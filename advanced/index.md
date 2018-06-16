@@ -1,5 +1,5 @@
 ---
-title: Advanced
+title: 高级
 category: advanced
 permalink: /advanced/index.html
 caption: Under the Hood

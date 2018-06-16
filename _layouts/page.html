@@ -30,7 +30,7 @@ layout: default
         </div>
 
         <ol class="breadcrumb" style="font-size: 1.3em;">
-            <li><a class="link" href="/">Home</a></li>
+            <li><a class="link" href="/">首页</a></li>
             {% for section in site.data.navigation.main %}
                 {% if section-title == section.title %}
                 <li><strong><a class="link" href="{{ section.url | prepend: site.baseurl }}">{{ section.title }}</a></strong></li>

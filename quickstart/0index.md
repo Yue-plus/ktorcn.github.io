@@ -1,5 +1,5 @@
 ---
-title: Quick Start
+title: 快速入门
 caption: QuickStart
 category: quickstart
 toc: true

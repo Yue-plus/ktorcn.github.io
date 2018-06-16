@@ -1,5 +1,5 @@
 ---
-title: Features
+title: 各种特性
 caption: Extend Application Capabilities 
 category: features
 permalink: /features/index.html

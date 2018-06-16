@@ -1,5 +1,5 @@
 ---
-title: Samples
+title: 样例
 category: samples
 permalink: /samples/index.html
 caption: Sample Projects
