@@ -3,10 +3,10 @@ title: Overview
 permalink: /index.html
 layout: home
 landing_page: true
-caption: 以 Kotlin 开发联网应用
+caption: 用 Kotlin 开发互联应用
 ---
 
-Ktor 是一个使用强大的 [Kotlin 语言](https://www.kotlincn.net/)在联网系统中构建异步服务器与客户端的框架。
+Ktor 是一个使用强大的 [Kotlin 语言](https://www.kotlincn.net/)在互联系统中构建异步服务器与客户端的框架。
 本站提供了 Ktor 应用程序结构与编程接口的完整参考，以及如何处理特定任务的参考。
 
 这里是查找你要寻找的答案并了解其工作原理的地方。
