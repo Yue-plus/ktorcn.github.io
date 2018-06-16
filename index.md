@@ -3,17 +3,17 @@ title: Overview
 permalink: /index.html
 layout: home
 landing_page: true
-caption: Connected Applications with Kotlin
+caption: 以 Kotlin 开发联网应用
 ---
 
-Ktor is a framework for building asynchronous servers and clients in connected systems using the powerful [Kotlin programming language](https://kotlinlang.org). 
-This website provides a complete reference to the Ktor application structure and programming interface. And how to approach particular tasks.
+Ktor 是一个使用强大的 [Kotlin 语言](https://www.kotlincn.net/)在联网系统中构建异步服务器与客户端的框架。
+本站提供了 Ktor 应用程序结构与编程接口的完整参考，以及如何处理特定任务的参考。
 
-Here is the place to find the answers you are looking for and learn all about how it works.
-Search for information or explore the sections below to get started. 
+这里是查找你要寻找的答案并了解其工作原理的地方。
+从搜索信息或者浏览下文的几节开始。
 
 
 {% include search.html inline="true" %} 
 
-![Ktor Example](/what-is-ktor-shadow.png){: style="width:745px;height:auto;max-width:100%;"}
+![Ktor 示例](/what-is-ktor-shadow.png){: style="width:745px;height:auto;max-width:100%;"}
 {: style="text-align:center;"}
