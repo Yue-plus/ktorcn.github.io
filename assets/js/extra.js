@@ -203,7 +203,7 @@ $(document).ready(function() {
             lines.push(`<small style="color:#999;">And ${invisibleLinks} more...</small>`);
         }
         if (query !== '' && !containsHash) {
-            lines.push(`<a href="https://www.google.com/search?q=site:ktorcn.github.io+${encodeURIComponent(query.trim())}">Search <code>${query.trim().escapeHTML()}</code> in google site:ktorcn.github.io</a>`)
+            lines.push(`<a href="https://www.google.com/search?q=site:ktor.kotlincn.net+${encodeURIComponent(query.trim())}">Search <code>${query.trim().escapeHTML()}</code> in google site:ktor.kotlincn.net</a>`)
         }
         let outLines = [];
         for (let n = 0; n < lines.length; n++) {

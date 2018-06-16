@@ -33,8 +33,8 @@ and we will try to help you!
 >     compile "io.ktor:ktor-server-netty:$ktor_version"
 > }
 > ```
-> * For gradle, check: <http://ktorcn.github.io/quickstart/gradle.html#choose-your-engine-and-configure-it>
-> * For maven, check: <http://ktorcn.github.io/quickstart/maven.html>
+> * For gradle, check: <http://ktor.kotlincn.net/quickstart/gradle.html#choose-your-engine-and-configure-it>
+> * For maven, check: <http://ktor.kotlincn.net/quickstart/maven.html>
 
 ## Does ktor provide a way to catch ipc signals (e.g. SIGTERM or SIGINT) so the server shutdown can be handled gracefully?
 {: #sigterm }
@@ -54,7 +54,7 @@ and we will try to help you!
 {: #no-attribute-key-locations }
 
 > You get this error if you try to use the locations feature without actually installing it. Check the locations feature:
-> <https://ktorcn.github.io/features/locations.html>
+> <https://ktor.kotlincn.net/features/locations.html>
 
 ## I get a 406 error with a client not sending an Accept header. With WRK I'm getting Non-2xx responses after adding JSON support
 {: #missing-accept-issue }
@@ -88,7 +88,7 @@ Something like this should be sent as part of the response headers: `Server: kto
 > and the return key <kbd>⏎</kbd> to go to the currently selected page.
 
 > This search only uses page titles, and keywords for the search. It is also possible to do a google search
-> in the `ktorcn.github.io` domain to do a full text search on all its contents. 
+> in the `ktor.kotlincn.net` domain to do a full text search on all its contents. 
 
 > Long code fragments that are folded, can be expanded by either clicking on
 > the `'+'`/`'-'` symbol that always appears in the top left corner of mobile devices
