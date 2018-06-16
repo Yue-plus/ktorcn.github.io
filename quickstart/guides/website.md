@@ -323,7 +323,7 @@ The main benefits of HTML DSL is that you have fully statically typed access to 
 with the code base.
 
 The counterpart of all this is that you have to recompile to change the HTML, and you can't search complete HTML blocks.
-But it is lightning fast, and you can use the [autoreload feature](https://ktor.io/servers/autoreload.html) to recompile
+But it is lightning fast, and you can use the [autoreload feature](/servers/autoreload.html) to recompile
 on change and reload the relevant JVM classes.
 
 ## Exercises
