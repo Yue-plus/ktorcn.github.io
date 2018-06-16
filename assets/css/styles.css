@@ -1666,15 +1666,15 @@ code.highlighter-rouge {
     font-size: 0.9em;
 }
 
-.note.tip:before { content: "TIP"; }
-.note.artifact:before { content: "ARTIFACT"; }
+.note.tip:before { content: "小贴士"; }
+.note.artifact:before { content: "构件"; }
 .note.api:before { content: "API"; }
-.note.experimental:before { content: "EXPERIMENTAL"; }
-.note.example:before { content: "EXAMPLE"; }
-.note.performance:before { content: "PERFORMANCE NOTE"; font-weight: bold; }
-.note.security:before { content: "SECURITY NOTE"; font-weight: bold; }
-.note.contact:before { content: "CONTACT"; font-weight: bold; }
-.note.exercise:before { content: "EXERCISE"; font-weight: bold; }
+.note.experimental:before { content: "实验性的"; }
+.note.example:before { content: "示例"; }
+.note.performance:before { content: "性能说明"; font-weight: bold; }
+.note.security:before { content: "安全说明"; font-weight: bold; }
+.note.contact:before { content: "联系方式"; font-weight: bold; }
+.note.exercise:before { content: "练习"; font-weight: bold; }
 .note.artifact-small {
     font-size: 0.8em;
 }

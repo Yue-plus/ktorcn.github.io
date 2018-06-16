@@ -1,48 +1,48 @@
 main:
-  - title: Quick Start
+  - title: 快速入门
     category: quickstart
     url: /quickstart/index.html
     icon_url: '/assets/images/icon_quick-start.svg'
-    summary: setting up the environment and starting up
+    summary: 建立环境并启动
     color: green
     icon: gift
 
-  - title: Servers
+  - title: 服务器
     category: servers
     url: /servers/index.html
     icon_url: '/assets/images/icon_servers.svg'
-    summary: creating web applications and services
+    summary: 创建 web 应用与服务
     color: purple
     icon: cloud
 
-  - title: Clients
+  - title: 客户端
     category: clients
     url: /clients/index.html
     icon_url: '/assets/images/icon_clients.svg'
-    summary: connecting to services and applications
+    summary: 连接到服务与应用
     color: orange
     icon: link_alt
 
-  - title: Features
+  - title: 各种特性
     category: features
     url: /features/index.html
     icon_url: '/assets/images/icon_features.svg'
-    summary: customizing applications with extensible features
+    summary: 用可扩展的各种特性来定制应用
     color: blue
     icon: tools
 
-  - title: Samples
+  - title: 样例
     category: samples
     url: /samples/index.html
     icon_url: '/assets/images/icon_samples.svg'
-    summary: samples and open source projects
+    summary: 样例与开源项目
     color: primary
     icon: toolbox_alt
 
-  - title: Advanced
+  - title: 高级
     category: advanced
     url: /advanced/index.html
     icon_url: '/assets/images/icon_advanced.svg'
-    summary: advanced topics and implementation details
+    summary: 高级主题与实现细节
     color: red
     icon: cone
