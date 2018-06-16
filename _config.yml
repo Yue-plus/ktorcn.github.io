@@ -1,4 +1,4 @@
-repository: ktorio/ktorio.github.io
+repository: ktorcn/ktorcn.github.io
 encoding: utf-8
 output: web
 
@@ -15,16 +15,16 @@ ktor_init_tools_url: https://ktor.io/ktor-init-tools/
 #ktor_init_tools_url: http://127.0.0.1:8081/
 
 # if you're using Github, provide the basepath to the branch you've created for reviews, following the sample here. if not, leave this value blank.
-github_editme_path: ktorio/ktorio.github.io/edit/master/
+github_editme_path: ktorcn/ktorcn.github.io/edit/master/
 
 # if you have google-analytics ID, put it in. if not, edit this value to blank.
-google_analytics: UA-47631155-3
+google_analytics: UA-120957075-1
 
 # the preview server used. Leave as is.
 host: 127.0.0.1
 
 # the port where the preview is rendered. You can leave this as is unless you have other Jekyll builds using this same port that might cause conflicts. in that case, use another port such as 4006.
-port: 4000
+port: 4002
 
 # these are the files and directories that jekyll will exclude from the build
 exclude:
