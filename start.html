@@ -1,0 +1,30 @@
+---
+layout: none
+permalink: /start
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Ktor Project Generator</title>
+<style type="text/css">
+    html, body { margin: 0; padding: 0; height:100% }
+</style>
+</head>
+<body>
+
+<div id="generator_id" style="width:100%;height:100%;"></div>
+
+<script type="text/javascript">
+    window.addEventListener('message', function(event) {
+        if (event.data && event.data.type === "updateHash") {
+            location.hash = event.data.value.replace(/^#/, '');
+        }
+    });
+    document.getElementById('generator_id').innerHTML = '<iframe src="{{ site.ktor_init_tools_url }}' + location.hash.replace(/"/g, '\\"') + '" width="100%" height="100%" style="border:0;width:100%;height:100%;margin:0;padding:0;"></iframe>';
+</script>
+<noscript>
+    JavaScript is required for the generator.
+</noscript>
+
+</body>
+</html>
