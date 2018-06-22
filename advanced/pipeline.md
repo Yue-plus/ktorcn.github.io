@@ -6,6 +6,8 @@ caption: Internal Pipeline Machinery
 children: /advanced/pipeline/
 ---
 
+{% include nomnoml-support.html %}
+
 ## Description
 
 The pipeline is a structure containing a sequence of functions (blocks / lambdas) that are called one after another,
@@ -160,9 +162,23 @@ pipeline we merge them all.
 ## Ktor pipelines
 
 ### ApplicationCallPipeline
+{: #ApplicationCallPipeline }
 
 Ktor defines a pipeline without subject, and the `ApplicationCall` as context
-defining three phases `Infrastructure`, `Call` and `Fallback`:
+defining three phases `Infrastructure`, `Call` and `Fallback` to be executed in that order:
+
+<div class="nomnoml">
+#direction: right
+#.call: fill=#af8
+#.fallback: fill=#faa dashed
+[&lt;call&gt;Call]
+[&lt;fallback&gt;Fallback]
+[Infrastructure] then -> [Call]
+[Call] then -> [Fallback]
+</div>
+
+The code looks like this:
+
 
 ```
 open class ApplicationCallPipeline : Pipeline<Unit, ApplicationCall>(Infrastructure, Call, Fallback) {
@@ -178,6 +194,12 @@ open class ApplicationCallPipeline : Pipeline<Unit, ApplicationCall>(Infrastruct
 ```
 
 This base pipeline is used by the `Application` and the `Routing` feature.
+
+The idea is that generic features that do not complete the call, like the [Authentication](/features/authentication.html) feature, intercept the `Infrastructure`,
+while things like the [Routing](/features/routing.html) feature that are going to complete the call, goes to the `Call`,
+and Features, like the [StatusPages], that must process unhandled calls and resolve them somehow, intercept the `Fallback` phase.
+
+[StatusPages]: /features/status-pages.html
 
 ### Application
 
