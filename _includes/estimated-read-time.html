@@ -1,5 +1,5 @@
 {% assign page_words = page.content | number_of_words %}
-{% assign page_ert = page_words | divided_by: 200.0 | ceil %}
+{% assign page_ert = page_words | divided_by: 100.0 | ceil %}
 <p>
     <em style="color:grey; font-size: 0.8em;">预计阅读时间： {{ page_ert }} 分钟</em>
 </p>
