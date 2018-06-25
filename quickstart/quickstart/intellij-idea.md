@@ -1,6 +1,6 @@
 ---
 title: IntelliJ IDEA 
-caption: Setting up Project in IntelliJ IDEA
+caption: 在 IntelliJ IDEA 中搭建项目
 category: quickstart
 toc: true 
 permalink: /quickstart/quickstart/intellij-idea.html
@@ -9,73 +9,73 @@ redirect_from:
 priority: 0
 ---
 
-This tutorial will guide you from the most basic setup through to a full
-featured setup you can use to start developing your app.
+本教程会指导你从最基本的搭建到可用于开始开发应用的全<!--
+-->功能搭建。
 
-**Table of contents:**
+**目录：**
 
 * TOC
 {:toc}
 
-## Prerequisites
+## 前提条件
 
-1.  The most recent version of IntelliJ IDEA
-2.  Kotlin and Gradle plugins enabled (They should be enabled by default.)
+1.  最新版的 IntelliJ IDEA
+2.  已启用 Kotlin 与 Gradle 插件（它们应该已经默认启用）
 
-You can check this in IntelliJ IDEA in the main menu:
+可以在 IntelliJ IDEA 中通过以下主菜单查验：
 * Windows: `File -> Settings -> Plugins`
 * Mac: `IntelliJ IDEA -> Settings -> Plugins`
 
-## Start a Project
+## 开始一个项目
 
 1.  `File -> New -> Project`:
 
     ![Ktor IntelliJ: File New Project](/quickstart/intellij-idea/file-new-project.png)
 
-2.  Select Gradle and under Additional Libraries and Frameworks, check Java and Kotlin (Java).  Confirm that Project SDK is completed and click `Next`:
+2.  选择 Gradle，并且在 Additional Libraries and Frameworks 下选中 Java 与 Kotlin (Java)。 确认 Project SDK 已配置好并点击 `Next`：
 
     ![Ktor IntelliJ: Gradle Kotlin JVM](/quickstart/intellij-idea/gradle-kotlin-jvm.png)
 
-3.  Enter a GroupId: `Example`
-    and ArtifactId: `Example`
-    and click Next:
+3.  输入 GroupId: `Example`
+    以及 ArtifactId: `Example`
+    并点击 Next:
 
     ![Ktor IntelliJ: GroupId](/quickstart/intellij-idea/groupid.png)
 
-4.  Check the checkboxes for `Use auto-import` and `Create separate module per source set`. Confirm the Use default gradle wrapper radio button is selected and that Gradle JVM is populated and click `Next`:
+4.  选中复选框 `Use auto-import` 以及 `Create separate module per source set`。 确认选中单选框 Use default gradle wrapper 并且 Gradle JVM 已有值，然后点击 `Next`：
 
     ![Ktor IntelliJ: Gradle Config](/quickstart/intellij-idea/gradle-config.png)
 
-5.  Complete Project name: `Example`
-    and Project location: `a/path/on/your/filesystem`
-    and click `Finish`:
+5.  填写项目名： `Example`
+    与项目位置： `a/path/on/your/filesystem`
+    并点击 `Finish`：
 
     ![Ktor IntelliJ: Project Location Name](/quickstart/intellij-idea/project-location-name.png)
 
-6.  Wait a few seconds for Gradle to run, and you should see a project structure like the following (with a few other files and directories):
+6.  等待 Gradle 运行几秒，应该能看到以下项目结构（以及其他几个文件与目录）：
 
     ![Ktor IntelliJ: Project Structure](/quickstart/intellij-idea/project-structure.png)
 
-7.  Update your `build.gradle` file with the artifact and repositories for the classes to be available:
-    * Include `compile "io.ktor:ktor-server-netty:$ktor_version"`, in your `build.gradle`'s `dependencies` block
-    * Include  `maven { url "http://kotlin.bintray.com/ktor" }` and `jcenter()` in your `repositories` block
+7.  更新 `build.gradle` 文件添加使相关类可用的构件与仓库：
+    * 将 `compile "io.ktor:ktor-server-netty:$ktor_version"` 包含到 `build.gradle` 的 `dependencies` 块中
+    * 将  `maven { url "http://kotlin.bintray.com/ktor" }` 与 `jcenter()` 包含到 `repositories` 块中
 
     ![Ktor IntelliJ: Build Gradle](/quickstart/intellij-idea/build-gradle.png)
 
-For a more detailed guide on setting up the `build.gradle` file, check the [Getting Started with Gradle](/quickstart/quickstart/gradle.html) section. 
+关于配置 `build.gradle` 文件的更详细的指南，请查阅[以 Gradle 入门](/quickstart/quickstart/gradle.html)一节。 
 {: .note}
 
-## Create the App
+## 创建应用
 
-Select the `src/main/kotlin` directory and create a new package.  We will call it `blog`.
+选择 `src/main/kotlin` 目录并创建一个新包。 我们称之为 `blog`。
 
-Select that directory and create a new kotlin file under it named `BlogApp`
+选择该目录并在其下创建一个名为 `BlogApp` 的新的 kotlin 文件
 
 ![Ktor IntelliJ: Create Kotlin File](/quickstart/intellij-idea/create-kotlin-file.png)
 
 ![Ktor IntelliJ: Create Kotlin File Name](/quickstart/intellij-idea/create-kotlin-file-name.png)
 
-Copy and paste in the most basic setup for an app so that it looks like:
+复制并粘贴应用的最基本设置，使其看起来像：
 
 
 ```kotlin
@@ -101,28 +101,28 @@ fun main(args: Array<String>) {
 
 ![Ktor IntelliJ: Program](/quickstart/intellij-idea/program.png)
 
-Now you can Run '`blog.BlogAppKt`'. You can do it, by pressing the glutter icon with the **🐞**{: style="transform:rotate(90deg);display:inline-block;"} symbol and selecting `Debug 'blog.BlogAppKt'`:
+现在可以运行“`blog.BlogAppKt`”了。 可以这样做，点击边框中的三角图标并选择带有 **🐞**{: style="transform:rotate(90deg);display:inline-block;"} 符号的 `Debug 'blog.BlogAppKt'`：
 
 ![Ktor IntelliJ: Program Run](/quickstart/intellij-idea/program-run.png)
 
-This will also create a run configuration in the upper-right part of IntelliJ, that will allow running
-this configuration again easily:
+这也会在 IntelliJ 的右上角创建一个运行配置，会使再次运行<!--
+-->该配置很容易：
 
 ![Ktor IntelliJ: Program Run Config](/quickstart/intellij-idea/program-run-config.png)
 
-This will start the Netty web server.
-In your browser enter the URL:  localhost:8080
-And you should see your example blog page.
+这会启动该 Netty web 服务器。
+在浏览器中输入其 URL： localhost:8080
+然后应该就能看到示例博客页了。
 
 ![Ktor IntelliJ: Website](/quickstart/intellij-idea/website.png)
 
-## Improve the app with the Application object
+## 使用 Application 对象改进应用
 
-The setup above has a lot of nested blocks and is not ideal for starting to 
-add functionality to your app.  We can improve it by using the Application object 
-and referring to that from an embeddedServer call in the main function.  
+上述设置中有很多嵌套的块，而这不适合开始<!--
+-->向应用中添加功能。 我们可以这样改进之：通过使用 Application 对象<!--
+-->并在 main 函数中的 embeddedServer 调用引用该对象。
 
-Change your code in BlogApp.kt to the following to try this:
+将 BlogApp.kt 中的代码改为以下这样来尝试这点：
 
 ```kotlin
 package blog
@@ -150,9 +150,9 @@ fun main(args: Array<String>) {
 }
 ```
 
-## Extract out Configuration Data
+## 提取配置数据
 
-Although we can designate some application configuration data in the main function embeddedServer call, we can provide more flexibility for future deployments and changes by extracting this out to a separate configuration file.  In the `src/main/resources` directory we will create a new text file named `application.conf` with the following content:
+虽然我们可以在主函数的 embeddedServer 调用中指定一些应用配置数据，但是我们可以将其提取到一个独立的配置文件中，为将来的部署与更改提供更多的灵活性。我们会在 `src/main/resources` 目录中创建一个新的文本文件名为 `application.conf`，其内容如下：
 
 ```kotlin
 ktor {
@@ -166,9 +166,9 @@ ktor {
 }
 ```
 
-Then we delete the main function from `BlogApp.kt` and change `fun Application.module()` to `fun Application.main()`.  However, if we run the application now, it will fail with an error message like "Top-level function 'main' not found in package blog."  Our `Application.main()` function is now a function extension and does not qualify as a top-level main function.   
+然后我们在 `BlogApp.kt` 中删除主函数并将 `fun Application.module()` 改为 `fun Application.main()`。 然而，如果我们现在运行该应用，它会失败并且有像“Top-level function 'main' not found in package blog.”这样的错误信息。 我们的 `Application.main()` 函数现在是一个扩展函数而不具备顶层主函数的作用。
 
-This requires us to indicate a new main class as IntelliJ IDEA will no longer be able to find it automatically.  In `build.gradle` we add:
+因为 IntelliJ IDEA 不能自动找到主类，这需要我们指定一个新的主类。在 `build.gradle` 添加：
 
 ```groovy
 apply plugin: 'application'
@@ -176,7 +176,7 @@ apply plugin: 'application'
 mainClassName = 'io.ktor.server.netty.DevelopmentEngine'
 ```
 
-And then go to `Run -> Edit Configurations` select the `blog.BlogAppKt` configuration and change its Main class to:
+然后转到 `Run -> Edit Configurations` 选择 `blog.BlogAppKt` 配置并将其 Main class 修改为：
 `io.ktor.server.netty.DevelopmentEngine`
 
-Now when we run the new configuration, the application will start again.
+现在，当我们运行新的配置时，应用程序会再次启动。
