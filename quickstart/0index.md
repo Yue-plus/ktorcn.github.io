@@ -169,6 +169,6 @@ fun main(args: Array<String>) {
     
 {:/comment}
 
-## 演练
+## 相关链接
 
 {% include category-list.html %}
