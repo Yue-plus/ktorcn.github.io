@@ -1,6 +1,6 @@
 ---
 title: Generator
-caption: Generate a Ktor project 
+caption: 生成一个 Ktor 项目
 category: quickstart
 #permalink: /start
 #redirect_from:
