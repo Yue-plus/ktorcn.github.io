@@ -1,6 +1,6 @@
 ---
 title: Gradle
-caption: Setting up a Gradle Build
+caption: 搭建 Gradle 构建版
 category: quickstart
 toc: true
 permalink: /quickstart/quickstart/gradle.html
@@ -9,22 +9,22 @@ redirect_from:
 priority: 0
 ---
 
-In this guide, we will show you how to create a `build.gradle` file
-and how to configure it to support Ktor.
+在本指南中，我们会展示如何创建 `build.gradle` 文件<!--
+-->以及如何配置以支持 Ktor。
 
-**Table of contents:**
+**目录：**
 
 * TOC
 {:toc}
 
-## Basic Kotlin `build.gradle` file (without Ktor)
+## 基本的 Kotlin `build.gradle` 文件（不带 Ktor）
 {: #initial }
 
-First of all, you need a skeleton `build.gradle` file including Kotlin.
-You can create it with any text editor, or you can use IntelliJ to create
-it following the [IntelliJ guide](/quickstart/quickstart/intellij-idea.html).
+首先，需要一个包含 Kotlin 的骨架 `build.gradle` 文件。
+可以使用任何文本编辑器创建它，也可以使用 IntelliJ 按照
+[IntelliJ 指南](/quickstart/quickstart/intellij-idea.html)来创建。
 
-The initial file looks like this:
+初始文件如下所示：
 
 ```groovy
 group 'Example'
@@ -57,45 +57,45 @@ dependencies {
 ```
 {: .compact}
 
-## Add Ktor dependencies and configure build settings
+## 添加 Ktor 依赖并配置构件设置
 {: #ktor-dependencies}
 
-Ktor artifacts are located in a specific repository on bintray.
-And its core has dependencies on the `kotlinx.coroutines` library that
-can be found on `jcenter`.
+Ktor 构件位于 bintray 的指定仓库中。
+而其核心所依赖的 `kotlinx.coroutines` 库<!--
+-->可以在 `jcenter` 上找到。
 
-You have to add both to the `repositories` block in the `build.gradle` file:
+必须将两者都添加到 `build.gradle` 文件中的 `repositories` 块中。
 
 ```groovy
 jcenter()
 maven { url "https://dl.bintray.com/kotlin/ktor" }
 ```
 
-Visit [Bintray](https://bintray.com/kotlin/ktor/ktor) and determine the latest version of ktor.
-In this case it is `{{site.ktor_version}}`.
+访问 [Bintray](https://bintray.com/kotlin/ktor/ktor) 并确定 ktor 的最新版本。
+在本例中是 `{{site.ktor_version}}`。
 
-You have to specify that version in each Ktor artifact reference,
-and to avoid repetitions, you can specify that version in an extra property
-in the `buildscript` block (or in a `gradle.properties` file) for using it later:
+必须在每个 Ktor 构件的引用中指定该版本，
+为避免重复，可以在 `buildscript` 块中
+（或者在 `gradle.properties` 文件中）的附加属性中指定该版本以便后续使用：
 
 ```groovy
 ext.ktor_version = '{{site.ktor_version}}'
 ```
 
-Now you have to add the `ktor-server-core` artifact, referencing the `ktor_version` you specified:
+现在必须添加 `ktor-server-core` 构件了，可引用之前指定的 `ktor_version`：
 
 ```groovy
 compile "io.ktor:ktor-server-core:$ktor_version"
 ```
 
-In groovy, there are single-quoted strings (instead of characters)
-and double-quoted strings, to be able to interpolate variables like
-versions, you have to use double-quoted strings.
+在 groovy 中，有单引号括起的字符串（而不是字符）
+与双引号括起的字符串，为了能够内插像版本号这样的变量，必须使用双引号<!--
+-->括起的字符串。
 {: .note.tip }
 
-As for Kotlin 1.2x, coroutines are still an experimental feature, 
-so you will need to tell the compiler that it is okay
-to use them to avoid warnings:
+截止到 Kotlin 1.2x，协程仍然是一项实验性的功能，
+所以需要告诉编译器可以<!--
+-->使用它们以避免警告：
 
 ```groovy
 kotlin {
@@ -105,8 +105,8 @@ kotlin {
 }
 ```
 
-You also need to tell the Kotlin compiler to generate bytecode
-compatible with Java 8:
+还需要告诉 Kotlin 编译器生成<!--
+-->与 Java 8 兼容的字节码：
 {: #java8}
 
 ```groovy
@@ -118,29 +118,29 @@ compileTestKotlin {
 }
 ```
 
-## Choose your engine and configure it
+## 选择引擎并配置之
 {: #engine}
 
-Ktor can run in many environments, such as Netty, Jetty or any other
-Servlet-compatible Application Container such as Tomcat.
+Ktor 可以在很多环境中运行，例如 Netty、 Jetty 或者任何其他
+Servlet 兼容的应用容器（Application Container）例如 Tomcat。
 
-This example shows you how to configure Ktor with Netty.
-For other engines see [artifacts](/quickstart/artifacts.html) for a list of
-available artifacts.
+本例展示了如何配置 Ktor 使用 Netty。
+对于其他引擎请参见[构件](/quickstart/artifacts.html)以查看<!--
+-->可用构件的列表。
 
-You will add a dependency for `ktor-server-netty` using the
-`ktor_version` property you have created. This module provides
-a Netty web server and all the required code to run Ktor
-application on top of it:
+可使用之前创建的 `ktor_version` 属性添加依赖项 `ktor-server-netty`
+。 这个模块提供了一个
+Netty web 服务器以及运行基于其上的 Ktor
+应用的所有必要代码：
 
 ```groovy
 compile "io.ktor:ktor-server-netty:$ktor_version"
 ```
 
-## Final `build.gradle` (with Ktor)
+## 最终版 `build.gradle`（带 Ktor）
 {: #complete}
 
-When you are done, the `build.gradle` file should look like this:
+完成后的 `build.gradle` 文件应该如下所示：
 
 ```groovy
 group 'Example'
@@ -187,11 +187,11 @@ dependencies {
 }
 ```
 
-You can now run Gradle (just `gradle` or `./gradlew` if using the wrapper)
-to fetch dependencies and verify everything is set up correctly.
+现在可以运行 Gradle（只需 `gradle`，或者 `./gradlew` 如果使用包装器的话）
+来获取依赖并验证所有设置是否正确了。
 
-## Configure logging
+## 配置日志
 {: #logging}
 
-If you want to log application events and useful information,
-you can read about it further in the [logging](/servers/logging.html) page.
+如果想记录应用事件及有用信息的日志，
+可以在[日志](/servers/logging.html)页中进一步阅读。
