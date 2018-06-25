@@ -1,6 +1,6 @@
 ---
 title: 快速入门
-caption: QuickStart
+caption: 快速入门
 category: quickstart
 toc: true
 permalink: /quickstart/index.html
@@ -10,20 +10,20 @@ priority: -100
 
 ![Ktor logo](/assets/images/ktor_logo.svg){:style="width:134px;height:56px;"}
  
-Ktor is a framework to easily build connected applications – web applications, HTTP services, mobile and browser applications.
-Modern connected applications need to be asynchronous to provide the best experience to users, and Kotlin coroutines provide
-awesome facilities to do it in an easy and straightforward way. 
+Ktor 是一个轻松构建联网应用（web 应用、 HTTP 服务、 移动应用以及浏览器应用）的框架。
+现代的联网应用需要异步化来提供最佳的用户体验，而 Kotlin 协程为此提供了<!--
+-->极其简便的方式。
 
-While not yet entirely there, the goal of Ktor is to provide an end-to-end multiplatform application framework for connected applications. 
-Currently, JVM client and server scenarios are supported, and we are working on bringing server facilities to native
-environments, and client facilities to native and JavaScript.
+虽然还没有完全实现，但是 Ktor 的目标是为联网应用提供端到端的多平台应用框架。
+目前支持 JVM 客户端与服务器场景，而我们（官方）正努力将服务端支持引入到原生（native）
+环境，并将客户端支持引入到原生与 JavaScript 环境。
 
 {::comment}
 Ktor embraces the strongly typed nature of the Kotlin programming language and provides [strongly typed end-points (Locations)](/features/locations.html) and
 the ability to exchange data with classes shared across platforms.
 {:/comment}
 
-**Table of contents:**
+**目录：**
 
 * TOC
 {:toc}
@@ -36,17 +36,17 @@ Ktor has a [start.ktor.io](https://soywiz.github.io/start-ktor-io-proposal/) web
 <iframe src="https://soywiz.github.io/start-ktor-io-proposal/" style="border:1px solid #aaa;width:100%;height:450px;"></iframe>
 {:/comment}
 
-## Gradle Setup
+## Gradle 设置
 
-This section assumes you have some basic knowledge about gradle. If you have never used gradle,
-gradle.org provides [several guides](https://guides.gradle.org/building-java-applications/) to help you get started.
+本节假定你有一些关于 Gradle 的基本知识。如果你从未使用过 gradle，
+那么可参考 gradle.org 提供的[一些指南](https://guides.gradle.org/building-java-applications/)来帮你入门。
 {: .note}
 
-You can set-up a simple Ktor application using gradle like this:
+你可以像这样使用 gradle 搭建一个简单的 Ktor 应用：
 
 ![Ktor Build with Gradle](/quickstart/1/ktor_build_gradle.png)
 
-Text version:
+文本版：
 ```groovy
 group 'Example'
 version '1.0-SNAPSHOT'
@@ -90,31 +90,31 @@ dependencies {
 ```
 {: .compact}
 
-Since Ktor is not 1.0 yet, we have custom maven repositories for distributing our early preview artifacts.
-You have to set up a couple of repositories as shown below, so your tools can find ktor artifacts and dependencies.
+由于 Ktor 还没到 1.0，我们（官方）用自定义的 maven 仓库来分发早期预览版构件。
+必须设置如下所示的几个仓库，以便工具可以找到 ktor 构件及其依赖。
 
-Of course, don't forget to include the actual artifact! For our quickstart, we are using the `ktor-server-netty` artifact.
-That includes Ktor's core, netty, and the ktor-netty connector as transitive dependencies.
-You can, of course, include any additional dependencies that you need.
+当然，不要忘记包含实际的构件！对于快速入门，我们使用 `ktor-server-netty` 构件。
+这包括 Ktor 的核心、netty 以及 ktor-netty 连接器作为传递依赖。
+当然你还可以包含任何其他所需要的额外依赖。
 
-Since ktor is designed to be modular, you will require additional artifacts and potentially other repositories
-for specific features. You can find the required artifacts (and repositories when required) for each feature in the
-specific feature documentation.
+由于 ktor 设计为模块化的，对于指定特性会需要额外的构件并且有可能需要其他仓库<!--
+-->。 可以在指定特性的文档中找到每个特性所需的构件（以及仓库，如果需要的话）<!--
+-->。
 {:.note}
 
 ## Hello World
 
-A simple hello world in Ktor would look like this:
+Ktor 的一个简单的 hello world 看起来像这样：
 
 ![Ktor Hello World](/quickstart/1/ktor_hello_world_main.png)
 
-1. Here you define a plain callable *main method*.
-2. Then you create an embedded *server using Netty* as the back-end that will listen on *port 8080*.
-3. Installs the *routing feature* with a block where you can define routes for specific paths and HTTP methods.
-4. Actual routes: In this case, it will handle a *GET request* for the path `/demo`, and will reply with a `HELLO WORLD!` message.
-5. Actually *start the server* and wait for connections.
+1. 在这里定义一个简单可调用的 *main 方法*。
+2. 然后创建一个内嵌的*使用 Netty 的服务器*作为监听在*8080 端口*上的后端。
+3. 通过一个代码块配置*路由特性*，在代码块中可以为指定的路径与 HTTP 方法定义路由。
+4. 实际路由：在本例中，它会处理 `/demo` 路径的 *GET 请求*，并以一个 `HELLO WORLD!` 消息回复。
+5. 实际*启动服务器*并等待连接。
 
-Text version:
+文本版：
 ```kotlin
 import io.ktor.application.*
 import io.ktor.http.*
@@ -139,36 +139,36 @@ fun main(args: Array<String>) {
 ```
 {: .compact}
 
-## Accessing your application
+## 访问应用
 
-Since you have a main method, you can execute it with your IDE. That will open an HTTP server,
-listening on [http://127.0.0.1:8080](http://127.0.0.1:8080/) You can try opening it with your favorite web browser.
+由于有 main 方法，因此可以用 IDE 执行。这会打开一个 HTTP 服务器，
+监听在 [http://127.0.0.1:8080](http://127.0.0.1:8080/)。可以尝试用你喜欢的 web 浏览器打开它。
 
-If that doesn't work, maybe you are using that port already. You can try changing the
-port 8080 (in line 10) and adjust it as needed.
+如果这不起作用，可能是该端口已被占用。可以尝试修改
+（在第 10 行的）8080 端口并按需调整。
 {: .note}
 
 ![Ktor Hello World Browser](/quickstart/1/screenshot.png){: width="50%""}
 
-At this point you should have a very simple Web Back-end running, so you can make changes,
-and see the results in your browser.
+此时应该有一个非常简单的 Web 后端在运行，所以你可以进行修改，
+并在浏览器中查看结果。
 
-Since you have configured a gradle project with the application plugin and the `mainClassName`,
-you can also run it from a terminal using `./gradlew run` on Linux/Mac, or `gradlew run` on a windows machine.
+由于已经为 gradle 项目配置了 application 插件与 `mainClassName`，
+因此可以在终端中运行，Linux/Mac 中使 `./gradlew run`，Windows 中使用 `gradlew run`。
 {:.note}
 
 {::comment}
-## Next step
+## 下一步
 
-Now we are ready for the next step. *What kind of application are you developing?*
+现在准备好下一步了。*你在开发哪种应用？*
 
-1. [RESTful API: Let's serve a *data class* as JSON](/quickstart/restful.html)
-2. Web Application:
-    * [Let's describe and serve some HTML, fully typed, using kotlinx.html the DSL way](/quickstart/html-dsl.html)
-    * [Let's serve some HTML using FreeMarker template engine](/quickstart/html-freemarker.html)
+1. [RESTful API: 让我们将*数据类*作为 JSON 提供服务](/quickstart/restful.html)
+2. Web 应用：
+    * [让我们使用完全静态类型的 kotlinx.html DSL 方式描述 HTML 并提供服务。](/quickstart/html-dsl.html)
+    * [让我们使用 FreeMarker 模板引擎提供 HTML 服务。](/quickstart/html-freemarker.html)
     
 {:/comment}
 
-## Walkthroughs
+## 演练
 
 {% include category-list.html %}
