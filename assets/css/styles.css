@@ -1658,7 +1658,7 @@ code.highlighter-rouge {
 }
 
 .note:before {
-    content: "NOTE";
+    content: "注";
     color: #c1a9d0;
     display: block;
     letter-spacing: 0.1em;
