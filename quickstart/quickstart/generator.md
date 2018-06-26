@@ -1,5 +1,5 @@
 ---
-title: Generator
+title: 生成器
 caption: 生成一个 Ktor 项目
 category: quickstart
 #permalink: /start

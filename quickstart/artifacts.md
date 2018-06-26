@@ -1,5 +1,5 @@
 ---
-title: Artifacts
+title: 构件
 caption: 构件列表 
 permalink: /quickstart/artifacts.html
 category: quickstart
@@ -53,5 +53,5 @@ Ktor 分为以下几组模块：
 
 * [Maven](/quickstart/quickstart/maven.html)
 * [Gradle](/quickstart/quickstart/gradle.html)
-* [Generate a project online](/quickstart/quickstart/generator.html)
+* [在线生成一个项目](/quickstart/quickstart/generator.html)
 
