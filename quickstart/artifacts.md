@@ -1,6 +1,6 @@
 ---
 title: Artifacts
-caption: List of Artifacts  
+caption: 构件列表 
 permalink: /quickstart/artifacts.html
 category: quickstart
 priority: 1
@@ -8,48 +8,48 @@ redirect_from:
   - /artifacts.html
 ---
 
-Ktor is divided into modules to allow fine-grained inclusion of dependencies based on the functionality required. 
-The typical Ktor application would require `ktor-server-core` and a corresponding engine depending on whether it's self-hosted
- or using an Application Server. 
+Ktor 分为多个模块，以便根据所需功能实现细粒度的依赖关系。
+典型的 Ktor 应用需要 `ktor-server-core` 以及一个相应的引擎，具体取决于它是自托管的<!--
+-->还是使用应用服务器（Application Server）。
 
-All artifacts in Ktor belong to `io.ktor` group and hosted on [Bintray](https://bintray.com/kotlin/ktor)
+Ktor 中的所有构件都属于 `io.ktor` group 并且托管在 [Bintray](https://bintray.com/kotlin/ktor) 上。
 
 [![Download](https://api.bintray.com/packages/kotlin/ktor/ktor/images/download.svg?version={{site.ktor_version}})](https://bintray.com/kotlin/ktor/ktor/{{site.ktor_version}})
     
-Ktor is split into several groups of modules:
+Ktor 分为以下几组模块：
 
-* `ktor-server` contains modules that support running the Ktor Application with different engines: Netty, Jetty, Tomcat, and 
-a generic servlet. It also contains a TestEngine for setting up application tests without starting the real server
-  * `ktor-server-core` is a core package where most of the application API and implementation is located 
-  * `ktor-server-jetty` supports a deployed or embedded Jetty instance
-  * `ktor-server-netty` supports Netty in embedded mode
-  * `ktor-server-tomcat` supports Tomcat servers
-  * `ktor-server-servlet` is used by Jetty and Tomcat and allows running in a generic servlet container
-  * `ktor-server-test-host` allows running application tests faster without starting the full host
-* `ktor-features` groups modules for features that are optional and may not be required by every application
-  * `ktor-auth` provides support for different [authentication systems](/features/authentication.html) like Basic, Digest, Forms, OAuth 1a and 2
-  * `ktor-auth-jwt` adds the ability to authenticate against [JWT](/features/authentication/jwt.html)
-  * `ktor-auth-ldap` adds the ability to authenticate against [LDAP](/features/authentication/ldap.html) instance
-  * `ktor-freemarker` integrates Ktor with [Freemarker templates](/features/templates/freemarker.html)
-  * `ktor-velocity` integrates Ktor with [Velocity templates](/features/templates/velocity.html)
-  * `ktor-gson` integrates with [Gson](/features/content-negotiation/gson.html) adding JSON content negotiation
-  * `ktor-jackson` integrates with [Jackson](/features/content-negotiation/gson.html) adding JSON content negotiation
-  * `ktor-html-builder` integrates Ktor with [kotlinx.html builders](/features/templates/html-dsl.html)
-  * `ktor-locations` contains experimental support for [typed locations](/features/locations.html)
-  * `ktor-metrics` adds the ability to add some [metrics](/features/metrics.html) to the server
-  * `ktor-server-sessions` adds the ability to use [stateful sessions stored on a server](/features/sessions.html)
-  * `ktor-websockets` provides support for [Websockets](/features/websockets.html)
-* `ktor-client` contains modules for [performing http requests](/clients/http-client.html)
-  * `ktor-client-core` is a core package where most of the http HttpClient API is located
-  * `ktor-client-apache` adds support for the Apache asynchronous HttpClient
-  * `ktor-client-cio`  adds support for a pure Kotlin Corutine based I/O asynchronous HttpClient
+* `ktor-server` 包含支持使用不同引擎运行 Ktor 应用程序的模块：Netty、Jetty、Tomcat 以及<!--
+-->通用 servlet。它还包含了一个用于设置应用测试而不真正启动服务器的 TestEngine
+  * `ktor-server-core` 是大多数应用 API 与实现所在的核心包 
+  * `ktor-server-jetty` 支持部署版或内嵌版 Jetty 实例
+  * `ktor-server-netty` 支持嵌入模式的 Netty
+  * `ktor-server-tomcat` 支持 Tomcat 服务器
+  * `ktor-server-servlet` 由 Jetty 与 Tomcat 使用，并允许在通用的 servlet 容器中运行
+  * `ktor-server-test-host` 允许在不启动完整主机的情况下更快地运行应用测试
+* `ktor-features` 为并非每个应用都需要的可选特性分组的模块
+  * `ktor-auth` 为不同的[认证系统](/features/authentication.html)如 Basic、 Digest、 表单、 OAuth 1a 与 OAuth 2 提供支持
+  * `ktor-auth-jwt` 添加针对 [JWT](/features/authentication/jwt.html) 认证的能力
+  * `ktor-auth-ldap` 添加针对 [LDAP](/features/authentication/ldap.html) 实例认证的能力
+  * `ktor-freemarker` 将 Ktor 与 [Freemarker 模板](/features/templates/freemarker.html)集成
+  * `ktor-velocity` 将 Ktor 与 [Velocity 模板](/features/templates/velocity.html)集成
+  * `ktor-gson` 与 [Gson](/features/content-negotiation/gson.html) 集成并添加 JSON 内容协商
+  * `ktor-jackson` 与 [Jackson](/features/content-negotiation/gson.html) 集成并添加 JSON 内容协商
+  * `ktor-html-builder` 将 Ktor 与 [kotlinx.html 构建器](/features/templates/html-dsl.html)集成
+  * `ktor-locations` 包含对[类型化 location](/features/locations.html) 的实验性的支持
+  * `ktor-metrics` 添加了为服务器添加一些[指标](/features/metrics.html)的能力
+  * `ktor-server-sessions` 添加使用[服务器存储的有状态会话](/features/sessions.html)的能力
+  * `ktor-websockets` 提供 [Websockets](/features/websockets.html) 支持
+* `ktor-client` 包含[执行 http 请求](/clients/http-client.html)的模块
+  * `ktor-client-core` 是大多数 http HttpClient API 所在的核心包
+  * `ktor-client-apache` 添加对 Apache 异步 HttpClient 的支持
+  * `ktor-client-cio`  添加对纯 Kotlin 基于协程的 I/O 异步 HttpClient 的支持
   * `ktor-client-jetty` adds support
-  * `ktor-client-auth-basic` adds support for [authentication](/clients/http-client.html#basicauth)
-  * `ktor-client-json` adds support for [json content negotiation](/clients/http-client.html#jsonfeature)
-* `ktor-network` includes [raw sockets](/servers/raw-sockets.html) for client/server, and TCP/UDP
-  * `ktor-network-tls` contains TLS support for raw sockets
+  * `ktor-client-auth-basic` 添加对[认证](/clients/http-client.html#basicauth)的支持
+  * `ktor-client-json` 添加对 [json 内容协商](/clients/http-client.html#jsonfeature)的支持
+* `ktor-network` 包含用于客户端/服务器的[原始套接字](/servers/raw-sockets.html)与 TCP/UDP
+  * `ktor-network-tls` 包含对原始套接字的 TLS 支持
  
-See instructions for setting up a project with
+参见使用以下这些搭建项目的说明
 
 * [Maven](/quickstart/quickstart/maven.html)
 * [Gradle](/quickstart/quickstart/gradle.html)
