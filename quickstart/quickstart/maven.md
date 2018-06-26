@@ -1,6 +1,6 @@
 ---
 title: Maven
-caption: Setting up a Maven Build
+caption: 搭建 Maven 构建版
 category: quickstart
 toc: true
 permalink: /quickstart/quickstart/maven.html
@@ -9,20 +9,20 @@ redirect_from:
 priority: 0
 ---
 
-In this guide, we will show you how to create a Maven `pom.xml` file
-and how to configure it to support Ktor.
+在本指南中，我们会展示如何创建  Maven `pom.xml` 文件<!--
+-->以及如何配置以支持 Ktor。
 
-**Table of contents:**
+**目录：**
 
 * TOC
 {:toc}
 
-## Basic Kotlin `pom.xml` file (without Ktor)
+## 基本的 Kotlin `pom.xml`文件（不带 Ktor）
 {: #initial }
 
-Maven is a build automation tool used primarily for Java projects.
-It reads project configuration from `pom.xml` files.
-Here is a basic `pom.xml` file for building Kotlin applications:
+Maven 是一个主要用于 Java 项目的构建自动化工具。
+它从 `pom.xml` 文件中读取项目配置。
+以下是用于构建 Kotlin 应用的基本`pom.xml`文件：
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -95,14 +95,14 @@ Here is a basic `pom.xml` file for building Kotlin applications:
 ```
 {: .compact }
 
-## Add Ktor dependencies and configure build settings
+## 添加 Ktor 依赖并配置构件设置
 {: #ktor-dependencies}
 
-Ktor artifacts are located in a specific repository on bintray.
-And its core has dependencies on the `kotlinx.coroutines` library that
-can be found on `jcenter`.
+Ktor 构件位于 bintray 的指定仓库中。
+而其核心所依赖的 `kotlinx.coroutines` 库<!--
+-->可以在 `jcenter` 上找到。
 
-You have to add both to the `repositories` block in the `pom.xml` file:
+必须将两者都添加到 `pom.xml` 文件中的 `repositories` 块中。
    
 ```xml
 <repositories>
@@ -121,12 +121,12 @@ You have to add both to the `repositories` block in the `pom.xml` file:
 </repositories>
 ``` 
 
-Visit [Bintray](https://bintray.com/kotlin/ktor/ktor) and determine the latest version of ktor.
-In this case it is `{{site.ktor_version}}`.
+访问 [Bintray](https://bintray.com/kotlin/ktor/ktor) 并确定 ktor 的最新版本。
+在本例中是 `{{site.ktor_version}}`。
 
-You have to specify that version in each Ktor artifact reference,
-and to avoid repetitions, you can specify that version in an extra property
-in the `properties` block for using it later:
+必须在每个 Ktor 构件的引用中指定该版本，
+为避免重复，可以在 `properties` 块中
+的附加属性中指定该版本以便后续使用：
 
 ```xml
 <properties>
@@ -134,7 +134,7 @@ in the `properties` block for using it later:
 </properties>
 ```
 
-Now you have to add `ktor-server-core` artifact using the `ktor.version` you specified:
+现在必须添加 `ktor-server-core` 构件了，可使用之前指定的 `ktor_version`：
  
 ```xml
 <dependency>
@@ -144,15 +144,15 @@ Now you have to add `ktor-server-core` artifact using the `ktor.version` you spe
 </dependency>
 ```
 
-As for Kotlin 1.2x, coroutines are still an experimental feature
-in Kotlin, so you will need to tell the compiler that it is okay
-to use them to avoid warnings:
+截止到 Kotlin 1.2x，协程仍然是 Kotlin 中的一项实验性的功能，
+所以需要告诉编译器可以<!--
+-->使用它们以避免警告：
 
 ```xml
 <plugin>
     <groupId>org.jetbrains.kotlin</groupId>
     
-    …
+    ……
     
     <configuration>
         <jvmTarget>1.8</jvmTarget>
@@ -163,20 +163,20 @@ to use them to avoid warnings:
 </plugin>
 ```
 
-## Choose your engine and configure it
+## 选择引擎并配置之
 {: #engine}
 
-Ktor can run in many environments, such as Netty, Jetty or any other
-Servlet-compatible Application Container such as Tomcat.
+Ktor 可以在很多环境中运行，例如 Netty、 Jetty 或者任何其他
+Servlet 兼容的应用容器（Application Container）例如 Tomcat。
 
-This example shows how to configure Ktor with Nett.
-For other engines see [artifacts](/quickstart/artifacts.html) for a list of
-available artifacts.
+本例展示了如何配置 Ktor 使用 Netty。
+对于其他引擎请参见[构件](/quickstart/artifacts.html)以查看<!--
+-->可用构件的列表。
 
-You will add a dependency for `ktor-server-netty` using the
-`ktor.version` property you have created. This module provides
-Netty as a web server and all the required code to run Ktor
-application on top of it:
+可使用之前创建的 `ktor.version` 属性添加依赖项 `ktor-server-netty`
+。 这个模块提供了
+Netty 作为 web 服务器以及运行基于其上的 Ktor
+应用的所有必要代码：
 
 ```xml
 <dependency>
@@ -186,10 +186,10 @@ application on top of it:
 </dependency>
 ```
 
-## Final `pom.xml` (with Ktor)
+## 最终版 `pom.xml`（带 Ktor）
 {: #complete}
 
-When you are done, the `pom.xml` file should look like:
+完成后的 `pom.xml` 文件应该如下所示：
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -292,12 +292,12 @@ When you are done, the `pom.xml` file should look like:
 ```
 {: .compact}
 
-You can now run `mvn package` to fetch dependencies and verify everything is set up correctly.
+现在可以运行 `mvn package`来获取依赖并验证所有设置是否正确了。
 
-## Configure logging
+## 配置日志
 {: #logging}
 
-If you want to log application events and useful information,
-you can read further in the [logging](/servers/logging.html) page.
+如果想记录应用事件及有用信息的日志，
+可以在[日志](/servers/logging.html)页中进一步阅读。
 
 

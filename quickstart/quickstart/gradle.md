@@ -17,7 +17,7 @@ priority: 0
 * TOC
 {:toc}
 
-## 基本的 Kotlin `build.gradle` 文件（不带 Ktor）
+## 基本的 Kotlin `build.gradle`文件（不带 Ktor）
 {: #initial }
 
 首先，需要一个包含 Kotlin 的骨架 `build.gradle` 文件。
