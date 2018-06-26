@@ -108,7 +108,7 @@ Ktor 的一个简单的 hello world 看起来像这样：
 
 ![Ktor Hello World](/quickstart/1/ktor_hello_world_main.png)
 
-1. 在这里定义一个简单可调用的 *main 方法*。
+1. 在这里定义一个寻常可调用的 *main 方法*。
 2. 然后创建一个内嵌的*使用 Netty 的服务器*作为监听在*8080 端口*上的后端。
 3. 通过一个代码块配置*路由特性*，在代码块中可以为指定的路径与 HTTP 方法定义路由。
 4. 实际路由：在本例中，它会处理 `/demo` 路径的 *GET 请求*，并以一个 `HELLO WORLD!` 消息回复。
@@ -154,7 +154,7 @@ fun main(args: Array<String>) {
 并在浏览器中查看结果。
 
 由于已经为 gradle 项目配置了 application 插件与 `mainClassName`，
-因此可以在终端中运行，Linux/Mac 中使 `./gradlew run`，Windows 中使用 `gradlew run`。
+因此可以在终端中运行，Linux/Mac 中使用 `./gradlew run`，Windows 中使用 `gradlew run`。
 {:.note}
 
 {::comment}

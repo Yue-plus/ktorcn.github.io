@@ -20,7 +20,7 @@ priority: 0
 ## 前提条件
 
 1.  最新版的 IntelliJ IDEA
-2.  已启用 Kotlin 与 Gradle 插件（它们应该已经默认启用）
+2.  已启用 Kotlin 与 Gradle 插件（它们应该都已默认启用）
 
 可以在 IntelliJ IDEA 中通过以下主菜单查验：
 * Windows: `File -> Settings -> Plugins`
@@ -56,7 +56,7 @@ priority: 0
 
     ![Ktor IntelliJ: Project Structure](/quickstart/intellij-idea/project-structure.png)
 
-7.  更新 `build.gradle` 文件添加使相关类可用的构件与仓库：
+7.  更新 `build.gradle` 文件，添加使相关类可用的构件与仓库：
     * 将 `compile "io.ktor:ktor-server-netty:$ktor_version"` 包含到 `build.gradle` 的 `dependencies` 块中
     * 将  `maven { url "http://kotlin.bintray.com/ktor" }` 与 `jcenter()` 包含到 `repositories` 块中
 
@@ -152,7 +152,7 @@ fun main(args: Array<String>) {
 
 ## 提取配置数据
 
-虽然我们可以在主函数的 embeddedServer 调用中指定一些应用配置数据，但是我们可以将其提取到一个独立的配置文件中，为将来的部署与更改提供更多的灵活性。我们会在 `src/main/resources` 目录中创建一个新的文本文件名为 `application.conf`，其内容如下：
+虽然可以在主函数的 embeddedServer 调用中指定一些应用配置数据，但是要为将来的部署与更改提供更多的灵活性的话，可以将其提取到一个独立的配置文件中。在 `src/main/resources` 目录中创建一个新的文本文件名为 `application.conf`，其内容如下：
 
 ```kotlin
 ktor {
