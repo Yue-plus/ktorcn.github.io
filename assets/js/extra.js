@@ -16,7 +16,7 @@ $(document).ready(function() {
         //$(element).prepend(
         $(element).prepend(
             $('<div />').addClass("compact_open").text('+')
-                .attr('title', 'Click here, or double click the content to expand and select or to compact')
+                .attr('title', '点击此处，或者双击内容本身来展开并选中内容或者收起内容')
                 .on("click", () => {
                     toggleSelection(element);
                 })
@@ -203,7 +203,7 @@ $(document).ready(function() {
             lines.push(`<small style="color:#999;">And ${invisibleLinks} more...</small>`);
         }
         if (query !== '' && !containsHash) {
-            lines.push(`<a href="https://www.google.com/search?q=site:ktor.kotlincn.net+${encodeURIComponent(query.trim())}">Search <code>${query.trim().escapeHTML()}</code> in google site:ktor.kotlincn.net</a>`)
+            lines.push(`<a href="https://www.google.com/search?q=site:ktor.kotlincn.net+${encodeURIComponent(query.trim())}">在谷歌 site:ktor.kotlincn.net 中搜索 <code>${query.trim().escapeHTML()}</code></a>`)
         }
         let outLines = [];
         for (let n = 0; n < lines.length; n++) {
@@ -213,7 +213,7 @@ $(document).ready(function() {
             outLines.push(`<li class="${active}${google}">${line}</li>`);
         }
         if (outLines.length === 0) {
-            outLines.push('<li>No results found</li>');
+            outLines.push('<li>未找到结果</li>');
         }
         searchResults.html(outLines.join(''));
     }
