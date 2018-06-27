@@ -1,54 +1,54 @@
 ---
-title: Application
-caption: Creating Your First Application
+title: 应用
+caption: 创建第一个应用
 category: quickstart
 permalink: /quickstart/application.html
 priority: 0
 ---
 
-This tutorial will help guide you through the steps needed to create a simple self-hosted Ktor server application that responds to HTTP requests with `Hello, World!`.
-Ktor applications can be built using common build systems such as [Maven](https://kotlinlang.org/docs/reference/using-maven.html) or [Gradle](https://kotlinlang.org/docs/reference/using-gradle.html).
+本教程会帮助指导你完成创建简单自托管的 Ktor 服务器应用所需的步骤，该应用程序以 `Hello, World!` 响应 HTTP 请求。
+Ktor 应用可以使用通用构建系统（如 [Maven](https://www.kotlincn.net/docs/reference/using-maven.html) 或 [Gradle](https://www.kotlincn.net/docs/reference/using-gradle.html)）构建。
 
-**Table of contents:**
+**目录：**
 
 * TOC
 {:toc}
 
-## Including the right dependencies
+## 包含正确的依赖
 {: #dependencies }
 
-Ktor is split up into several groups of modules,
-allowing you to include only the functionality that you will need.
+Ktor 分为几组模块，
+允许只包含所需的功能。
  
-For a list of these modules, please check the [Artifacts](/quickstart/artifacts.html) page.
-In this case, you only need to include `ktor-server-netty`.  
+关于这些模块的列表，请查阅[构件](/quickstart/artifacts.html)页。
+在本例中，只需包含 `ktor-server-netty`。
 
-These dependencies are hosted on [Bintray](https://bintray.com/kotlin/ktor) and as such the right
-repositories need to be added to your build script.
+这些依赖都托管在 [Bintray](https://bintray.com/kotlin/ktor) 上，这也正是<!--
+-->需要添加到构建脚本中的仓库。
 
-For a more detailed guide on setting up build files with different build systems see:
+关于使用不同构建系统设置构建文件的更详细指南，请参见：
 
-* [Setting up Gradle Build](/quickstart/quickstart/gradle.html)
-* [Setting up Maven Build](/quickstart/quickstart/maven.html)
+* [搭建 Gradle 构建版](/quickstart/quickstart/gradle.html)
+* [搭建 Maven 构建版](/quickstart/quickstart/maven.html)
 
-## Creating a self-hosted Application
+## 创建自托管的应用
 {: #self-hosted}
 
-Ktor allows applications to run within an Application Server compatible with Servlets such as Tomcat,
-or as an embedded application, using Jetty or Netty.
+Ktor 允许应用在兼容 Servlet 的应用服务器（如 Tomcat）中运行，
+也可以使用 Jetty 或者 Netty 作为内嵌应用。
 
-In this tutorial, you will learn how to self-host an application using Netty.
+在本教程中，你会学习如何开发使用 Netty 的自托管应用。
 
-You can start by creating an `embeddedServer`, passing in the engine factory as the first argument,
-the port as the second argument and the actual application code as the fourth argument (third argument
-is the host which is 0.0.0.0 by default).
+可以通过创建一个 `embeddedServer` 开始，向其传入引擎工厂作为第一个参数、
+端口号作为第二个参数，而将实际应用代码作为<!--
+-->第四个参数（第三个参数是主机名，默认取 0.0.0.0）传入。
 
-The code below defines a single route that responds to the `GET` verb on the URL `/` with
-the text `Hello, world!`
+下述代码定义了单个路由，它对 URL `/` 上的 `GET` 请求的响应是<!--
+-->文本 `Hello, world!`。
 
-After defining the routes, you have to start the server by calling `server.start`,
-passing as argument a boolean to indicate whether you want the main thread
-of the application to block.
+定义该路由后，必须通过调用 `server.start` 来启动服务器，
+同时传入一个布尔参数来指示是否希望<!--
+-->应用的主线程阻塞。
 
 ```kotlin
 import io.ktor.application.*
@@ -70,25 +70,25 @@ fun main(args: Array<String>) {
 }
 ```
 
-If your server is just listening for HTTP requests and do not want to do anything else after that in the setup,
-you will normally call the server.start with `wait = true`.
+如果服务器设置为只是监听 HTTP 请求而之后不想做任何事，
+通常会以 `wait = true` 调用 server.start。
 {: .note}
 
-## Running the Application
+## 运行该应用
 {: #running }
 
-Given that the entry point of your application is the standard Kotlin `main` function, 
-you can simply run it, effectively starting the server and listening on the specified port.
+考虑到应用的入口是标准的 Kotlin `main` 函数，
+直接运行即可有效启动服务器并监听指定端口。
 
-Checking the `localhost:8080` page in your browser, you should see the `Hello, world!` text. 
+在浏览器中查验 `localhost:8080` 页，会看到 `Hello, world!` 文本。
 
-## Next Steps
+## 下一步
 {: #next-steps }
 
-This was the simplest example of getting a self-hosted Ktor application up and running. 
-A recommended tour to continue learning Ktor on the server would be:
+这是编写并运行自托管 Ktor 应用的最简单示例。
+继续学习 Ktor 服务端开发的旅程会是：
 
-* [What is an Application?](/servers/application.html)
-* [Features](/features)
-* [Application Structure](/servers/structure.html)
-* [Testing](/servers/testing.html)
+* [应用是什么？](/servers/application.html)
+* [各种特性](/features)
+* [应用结构](/servers/structure.html)
+* [进行测试](/servers/testing.html)
