@@ -39,8 +39,8 @@ IETF RFC 或者其他协议的逻辑，而不依赖外部 JVM 库。
 >     compile "io.ktor:ktor-server-netty:$ktor_version"
 > }
 > ```
-> * 对于 gradle，请查阅：<http://ktor.kotlincn.net/quickstart/gradle.html#engine>
-> * 对于 maven，请查阅：<http://ktor.kotlincn.net/quickstart/maven.html>
+> * 对于 gradle，请查阅：<https://ktor.kotlincn.net/quickstart/gradle.html#engine>
+> * 对于 maven，请查阅：<https://ktor.kotlincn.net/quickstart/maven.html>
 
 ## ktor 是否提供了捕获 ipc 信号（如 SIGTERM 或 SIGINT）的方法，以便可以优雅处理服务器关机？
 {: #sigterm }
