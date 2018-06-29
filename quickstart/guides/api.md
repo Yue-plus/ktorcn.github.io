@@ -1,46 +1,46 @@
 ---
 title: REST API
-caption: How to create an API using ktor
+caption: 如何使用 ktor 创建 API
 category: quickstart
 ---
 
 {::options toc_levels="1..2" /}
 
-In this guide you will learn how to create an API using ktor.
-We are going to create a simple API to store simple text snippets (like a small pastebin-like API).
+在本指南中，你会学习如何使用 ktor 创建 API。
+我们会创建一个简单的 API 来存储简单的文本片段（就像一个小型的类 pastebin API）。
 
-To achieve this, we are going to use the [Routing], [StatusPages], [Authentication], [JWT Authentication],
-[CORS], [ContentNegotiation] and [Jackson] features.
+为了实现这一点，我们会用到[路由]、 [状态页]、 [身份认证]、 [JWT 认证]、
+[CORS]、 [内容协商]以及 [Jackson] 这些特性。
 
-[Routing]: /features/routing.html
-[StatusPages]: /features/status-pages.html
-[Authentication]: /features/authentication.html
-[JWT Authentication]: /features/authentication/jwt.html
+[路由]: /features/routing.html
+[状态页]: /features/status-pages.html
+[身份认证]: /features/authentication.html
+[JWT 认证]: /features/authentication/jwt.html
 [CORS]: /features/cors.html
-[ContentNegotiation]: /features/content-negotiation.html
+[内容协商]: /features/content-negotiation.html
 [Jackson]: /features/content-negotiation/jackson.html
 
-**Table of contents:**
+**目录：**
 
 * TOC
 {:toc}
 
-## Setting up the project
+## 搭建项目
 
-The first step is to set up a project. You can follow the [Quick Start](/quickstart/index.html) guide, or use the following form to create one:
+第一步是搭建一个项目。可以按照[快速入门](/quickstart/index.html)指南操作，或者使用以下表单创建：
 
-[**Open the pre-configured generator form**](javascript:$('#start_ktor_io_form').toggle())
+[**打开预先配置好的生成器表单**](javascript:$('#start_ktor_io_form').toggle())
 
 <iframe src="{{ site.ktor_init_tools_url }}#dependency=auth&dependency=auth-jwt&dependency=ktor-jackson&dependency=cors&artifact-group=com.example&artifact-name=api-example" id="start_ktor_io_form" style="border:1px solid #343a40;width:100%;height:500px;display:none;"></iframe>
 
-## Simple routing
+## 简单路由
 
-First of all, we are going to use the routing feature. This feature is part of the Ktor's core, so you won't need
-to include any additional artifact.
+首先，我们要使用路由特性。 这个特性是 Ktor 核心的一部分，因此不需要<!--
+-->包含任何其他构件。
 
-This feature is installed automatically when using the `routing { }` block.
+这一特性在使用 `routing { }` 块时自动安装。
 
-Let's start creating a simple GET route that responds with 'OK':
+让我们开始创建一个响应为“OK”的简单 GET 路由：
 
 ```kotlin
 fun Application.module() {
@@ -52,9 +52,9 @@ fun Application.module() {
 }
 ```
 
-## Serving JSON content
+## 提供 JSON 内容
 
-A REST API usually responds with JSON. You can use the *Content Negotiation* feature with *Jackson* for this:
+REST API 通常以 JSON 响应。可以使用以 *Jackson* 进行*内容协商*这一特性来实现：
 
 ```kotlin
 fun Application.module() {
@@ -63,12 +63,12 @@ fun Application.module() {
         }
     }
     routing {
-        // ...
+        // ……
     }
 }
 ```
 
-To respond to a call with a JSON. You have to call the `call.respond` method with an arbitrary object.
+为了以 JSON 响应调用，必须调用 `call.respond` 方法并传入任意对象。
 
 ```kotlin
 routing {
@@ -78,14 +78,14 @@ routing {
 }
 ```
 
-Now the browser should respond to `http://127.0.0.1:8080/snippets` with `{"OK":true}`
+现在浏览器应该以 `{"OK":true}` 来响应 `http://127.0.0.1:8080/snippets`
 
-If you get an error like `Response pipeline couldn't transform '...' to the OutgoingContent`, check that you have
-installed the ContentNegotiation feature with Jackson.
+如果出现类似 `Response pipeline couldn't transform '...' to the OutgoingContent` 的错误，请检查是否已经<!--
+-->安装了采用 Jackson 的内容协商特性。
 {: .note}
 
-You can also use typed objects as part of the reply (but ensure that your classes are not defined
-inside a function or it won't work). So for example:
+也可以使用类型化的对象作为回复的一部分（但要确保该类不是在<!--
+-->函数内部定义的，否则不能用）。例如：
 
 ```kotlin
 data class Snippet(val text: String)
@@ -98,7 +98,7 @@ val snippets = Collections.synchronizedList(mutableListOf(
 fun Application.module() {
     install(ContentNegotiation) {
         jackson {
-            enable(SerializationFeature.INDENT_OUTPUT) // Pretty Prints the JSON
+            enable(SerializationFeature.INDENT_OUTPUT) // 美化输出 JSON
         }
     }
     routing {
@@ -109,15 +109,15 @@ fun Application.module() {
 }
 ```
 
-Would reply with:
+会回复：
 
 ![](/quickstart/guides/api/snippets_get.png){:.rounded-shadow}
 
-## Handling other HTTP methods
+## 处理其他 HTTP 方法
 
-REST APIs use most of the HTTP methods/verbs (_HEAD_, _GET_, _POST_, _PUT_, _PATCH_, _DELETE_, _OPTIONS_) to perform operations.
-Let's create a route to add new snippets. For this, we will need to read the JSON body of the POST request.
-For this we will use `call.receive<Type>()`:
+REST API 使用大部分 HTTP 方法/动词（_HEAD_、 _GET_、 _POST_、 _PUT_、 _PATCH_、 _DELETE_、 _OPTIONS_）来执行操作。
+我们来创建一个添加新片段的路由。为此，我们需要读取 POST 请求的 JSON 正文。
+为此我们会使用 `call.receive<Type>()`：
 
 ```kotlin
 data class PostSnippet(val snippet: PostSnippet.Text) {
@@ -136,13 +136,13 @@ routing {
 }
 ```
 
-You can use postman or curl to perform a POST call easily:
+可以使用 postman 或 curl 轻松执行 POST 调用：
 
-Postman:
+Postman：
 
 ![](/quickstart/guides/api/postman.png)`{:.rounded-shadow}`
 
-CURL:
+CURL：
 
 <table class="compare-table"><thead><tr><th>Bash:</th><th>Response:</th></tr></thead><tbody><tr><td markdown="1">
 
@@ -164,18 +164,18 @@ curl \
 
 </td></tr></tbody></table>
 
-Let's do the GET request again:
+我们再次执行 GET 请求：
 
 ![](/quickstart/guides/api/snippets_get_new.png){:.rounded-shadow}
 
-Nice!
+很好！
 
-## Grouping routes together
+## 将路由分组合并
 
-Now we have two separate routes that share the path (but not the method) and we don't want to repeat ourselves.
+现在我们有两个分开的路由共享同一路径（但不共享方法），而我们不希望自我重复。
 
-We can group routes with the same prefix, using the `route(path) { }` block. For each HTTP method, there is an
-overload without the route path argument that we can use at routing leaf nodes:
+我们可以使用 `route(path) { }` 块将具有相同前缀的路由分组。对于每个 HTTP 方法，都有一个<!--
+-->不带路由路径参数的重载，可以用于路由的叶子节点：
 
 ```kotlin
 routing {
@@ -192,10 +192,10 @@ routing {
 }
 ```
 
-## Authentication
+## 身份认证
 
-It would be a good idea to prevent everyone from posting snippets. For now, we are going to limit it using
-http's basic authentication with a fixed user and password. To do it, we are going to use the authentication feature.
+防止每个人都发布片段是一个好主意。现在，我们将使用
+http 的基本身份认证用固定的用户名与密码来限制。为做到这一点，我们会使用身份认证特性。
 
 ```kotlin
 fun Application.module() {
@@ -205,14 +205,14 @@ fun Application.module() {
             validate { if (it.name == "user" && it.password == "password") UserIdPrincipal("user") else null }
         }
     }
-    // ...
+    // ……
 }
 ```
 
-After installing and configuring the feature, we can group some routes together to be authenticated with the
-`authenticate { }` block.
+安装并配置该特性之后，我们可以将一些路由组合到一起，以便<!--
+-->使用 `authenticate { }` 块进行身份认证。
 
-In our case, we are going to keep the get call unauthenticated, and going to require authentication for the post one:
+在本例中，我们保持 get 调用无需认证，而要对 post 调用进行身份认证：
 
 ```kotlin
 routing {
@@ -231,15 +231,15 @@ routing {
 }
 ```
 
-## JWT Authentication
+## JWT 认证
 
-Instead of using a fixed authentication, we are going to use JWT tokens.
+我们接下来使用 JWT 令牌取代固定身份认证。
 
-We are going to add a login-register route. That route will register a user if it doesn't exist,
-and for a valid login or register it will return a JWT token.
-The JWT token will hold the user name, and posting will link a snippet to the user.
+我们会添加一个登录注册路由。 如果指定用户不存在就会注册一个用户，
+而对于有效登录或注册会返回一个 JWT 令牌。
+JWT 令牌会保存用户名，而发布过程会将片段链接到用户。
 
-We will need to install and configure JWT (replacing the basic auth):
+我们需要安装并配置 JWT（取代基本身份认证 basic auth）：
 
 ```kotlin
 open class SimpleJWT(val secret: String) {
@@ -258,11 +258,11 @@ fun Application.module() {
             }
         }
     }
-    // ...
+    // ……
 }
 ```
 
-We will also need a data source holding usernames and passwords. One simple option would be:
+我们还需要一个保存用户名与密码的数据源。一个简单的选择是：
 
 ```kotlin
 class User(val name: String, val password: String)
@@ -274,7 +274,7 @@ val users = Collections.synchronizedMap(
 )
 ```
 
-With all this, we can already create a route for logging or registering users:
+有了这些，我们就可以创建一个用来登录或者注册用户的路由：
 
 ```kotlin
 routing {
@@ -287,7 +287,7 @@ routing {
 }
 ```
 
-With all this, we can already try to obtain a JWT token for our user:
+有了这些，我们就可以尝试获取用户的 JWT 令牌：
 
 <table class="compare-table"><thead><tr><th>Bash:</th><th>Response:</th></tr></thead><tbody><tr><td markdown="1">
 
@@ -309,7 +309,7 @@ curl -v \
 
 </td></tr></tbody></table>
 
-And with that token, we can already publish snippets:
+使用这个令牌，我们就可以发布片段了：
 
 <table class="compare-table"><thead><tr><th>Bash:</th><th>Response:</th></tr></thead><tbody><tr><td markdown="1">
 
@@ -332,12 +332,12 @@ curl -v \
 
 </td></tr></tbody></table>
 
-## Associating user to snippets
+## 将用户与片段关联
 
-Since we are posting snippets with an authenticated route, we have access to the generated `Principal` that includes
-the username. So we should be able to access that user and associate it to the snippet.
+由于我们使用有认证的路由发布片段，因此我们可以访问所生成的包含用户名的 `Principal`
+。所以我们应该能够访问该用户并将其关联到相应片段。
 
-First of all, we will need to associate user information to snippets:
+首先，我们需要将用户信息关联到片段：
 
 ```kotlin
 data class Snippet(val user: String, val text: String)
@@ -348,14 +348,14 @@ val snippets = Collections.synchronizedList(mutableListOf(
 ))
 ```
 
-Now we can use the principal information (that is generated by the authentication feature when authenticating JWT)
-when inserting new snippets:
+现在我们可以在插入新片段时<!--
+-->使用（在 JWT 认证时由身份认证特性生成的）当事人信息了：
 
 ```kotlin
 routing {
-    // ...
+    // ……
     route("/snippets") {
-        // ...
+        // ……
         authenticate {
             post {
                 val post = call.receive<PostSnippet>()
@@ -368,7 +368,7 @@ routing {
 }
 ```
 
-Let's try this:
+我们来试试这个：
 
 <table class="compare-table"><thead><tr><th>Bash:</th><th>Response:</th></tr></thead><tbody><tr><td markdown="1">
 
@@ -397,22 +397,22 @@ curl -v \
 
 </td></tr></tbody></table>
 
-Awesome!
+好极了！
 
-## StatusPages
+## 状态页
 
-Now let's refine things a bit. A REST API should use Http Status codes to provide semantic information about errors.
-Right now, when an exception is thrown (for example when trying to get a JWT token from an user that already exists,
-but with a wrong password), a 500 server error is returned. We can do it better, and the StatusPages features
-will allow you to do this by capturing specific exceptions and generating the result.
+现在我们来细化一下。REST API 应该使用 Http 状态码来提供错误相关的语义信息。
+现在，当异常抛出时（例如当试图用已存在的用户获取 JWT 令牌，
+但密码错误时），会返回 500 服务器错误。 我们可以做的更好，并且状态页特性<!--
+-->会允许通过捕获指定的异常并生成结果来实现这个功能。
 
-Let's create a new exception type:
+我们来创建一个新的异常类型：
 
 ```kotlin
 class InvalidCredentialsException(message: String) : RuntimeException(message)
 ```
 
-Now, let's install the StatusPages feature, register this exception type, and generate an Unauthorized page: 
+现在，我们来安装状态页特性、注册这个异常类型，并生成一个未授权（Unauthorized）页：
 
 ```kotlin
 fun Application.module() {
@@ -421,11 +421,11 @@ fun Application.module() {
             call.respond(HttpStatusCode.Unauthorized, mapOf("OK" to false, "error" to (exception.message ?: "")))
         }
     }
-    // ...
+    // ……
 }
 ```
 
-We should also update our login-register page to throw this exception:
+我们也需要更新登录注册页来引发这个异常：
 
 ```kotlin
 routing {
@@ -438,7 +438,7 @@ routing {
 }
 ```
 
-Let's try this:
+我们来试试这个：
 
 <table class="compare-table"><thead><tr><th>Bash:</th><th>Response:</th></tr></thead><tbody><tr><td markdown="1">
 
@@ -466,12 +466,12 @@ curl -v \
 
 </td></tr></tbody></table>
 
-Things are getting better!
+看起来好多了！
 
 ## CORS
 
-Now suppose we need this API to be accessible via JavaScript from another domain. We will need to configure CORS.
-And Ktor has a feature to configure this:
+现在假定我们需要从另一个域通过 JavaScript 访问这个 API。我们需要配置 CORS。
+而 Ktor 有一个特性来配置这个功能：
 
 ```kotlin
 fun Application.module() {
@@ -486,21 +486,21 @@ fun Application.module() {
         allowCredentials = true
         anyHost()
     }
-    // ...
+    // ……
 }
 ```
 
-Now our API is accessible from any host :)
+现在我们的 API 可以从任何主机访问了 :)
 
-## Exercises
+## 练习
 
-After following this guide, as an exercise, you can try to do the following exercises:
+学完本指南，作为练习，可以尝试以下题目：
 
-### Exercise 1
+### 练习一
 
-Add unique ids to each snippet and add a DELETE http verb to /snippets allowing an authenticated user to delete
-her snippets.  
+为每个片段添加唯一 id，并为 /snippets 添加一个 DELETE http 动词，以允许通过身份认证的用户删除<!--
+-->自己的片段。
 
-### Exercise 2
+### 练习二
 
-Store users and snippets in a database. 
+将用户与片段存储到数据库中。

@@ -27,7 +27,7 @@ Ktor 分为以下几组模块：
   * `ktor-server-servlet` 由 Jetty 与 Tomcat 使用，并允许在通用的 servlet 容器中运行
   * `ktor-server-test-host` 允许在不启动完整主机的情况下更快地运行应用测试
 * `ktor-features` 为并非每个应用都需要的可选特性分组的模块
-  * `ktor-auth` 为不同的[认证系统](/features/authentication.html)如 Basic、 Digest、 表单、 OAuth 1a 与 OAuth 2 提供支持
+  * `ktor-auth` 为不同的[身份认证系统](/features/authentication.html)如 Basic、 Digest、 表单、 OAuth 1a 与 OAuth 2 提供支持
   * `ktor-auth-jwt` 添加针对 [JWT](/features/authentication/jwt.html) 认证的能力
   * `ktor-auth-ldap` 添加针对 [LDAP](/features/authentication/ldap.html) 实例认证的能力
   * `ktor-freemarker` 将 Ktor 与 [Freemarker 模板](/features/templates/freemarker.html)集成
