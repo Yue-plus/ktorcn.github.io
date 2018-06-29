@@ -183,7 +183,6 @@ client.post<Unit> {
     body = HelloWorld(hello = "world")
 }
 ```
-{: .compact}
 
 Remember that your classes must be *top-level* to be recognized by `Gson`. \\
 If you try to send a class that is inside a function, the feature will send a *null*.
@@ -492,7 +491,8 @@ suspend fun parallelRequests() {
 
 ## Examples
 
-*Interchanging JSON: Ktor server / Ktor client*:
+### Interchanging JSON: Ktor server / Ktor client
+{: #example-json }
 
 ```kotlin
 fun main(args: Array<String>) {
@@ -545,7 +545,6 @@ fun Application.mymodule() {
     }
 }
 ```
-{: .compact}
 
 You can check the [ktor-samples](https://github.com/ktorio/ktor-samples) and [ktor-exercises](https://github.com/ktorio/ktor-exercises) repositories for samples and exercises.
 {: .note }
