@@ -140,7 +140,7 @@ routing {
 
 Postman：
 
-![](/quickstart/guides/api/postman.png)`{:.rounded-shadow}`
+![](/quickstart/guides/api/postman.png){:.rounded-shadow}
 
 CURL：
 
