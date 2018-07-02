@@ -2,6 +2,7 @@
 title: Http Client
 category: clients
 permalink: /clients/http-client.html
+children: /clients/http-client/
 caption: Http Client 
 ---
 
@@ -24,6 +25,9 @@ And each engine, is provided in [separate artifacts](#engines).
 The basic usage is *super* simple: you just have to instantiate an `HttpClient` instance,
 specifying an engine, for example [`Apache`](#apache), [`Jetty`](#jetty)
 or [`CIO`](#cio), and start making requests using one of the many convenience methods available.
+
+Since Ktor 0.9.3, you can omit the engine, and Ktor will choose an engine among the ones that are available
+from the included artifacts using a ServiceLoader. 
 
 First you need to instantiate the client:   
 

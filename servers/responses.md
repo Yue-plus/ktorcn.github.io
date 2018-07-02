@@ -71,7 +71,7 @@ Getting and changing the HTTP Status:
 * `request.status(HttpStatusCode(418, "I'm a tea pot"))` - Sets the HttpStatusCode to a custom status code
 * `val status: HttpStatusCode? = request.status()` - Gets the currently set HttpStatusCode if set
 
-* `response.contentType(ContentType.Application.Json.withCharset(Charsets.UTF_8))` - Typed way for setting the Content-Type
+* `response.contentType(ContentType.Text.Plain.withCharset(Charsets.UTF_8))` - Typed way for setting the Content-Type (for `ContentType.Application.Json` the default charset is UTF_8 without making it explicit)
 * `response.contentType("application/json; charset=UTF-8")` - Untyped way for setting the Content-Type header
 
 Custom headers:
@@ -138,6 +138,10 @@ Sending plain text:
 * `call.respondText("p { background: red; }", contentType = ContentType.Text.CSS, status = HttpStatusCode.OK) { ... }` - Sending a text specifying the ContentType, the HTTP Status and configuring the [OutgoingContent](#outgoing-content)
 * `call.respondText { "string" }` - Responding a string with a suspend provider
 * `call.respondText(contentType = ..., status = ...) { "string" }` - Responding a string with a suspend provider
+
+Sending byte arrays:
+
+* `call.respondBytes(byteArrayOf(1, 2, 3))` - A ByteArray with a binary body
 
 Sending files:
 
