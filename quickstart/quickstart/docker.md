@@ -1,6 +1,6 @@
 ---
 title: Docker
-caption: Creating Docker Container
+caption: 创建 Docker 容器
 category: quickstart
 permalink: /quickstart/quickstart/docker.html
 redirect_from:
@@ -8,28 +8,28 @@ redirect_from:
 priority: 0
 ---
 
-[Docker](https://www.docker.com) is a container platform:
-it allows packaging software in a format that can then be run in isolation in any supported operating system.
+[Docker](https://www.docker.com) 是一个容器平台：
+它允许将软件打包为可以在任何所支持的操作系统中隔离运行的格式。
 
-Publishing a Ktor application to docker is very easy and only takes a few steps:
+将 Ktor 应用发布到 docker 非常简单，只需以下几步：
 
-* Install [Docker](https://www.docker.com)
-* A JAR packaging tool
+* 安装 [Docker](https://www.docker.com)
+* JAR 打包工具
 
-In this page we will guide you through creating a docker image and publishing an application to it.
+在本页中，我们会指导你创建你一个 docker 镜像并将应用发布进去。
 
-**Table of contents:**
+**目录：**
 
 * TOC
 {:toc}
 
-### Package an application using Gradle
+### 使用 Gradle 打包应用
 
-In this tutorial, we will use the Gradle [shadow plugin](https://github.com/johnrengelman/shadow).
-It packages all the output classes, resources, and all the required dependencies into a single JAR file,
-and appends a manifest file to tell Java which is the entry-point main class containing the main method. 
+在本教程中，我们会使用 Gradle [shadow 插件](https://github.com/johnrengelman/shadow)。
+它将所有输出的类、资源以及所有必需的依赖项打包到一个 JAR 文件中，
+并追加一个清单文件来告诉 Java 哪个是包含 main 方法的入口点主类。
 
-First, you need to add the shadow plugin dependency in your `build.gradle` file:
+首先，需要在 `build.gradle` 文件中添加 shadow 插件依赖：
 
 ```groovy 
 buildscript {
@@ -45,24 +45,24 @@ buildscript {
 }
 ```
 
-After that, you have to apply it, along with the application plugin:
+之后，必须应用它以及 application 插件：
 
 ```groovy
 apply plugin: "com.github.johnrengelman.shadow"
 apply plugin: 'application'
 ``` 
 
-Then specify the main class, so it knows what to run when running the java's JAR inside Docker:
+然后指定主类，这样它才知道当在 Docker 内部运行该 JAR 包时要运行什么：
 
 ```groovy
 mainClassName = 'org.sample.ApplicationKt'
 ```
 
-The string is the fully qualified name of the class containing your `main` function. When `main` function is a top-level
-function in a file, the class name is the file name with the `Kt` suffix. In the example above, `main` function is in the
-file `Application.kt` in package `org.sample`.
+该字符串是包含 `main` 函数的类的完整限定名。 当 `main` 函数是<!--
+-->文件中的顶层函数时，类名是带有 `Kt` 后缀的文件名。 在上述示例中，`main` 函数在
+`org.sample` 包中的 `Application.kt` 文件中。
 
-Finally, you have to configure the shadow plugin:
+最后，必须配置 shadow 插件：
 
 ```groovy
 shadowJar {
@@ -72,12 +72,12 @@ shadowJar {
 }
 ```
 
-Now you can run `./gradlew build` to build and package your application.
-You should get `my-application.jar` in `build/libs` folder.  
+现在可以运行 `./gradlew build` 来构建并打包应用了。
+应该可以在 `build/libs` 文件夹中获取 `my-application.jar`。
 
-For more information about configuring this plugin see [documentation for the plugin](http://imperceptiblethoughts.com/shadow/)
+关于配置这个插件的更多信息，请参见[该插件的文档](http://imperceptiblethoughts.com/shadow/)
 
-So a full `build.gradle` file would look like this:
+因此一个完整的 `build.gradle` 文件会如下所示：
 
 
 **`build.gradle`**:
@@ -175,12 +175,12 @@ fun Application.main() {
 ```
 {: .compact}
 
-You can check this [full example](https://github.com/ktorio/ktor-samples/tree/master/deployment/docker) at the ktor-samples repository.
+可以在 ktor-samples 仓库中检出这个[完整示例](https://github.com/ktorio/ktor-samples/tree/master/deployment/docker)。
 {: .note }
 
-### Prepare Docker image
+### 准备 Docker 镜像
 
-In the root folder of your project create a file named `Dockerfile` with the following contents:
+在项目的根文件夹中创建一个名为 `Dockerfile` 的文件，其内容如下：
 
 ```text
 FROM openjdk:8-jre-alpine
@@ -189,82 +189,82 @@ WORKDIR /root
 CMD ["java", "-server", "-XX:+UnlockExperimentalVMOptions", "-XX:+UseCGroupMemoryLimitForHeap", "-XX:InitialRAMFraction=2", "-XX:MinRAMFraction=2", "-XX:MaxRAMFraction=2", "-XX:+UseG1GC", "-XX:MaxGCPauseMillis=100", "-XX:+UseStringDeduplication", "-jar", "my-application.jar"]
 ```
 
-Let's see what is what:
+我们来看下都是什么：
 
 ```text
 FROM openjdk:8-jre-alpine
 ```
 
-This line tells Docker to base an image on a pre-built image with [Alpine Linux](https://alpinelinux.org/). You can use other images 
-from [OpenJDK registry](https://hub.docker.com/_/openjdk/). Alpine Linux benefit is that the image is pretty small. 
-We also select JRE-only image since we don't need to compile code on the image, only run precompiled classes.
+这行告诉 Docker 使用以 [Alpine Linux](https://alpinelinux.org/) 预构建的镜像作为基础镜像。也可以使用
+[OpenJDK registry](https://hub.docker.com/_/openjdk/) 中的其他镜像。Alpine Linux 的好处是镜像非常小。
+我们选择的也是只有 JRE 的镜像，因为我们并不需要在镜像中编译代码，只需要运行预编译的类。
 
 ```text
 COPY ./build/libs/my-application.jar /root/my-application.jar
 WORKDIR /root
 ```
 
-These lines copy your packaged application into the Docker image and sets the working directory to where we copied it.
+这几行将已打包的应用复制到 Docker 镜像中，并将工作目录设置为复制后的位置。
 
 ```text
 CMD ["java", "-server", "-XX:+UnlockExperimentalVMOptions", "-XX:+UseCGroupMemoryLimitForHeap", "-XX:InitialRAMFraction=2", "-XX:MinRAMFraction=2", "-XX:MaxRAMFraction=2", "-XX:+UseG1GC", "-XX:MaxGCPauseMillis=100", "-XX:+UseStringDeduplication", "-jar", "my-application.jar"]
 ```
 
-The last line instructs Docker to run `java` with G10s GC, 4G of memory and your packaged application. 
+最后一行指示 Docker 使用 G1 GC、4G 内存以及已打包的应用来运行 `java`。
 
-### Building and running the Docker image
+### 构建并运行 Docker 镜像
 
-Build an application package:
+构建应用包：
 
 ```
 ./gradlew build
 ```
 
-Build and tag an image:
+构建并标记镜像：
 
 ```
 docker build -t my-application .
 ```
 
-Start an image:
+启动镜像：
 
 ```
 docker run -m512M --cpus 2 -it -p 8080:8080 --rm ktor-docker-sample-application
 ```
 
-With this command, we start Docker in a foreground mode. It will wait for the server to exit, it
-will also respond to `Ctrl+C` to stop it. `-it` instructs Docker to allocate a terminal (*tty*) to pipe the stdout
-and to respond to the interrupt key sequence. 
+通过这个命令，我们启动 Docker 进入前台模式。 它会等待服务器退出，
+也会响应 `Ctrl+C` 来停止服务。 `-it` 指示 Docker 分配一个终端（*tty*）来管理标准输出（stdout）
+并响应中断键序列。
 
-Since our server is running in an isolated container now, we should tell Docker to expose a port so we can
-actually access the server port. Parameter `-p 8080:8080` tells Docker to publish port 8080 from inside a container as a port 8080 on a local
-machine. Thus, when you tell your browser to visit `localhost:8080` it will first reach out to Docker, and it will bridge
-it into internal port `8080` for your application. 
+由于我们的服务器现在是在一个隔离的容器中运行，因此我们应该告诉 Docker 暴露一个端口，以便我们可以<!--
+-->实际访问到服务器端口。 参数 `-p 8080:8080` 告诉 Docker 将容器内部的 8080 端口发布为本机的
+8080 端口。 因此，当告诉浏览器访问 `localhost:8080` 时，它会首先连向 Docker，然后为应用将其桥接<!--
+-->到内部端口 `8080`。
 
-You can adjust memory with `-m512M` and number of exposed cpus with `--cpus 2`. 
+可以通过 `-m512M` 调整内存并通过  `--cpus 2` 调整所暴露 cpu 数。
 
-By default a container’s file system persists even after the container exits, so we supply `--rm` option to prevent
-garbage piling up.
+默认情况下，容器的文件系统在容器退出后仍然存在，所以我们提供 `--rm` 选项以防<!--
+-->垃圾堆积。
 
-For more information about running a docker image please consult [docker run](https://docs.docker.com/engine/reference/run) 
-documentation.
+关于运行 docker 镜像的更多信息，请参考 [docker run](https://docs.docker.com/engine/reference/run)
+文档。
 
-### Pushing docker image 
+### 上传 docker 镜像
 
-Once your application is running locally successfully, it might be a time to deploy it:
+一旦应用能在本地成功运行，那么可能就到部署它的时候了：
 
 ```text
 docker tag my-application hub.example.com/docker/registry/tag
 docker push hub.example.com/docker/registry/tag
 ```
  
-These commands will tag your application for a registry and push an image. 
-Of course, you need to replace `hub.example.com/docker/registry/tag` with an actual URL for your registry.
+这两条命令会为 registry 创建应用的标记并将镜像上传。
+当然，需要用你的 registry 的实际 URL 来替换 `hub.example.com/docker/registry/tag`。
 
-We won't go into details here since your configuration might require authentication, specific configuration options 
-and even special tools. Please consult your organization or cloud platform, or 
-check [docker push](https://docs.docker.com/engine/reference/commandline/push/) documentation.
+我们这里不会详细展开，因为你的配置可能需要身份认证、特殊配置<!--
+-->甚至特殊工具。请咨询你的组织或者云平台，或者<!--
+-->查阅 [docker push](https://docs.docker.com/engine/reference/commandline/push/) 文档。
 
-### Sample
+### 样例
 
-You can check a [full sample](https://github.com/ktorio/ktor-samples/tree/master/deployment/docker) at the ktor-samples repository.
+可以在 ktor-samples 仓库中检出[完整样例](https://github.com/ktorio/ktor-samples/tree/master/deployment/docker)。
