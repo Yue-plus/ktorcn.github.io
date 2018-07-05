@@ -2,12 +2,14 @@
 title: 生成器
 caption: 生成一个 Ktor 项目
 category: quickstart
-#permalink: /start
-#redirect_from:
-#  - /quickstart/quickstart/generator.html
+permalink: /quickstart/generator.html
+redirect_from:
+  - /quickstart/quickstart/generator.html
 ---
 
-<https://ktor.io/start>
+<!--<https://ktor.io/start>-->
+
+**NOTE: You can also use the [Ktor IntelliJ plugin](/quickstart/quickstart/intellij-idea/plugin.html) instead.**
 
 <div id="generator_id"></div>
 
