@@ -38,11 +38,11 @@ Ktor has a [start.ktor.io](https://soywiz.github.io/start-ktor-io-proposal/) web
 
 ## Gradle 设置
 
-本节假定你有一些关于 Gradle 的基本知识。如果你从未使用过 gradle，
+本节假定你有一些 Gradle 的基本知识。如果你从未使用过 Gradle，
 那么可参考 gradle.org 提供的[一些指南](https://guides.gradle.org/building-java-applications/)来帮你入门。
 {: .note}
 
-你可以像这样使用 gradle 搭建一个简单的 Ktor 应用：
+你可以像这样使用 Gradle 搭建一个简单的 Ktor 应用：
 
 ![Ktor Build with Gradle](/quickstart/1/ktor_build_gradle.png)
 
@@ -90,21 +90,21 @@ dependencies {
 ```
 {: .compact}
 
-由于 Ktor 还没到 1.0，我们（官方）用自定义的 maven 仓库来分发早期预览版构件。
-必须设置如下所示的几个仓库，以便工具可以找到 ktor 构件及其依赖。
+由于 Ktor 还没到 1.0，我们（官方）用自定义的 Maven 仓库来分发早期预览版构件。
+必须设置如下所示的几个仓库，以便工具可以找到 Ktor 构件及其依赖。
 
 当然，不要忘记包含实际的构件！对于快速入门，我们使用 `ktor-server-netty` 构件。
 这包括 Ktor 的核心、netty 以及 ktor-netty 连接器作为传递依赖。
 当然你还可以包含任何其他所需要的额外依赖。
 
-由于 ktor 设计为模块化的，对于指定特性会需要额外的构件并且有可能需要其他仓库<!--
--->。 可以在指定特性的文档中找到每个特性所需的构件（以及仓库，如果需要的话）<!--
+由于 Ktor 设计为模块化的，对于指定特性会需要额外的构件并且有可能需要其他仓库<!--
+-->。 可以在指定特性的文档中找到每个特性所需的构件（以及所需仓库）<!--
 -->。
 {:.note}
 
 ## Hello World
 
-Ktor 的一个简单的 hello world 看起来像这样：
+Ktor 的一个简单的 hello world 如下所示：
 
 ![Ktor Hello World](/quickstart/1/ktor_hello_world_main.png)
 
@@ -142,7 +142,7 @@ fun main(args: Array<String>) {
 ## 访问应用
 
 由于有 main 方法，因此可以用 IDE 执行。这会打开一个 HTTP 服务器，
-监听在 [http://127.0.0.1:8080](http://127.0.0.1:8080/)。可以尝试用你喜欢的 web 浏览器打开它。
+监听在 [http://127.0.0.1:8080](http://127.0.0.1:8080/)，可以尝试用你喜欢的 web 浏览器打开它。
 
 如果这不起作用，可能是该端口已被占用。可以尝试修改
 （在第 10 行的）8080 端口并按需调整。
@@ -153,7 +153,7 @@ fun main(args: Array<String>) {
 此时应该有一个非常简单的 Web 后端在运行，所以你可以进行修改，
 并在浏览器中查看结果。
 
-由于已经为 gradle 项目配置了 application 插件与 `mainClassName`，
+由于已经为 Gradle 项目配置了 application 插件与 `mainClassName`，
 因此可以在终端中运行，Linux/Mac 中使用 `./gradlew run`，Windows 中使用 `gradlew run`。
 {:.note}
 
