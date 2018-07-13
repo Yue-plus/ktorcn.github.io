@@ -124,7 +124,7 @@ data class PostSnippet(val snippet: PostSnippet.Text) {
     data class Text(val text: String)
 }
 
-// ...
+// ……
 
 routing {
     get("/snippets") {
@@ -138,21 +138,21 @@ routing {
 }
 ```
 
-Now it is time to actually try our backend.
+现在是时候试一下后端服务了。
 
-If you have IntelliJ Ultimate, you can use its built-in powerful HTTP Request client,
-if not, you can also use postman or curl:
+如果有 IntelliJ Ultimate，可以使用其 HTTP 请求客户端；
+如果没有，也可以使用 postman 或者 curl：
 
-### IntelliJ Ultimate:
+### IntelliJ Ultimate：
 {: #first-request-intellij }
 
-IntelliJ Ultimate, along PhpStorm and other IDEs from JetBrains include a
-very nice [Editor-Based Rest Client](https://blog.jetbrains.com/phpstorm/2017/09/editor-based-rest-client/){:target="_blank"}.
+IntelliJ Ultimate 还有 PhpStorm 以及其他 JetBrains IDE 都包含一个<!--
+-->很好的[基于编辑器的 Rest 客户端](https://blog.jetbrains.com/phpstorm/2017/09/editor-based-rest-client/){:target="_blank"}.
 
-First you have to create a HTTP Request file (either `api` or `http` extensions)
+首先，必须创建 HTTP Request 文件（`api` 或者 `http` 扩展名均可）
 ![](/quickstart/guides/api/IU-http-new-file.png)
 
-Then you have to type the method, url, headers and payload like this:
+然后必须输入方法、url、请求头以及有效载荷，如下所示
 
 ![](/quickstart/guides/api/IU-http-request.png)
 
@@ -163,25 +163,25 @@ Content-Type: application/json
 {"snippet": {"text" : "mysnippet"}}
 ```
 
-And then in the play gutter icon from the URL, you can perform the call, and get the response:
+然后点击在 URL 左侧栏的播放图标，可以执行该调用并获取其响应：
 
 ![](/quickstart/guides/api/IU-http-response.png)
 
-And that's it!
+就是这样！
 
-This allows you to define files (plain or scratches) that include definition for several HTTP requests,
-allowing to include headers, provide a payload inline, or from files, use environment variables defined in a JSON file,
-process the response using JavaScript to perform assertions, or to store some environment variables like
-authentication credentials so they are available to other requests. It supports autocompletion, templates, and
-automatic language injection based on Content-Type, including JSON, XML, etc..
+这可以定义包含一系列 HTTP 请求的一些（纯文本或 scratch）文件，
+可以包含请求头、提供内联或者来自文件的有效载荷、使用 JSON 文件中定义的环境变量、
+使用 JavaScript 处理响应以执行断言，或者存储一些环境变量（如<!--
+-->认证凭据）以便可用于其他请求。它支持基于 Content-Type（包括 JSON、XML 等等）的<!--
+-->自动补全、模板与自动语言注入。
 {: .note}
 
-In addition to easily test your backends inside your editor, it also helps your to document your APIs
-by including a file with the endpoints on it.
-And allows you fetch and locally store responses and visually compare them.
+除了易于在编辑器中测试后端之外，它还可以通过在其上包含一个带有的端点文件来帮助编写 API 文档<!--
+-->。
+可以获取并本地存储响应乃至可视化比较之。
 {: .note}
 
-### CURL:
+### CURL：
 {: #first-request-curl }
 
 <table class="compare-table"><thead><tr><th>Bash:</th><th>Response:</th></tr></thead><tbody><tr><td markdown="1">
@@ -337,30 +337,30 @@ routing {
 ### IntelliJ
 {% endcomment %}
 
-Using the Editor-Based HTTP client for IntelliJ Ultimate,
-you can make the POST request, and check that the content is valid,
-and store the token in an environment variable:
+如果使用 IntelliJ Ultimate 的基于编辑器的 HTTP 客户端，
+可以发出 POST 请求并检验其内容是否有效，
+然后将令牌存储在环境变量中：
 
 ![](/quickstart/guides/api/IU-http-login-register-request.png)
 
 ![](/quickstart/guides/api/IU-http-login-register-response.png)
 
-Now you can make a request using the environment variable `{% raw %}{{auth_token}}{% endraw %}`:
+现在可以使用环境变量 `{% raw %}{{auth_token}}{% endraw %}` 来进行请求：
 
 ![](/quickstart/guides/api/IU-http-snippets-env-auth_token-request.png)
 
 ![](/quickstart/guides/api/IU-http-snippets-env-auth_token-response.png)
 
-If you want to easily test different endpoints in addition to localhost,
-you can create a `http-client.env.json` file and put a map with environments
-and variables like this:
+如果还想轻松测试除了 localhost 之外的不同端点，
+可以创建一个 `http-client.env.json` 文件并放一个带有环境<!--
+-->与变量的映射如下：
 
 ![](/quickstart/guides/api/IU-env/http-client.env.json.png)
 
-After this, you can start using the user-defined `{% raw %}{{host}}{% endraw %}` env variable:
+此后，就可以开始使用自定义的 `{% raw %}{{host}}{% endraw %}` 环境变量了：
 ![](/quickstart/guides/api/IU-env/use_host_env.png)
 
-When trying to run a request, you will be able to choose the environment to use:
+当尝试运行一个请求时，就可以选择要使用的环境了：
 ![](/quickstart/guides/api/IU-env/select_env_for_running.png)
 
 {% comment %}
@@ -588,7 +588,7 @@ fun Application.module() {
 
 现在我们的 API 可以从任何主机访问了 :)
 
-## Full Source
+## 完整代码
 
 ### `application.kt`
 
@@ -700,12 +700,12 @@ class LoginRegister(val user: String, val password: String)
 
 ```
 {% raw %}
-# Get all the snippets
+# 获取所有片段
 GET {{host}}/snippets
 
 ###
 
-# Register a new user
+# 注册一个新用户
 POST {{host}}/login-register
 Content-Type: application/json
 
@@ -718,7 +718,7 @@ client.global.set("auth_token", response.body.token);
 
 ###
 
-# Put a new snippet (requires registering)
+# 发布一个新片段（需要注册）
 POST {{host}}/snippets
 Content-Type: application/json
 Authorization: Bearer {{auth_token}}
@@ -727,7 +727,7 @@ Authorization: Bearer {{auth_token}}
 
 ###
 
-# Try a bad login-register
+# 尝试一个错误的登录-注册
 POST http://127.0.0.1:8080/login-register
 Content-Type: application/json
 
