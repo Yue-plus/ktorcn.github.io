@@ -1,6 +1,6 @@
 ---
 title: SSL
-caption: How to get a free certificate and use SSL with Ktor
+caption: 如何获取免费证书以及在 Ktor 中使用 SSL
 category: quickstart
 keywords: tls ssl https let's encrypt letsencrypt
 ---
@@ -10,43 +10,43 @@ keywords: tls ssl https let's encrypt letsencrypt
 
 ![](/quickstart/guides/ssl/lets-encrypt.svg)
 
-**Table of contents:**
+**目录：**
 
 * TOC
 {:toc}
 
-You can buy a certificate and configure Ktor to use it,
-**or** you can use Let's Encrypt to automatically get a **free certificate** to serve `https://` and `wss://` requests
-with Ktor.
-In this page you will discover how to do it, by either configuring Ktor to directly serve the SSL certificate
-for a single domain or by using Docker with nginx to serve different applications in different machines on
-a single machine easily.
+可以购买证书并配置 Ktor 使用，
+**也可以**使用 Let's Encrypt 自动获取 **免费证书** 来以 Ktor 提供支持 `https://` 与 `wss://` 请求<!--
+-->的服务。
+本页会介绍如何实现，既有通过直接配置 Ktor 以提供单个域名的 SSL 证书的服务，
+也有使用 Docker 与 nginx 轻松在一台计算机上为位于不同计算机的不同应用提供服务<!--
+-->。
 
-## Option1: With Ktor serving SSL directly
+## 选项一：直接以 Ktor 提供 SSL 服务
 {: #ktor}
 
-### Configuring an `A` register pointing to the machine
+### 配置 `一个`指向机器的注册点
 
-First of all, you have to configure your domain or subdomain to point to the IP of the machine that
-you are going to use for the certificate. You have to put the public IP of the machine here.
-If that machine is behind routers, you will need to configure the router to DMZ the machine with the host,
-or to redirect at least the port 80 (HTTP) to that machine, and later you will probably want to configure the
-port 443 (HTTPS) too.
+首先，必须将域名或者子域名配置为指向即将用于证书的<!--
+-->计算机的 IP。 必须在这里使用计算机的公网 IP。
+如果该计算机位于路由器之后，那么需要配置路由器将该计算机与对应主机名做 DMZ，
+或者至少将 80 端口（HTTP）重定向到该计算机，而之后可能也需要配置
+443 端口（HTTPS）。
 
-Let's Encrypt can always access the PORT 80 of your public IP, even if you configure Ktor to bind to another port,
-you have to configure your routes to redirect the port 80 to the correct local ip and port of the machine
-hosting ktor.
+Let's Encrypt 总是访问你的公网 IP 的 80 端口，即便你配置 Ktor 绑定了其他端口，
+你必须配置路由将 80 端口重定向到运行 ktor 的计算机的正确本机 IP 与端口<!--
+-->。
 {: .note }
 
-### Generating a certificate
+### 生成证书
 
-The Ktor server must not be running, and you have to execute the following command
-(changing `my.example.com`, `root@example.com` and `8889`).
+Ktor 服务器必须没有运行，然后必须运行以下命令
+（需更改 `my.example.com`、 `root@example.com` 与 `8889`）
 
-This command will start a HTTP web server in the specified port (that must be available as port 80 in the
-public network, or you can forward ports in your router to 80:8889, and the domain must point to your public IP),
-it will then request a challenge, expose the `/.well-known/acme-challenge/file` with the proper content, generate a 
-domain private key, and retrieve the certificate chain:  
+这个命令会在指定的端口启动一个 HTTP 服务器（该端口必须在公网暴露为 80
+端口，也可以在路由器转发端口 80:8889，并且域名必须指向你的公网 IP），
+它会请求一个 challenge、以正确的内容暴露为 `/.well-known/acme-challenge/file`，
+生成一个域名私钥并接收证书链：
 
 ```
 export DOMAIN=my.example.com
@@ -59,7 +59,7 @@ certbot certonly -n -d $DOMAIN --email "$EMAIL" --agree-tos --standalone --prefe
 <table>
 <tr>
 <td markdown="1" style="width:50%;">
-❌ Error output sample:
+❌ 错误输出样例：
 
 ```aidl
 Saving debug log to /var/log/letsencrypt/letsencrypt.log
@@ -95,7 +95,7 @@ IMPORTANT NOTES:
 ```
 </td>
 <td markdown="1" style="width:50%;">
-✅ Working output sample:
+✅ 正常输出样例：
 
 ```aidl
 Saving debug log to /var/log/letsencrypt/letsencrypt.log
@@ -124,33 +124,33 @@ IMPORTANT NOTES:
 </tr>
 </table>
 
-### Converting the private key and certificate for Ktor
+### 为 Ktor 转换私钥与证书
 
-Now you have to convert the private key and certificates written by `certbot` to a format that Ktor understands.
+现在必须将 `certbot` 写入的私钥与证书转换为 Ktor 理解的格式。
 
-The chain and private keys are stored in `/etc/letsencrypt/live/$DOMAIN` as `fullchain.pem` and `privkey.pem`.
+证书链与私钥都存储在 `/etc/letsencrypt/live/$DOMAIN` 中，分别为 `fullchain.pem` 与 `privkey.pem`。
 
 ```
 openssl pkcs12 -export -out /etc/letsencrypt/live/$DOMAIN/keystore.p12 -inkey /etc/letsencrypt/live/$DOMAIN/privkey.pem -in /etc/letsencrypt/live/$DOMAIN/fullchain.pem -name $ALIAS
 ```
 
-This will request a password for the export (you need to provide one for the next step to work):
+导出时会要求设置密码（需要提供一个用于下一步工作的密码）：
 
 ```
 Enter Export Password: mypassword
 Verifying - Enter Export Password: mypassword
 ```
 
-With th p12 file, we can use the `keytool` cli to generate a JKS file: 
+有了 p12 文件，可以使用 `keytool` 命令行工具来生成 JKS 文件：
 
 ```
 keytool -importkeystore -alias $ALIAS -destkeystore /etc/letsencrypt/live/$DOMAIN/keystore.jks -srcstoretype PKCS12 -srckeystore /etc/letsencrypt/live/$DOMAIN/keystore.p12
 ```
 
-### Configuring Ktor to use the generated JKS
+### 配置 Ktor 使用生成的 JKS
 
-Now you have to update your `application.conf` HOCON file, to configure the SSL port, the keyStore, alias, and passwords.
-You have to set the correct values for your specific case: 
+现在必须更新 HOCON 文件 `application.conf`，配置 SSL 端口、keyStore、别名以及密码。
+必须为你指定的场景设置正确的值：
 
 ```groovy
 ktor {
@@ -174,33 +174,33 @@ ktor {
 }
 ```
 
-If everything went well, Ktor should be listening on port 8889 in HTTP and listening on port 8890 in HTTPS.
+如果一切顺利，Ktor 应该是 HTTP 监听在 8889 端口而 HTTPS 监听在 8890 端口。
 
-## Option2: With Docker and Nginx as reverse proxy
+## 选择二：使用 Docker 并以 Nginx 作为反向代理
 {: #docker}
 
-When using Docker with multiple domains, you might want to use the [nginx-proxy] image and the [letsencrypt-nginx-proxy-companion]
-image to serve multiple domains/subdomains in a single machine/ip and to automatically provide HTTPS, using let’s encrypt.
+使用具有多个域名的 Docker 时，可能希望使用 [nginx-proxy] 镜像以及 [letsencrypt-nginx-proxy-companion]
+镜像在单个计算机/ip 中为多个域名/子域名提供服务，并使用 let’s encrypt 自动提供 HTTPS。
 
-In this case you create a container with NGINX, potentially listening to port 80 and 443, an internal network
-accessible only between containers so nginx can connect and reverse proxy your websites (including websockets),
-and a NGINX companion handling the domain certificates by introspecting the configured Docker containers. 
+在这个场景中，创建一个带 NGINX 的容器，可能会监听 80 与 443 端口，内部网络<!--
+-->只能在容器间访问，因此 nginx 可以连接并反向代理你的网站（包括 websocket），
+而 NGINX 伴侣通过自省已配置的 Docker 容器来处理域名证书。
 
 [nginx-proxy]: https://github.com/jwilder/nginx-proxy
 [letsencrypt-nginx-proxy-companion]: https://github.com/JrCs/docker-letsencrypt-nginx-proxy-companion
 
-### Creating a internal docker network
+### 创建一个 docker 内网
 
-The first step is to create a bridge network that we will use so nginx can connect to other containers
-to reverse proxy a user's HTTP, HTTPS, WS, and WSS requests:
+第一步是创建一个将会使用的桥接网络，以便 nginx 可以连接到其他容器<!--
+-->以反向代理用户的 HTTP、HTTPS、WS 与 WSS 请求：
 
 ```bash
 docker network create --driver bridge reverse-proxy
 ```
 
-### Creating an Nginx container
+### 创建一个 Nginx 容器
 
-Now we have to create a container running NGINX doing the reverse proxy:
+现在应该创建一个运行 NGINX  的容器来进行反向代理：
 
 ```bash
 docker rm -f nginx
@@ -218,19 +218,19 @@ docker run -d -p 80:80 -p 443:443 \
 	jwilder/nginx-proxy
 ```
 
-* `--restart=always` so the docker daemon restarts the container when the machine is restarted.
-* `--network=reverse-proxy` so NGINX is in that network and can connect to other containers in the same network.
-* `-v certs:ro` this volume will be shared with the letsencrypt-companion to access the certificates per domain.
-* `-v conf, vhost` so this configuration is persistent and accessible from outside in the case you have to do some tweaks.
-* `-v /var/run/docker.sock` this allows this image to get notified / introspect about new containers running in the daemon.
-* `-e --label` used by the companion by identify this image as NGINX.
+* `--restart=always` 以便计算机重启时，docker 守护进程重新启动容器。
+* `--network=reverse-proxy` 以便 NGINX 在该网络中可以连接到同一网络中的其他容器。
+* `-v certs:ro` 这个卷会与 letsencrypt-companion 共享以访问每个域名的证书。
+* `-v conf, vhost` 这个配置是持久化且外部可访问的，以便应对必须调整配置的情况。
+* `-v /var/run/docker.sock` 这允许本镜像获取关于在守护进程中运行的新容器的通知/自省。
+* `-e --label` 供其伴侣使用，将本镜像标识为 NGINX。
 
-You can adjust `/home/virtual/nginx*` paths to the path you prefer.
+可以将 `/home/virtual/nginx*` 路径调整为你选用的路径。
 
-### Creating a Nginx Let's Encrypt companion container
+### 创建一个 Nginx Let's Encrypt 伴侣容器
 
-With the nginx-proxy container, now we can create a companion container,
-that will request and renew certificates:
+有了 nginx-proxy 容器，现在可以创建一个伴侣容器，
+它会请求与续订证书：
 
 ```bash
 docker rm -f nginx-letsencrypt
@@ -244,18 +244,18 @@ docker run -d \
     jrcs/letsencrypt-nginx-proxy-companion
 ```
 
-* `--restart=always` as NGINX image, to restart on boot.
-* `--network=reverse-proxy` it need to be on the same network as the NGINX proxy container to communicate with it.
-* `--volumes-from nginx` it makes accessible the same volumes as the NGINX container so it can write the `.well-known` challenge inside `/usr/share/nginx/html`.
-* `-v certs:rw` it requires write access to write the private key and certificates to be available from NGINX.
-* `-v /var/run/docker.sock` requires access to docker events and introspection to determine which certificates to request.
+* `--restart=always` 作为 NGINX 镜像，在启动时重启。
+* `--network=reverse-proxy` 它需要与 NGINX 代理容器位于同一网络以与之通信。
+* `--volumes-from nginx` 这样可访问与 NGINX 容器相同的卷，因此可以在 `/usr/share/nginx/html` 内写入 `.well-known` challenge。
+* `-v certs:rw` 它需要写访问权以写入私钥与证书供 NGINX 使用。
+* `-v /var/run/docker.sock` 需要访问 docker 事件与自省来确定要请求的证书。
 
-### Creating a service
+### 创建一个服务
 
-Now we have NGINX and Let's Encrypt companion configured so they will automatically reverse-proxy your websites and
-request and serve certificates for them based on the environment variables `VIRTUAL_HOST`, `VIRTUAL_PORT` and `LETSENCRYPT_HOST`, `LETSENCRYPT_EMAIL`.
+现在已经配置了 NGINX 与 Let's Encrypt 伴侣，这样他们就会自动反向代理你的网站，
+并根据环境变量 `VIRTUAL_HOST`、 `VIRTUAL_PORT` 以及 `LETSENCRYPT_HOST`、 `LETSENCRYPT_EMAIL` 为网站请求并提供证书。
 
-Using docker-compose, you can create a `docker-compose.yml` file (without additional services) that could look like this:
+使用 docker-compose，可以创建一个 `docker-compose.yml` 文件（而无其他服务）如下所示：
 
 #### `docker-compose.yml`
 
@@ -293,8 +293,8 @@ WORKDIR /root
 CMD ["java", "-server", "-XX:+UnlockExperimentalVMOptions", "-XX:+UseCGroupMemoryLimitForHeap", "-XX:InitialRAMFraction=2", "-XX:MinRAMFraction=2", "-XX:MaxRAMFraction=2", "-XX:+UseG1GC", "-XX:MaxGCPauseMillis=100", "-XX:+UseStringDeduplication", "-jar", "my-application.jar"]
 ```
 
-You can find more information about [how to deploy a docker and the Dockerfile in the deploy section](/servers/deploy.html#docker).
+可以在部署一节找到关于 [how to deploy a docker and the Dockerfile](/servers/deploy.html#docker) 的更多信息。
 
-### Simplified overview
+### 简要概述
 
 <div class="nomnoml nomnoml-link">/quickstart/guides/ssl/docker.nomnoml.txt</div>
