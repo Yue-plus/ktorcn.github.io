@@ -52,7 +52,7 @@ fun Application.module() {
 }
 ```
 
-## 提供 JSON 内容
+## 提供 JSON 内容服务
 
 REST API 通常以 JSON 响应。可以使用以 *Jackson* 进行*内容协商*这一特性来实现：
 

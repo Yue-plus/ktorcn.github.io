@@ -1,47 +1,47 @@
 ---
-title: Website
-caption: How to create a plain website using ktor
+title: 网站
+caption: 如何使用 ktor 创建普通网站
 category: quickstart
 ---
 
 {::options toc_levels="1..2" /}
 
-In this guide you will learn how to create an HTML Website using Ktor.
-We are going to create a simple website with HTML rendered at the back-end with users, a login form,
-and keeping a persistent session.
+在本指南中，你会学习如何使用 Ktor 创建 HTML 网站。
+我们会创建一个简单的网站，由后端渲染 HTML，有用户、登录表单<!--
+-->以及保持持久会话。
 
-To achieve this, we are going to use the [Routing], [StatusPages], [Authentication], [Sessions], [StaticContent],
-[FreeMarker], and [HTML DSL] features.
+为了实现这一点，我们会用到[路由]、 [状态页]、 [身份认证]、 [会话]、 [静态内容]、
+[FreeMarker] 以及 [HTML DSL] 这些特性。
 
-[Routing]: /features/routing.html
-[StatusPages]: /features/status-pages.html
-[Authentication]: /features/authentication.html
-[Sessions]: /features/sessions.html
-[StaticContent]: /features/static-content.html
+[路由]: /features/routing.html
+[状态页]: /features/status-pages.html
+[身份认证]: /features/authentication.html
+[会话]: /features/sessions.html
+[静态内容]: /features/static-content.html
 [FreeMarker]: /features/templates/freemarker.html
 [HTML DSL]: /features/templates/html-dsl.html
 
-**Table of contents:**
+**目录：**
 
 * TOC
 {:toc}
 
-## Setting up the project
+## 搭建项目
 
-The first step is to set up a project. You can follow the [Quick Start](/quickstart/index.html) guide, or use the following form to create one:
+第一步是搭建一个项目。可以按照[快速入门](/quickstart/index.html)指南操作，或者使用以下表单创建：
 
-[**Open the pre-configured generator form**](javascript:$('#start_ktor_io_form').toggle())
+[**打开预先配置好的生成器表单**](javascript:$('#start_ktor_io_form').toggle())
 
 <iframe src="{{ site.ktor_init_tools_url }}#dependency=html-dsl&dependency=css-dsl&dependency=freemarker&dependency=static-content&dependency=auth&dependency=ktor-sessions&dependency=status-pages&dependency=routing&artifact-name=website-example" id="start_ktor_io_form" style="border:1px solid #343a40;width:100%;height:500px;display:none;"></iframe>
 
-## Simple routing
+## 简单路由
 
-First of all, we are going to use the routing feature. This feature is part of the Ktor's core, so you won't need
-to include any additional artifacts.
+首先，我们要使用路由特性。 这个特性是 Ktor 核心的一部分，因此不需要<!--
+-->包含任何其他构件。
 
-This feature is installed automatically when using the `routing { }` block.
+这一特性在使用 `routing { }` 块时自动安装。
 
-Let's start creating a simple GET route that responds with 'OK':
+让我们开始创建一个响应为“OK”的简单 GET 路由：
 
 ```kotlin
 fun Application.module() {
@@ -53,14 +53,14 @@ fun Application.module() {
 }
 ```
 
-## Serving HTML with FreeMarker
+## 以 FreeMarker 提供 HTML 服务
 
-Apache FreeMarker is a template engine for the JVM, and thus you can use it with Kotlin.
-There is a Ktor feature supporting it.
+Apache FreeMarker 是一个JVM 上的模板引擎，因此可以将其与 Kotlin 一起使用。
+有一个支持它的 Ktor 特性。
 
-For now, we are going to store the templates embedded as part of the resources in a `templates` folder.
+现在，我们会把作为资源的一部分而嵌入的模板存储在 `templates` 文件夹中。
 
-Create a file called `resources/templates/index.ftl` and put in the following content to create a simple HTML list:
+创建一个名为 `resources/templates/index.ftl` 的文件，并输入以下内容来创建一个简单的 HTML 列表：
 
 ```freemarker
 <#-- @ftlvariable name="data" type="com.example.IndexData" -->
@@ -75,10 +75,10 @@ Create a file called `resources/templates/index.ftl` and put in the following co
 </html>
 ```
 
-IntelliJ IDEA Ultimate has FreeMarker support with autocompletion and variable hinting.
+IntelliJ IDEA Ultimate 具有带自动补全与变量提示功能的 FreeMarker 支持。
 {:.note}
 
-Now, let's install the FreeMarker feature and then create a route serving this template and passing a set of values to it:
+现在，我们来安装 FreeMarker 特性，然后创建一个以此模板提供服务的路由并为其传入一组值：
 
 ```kotlin
 data class IndexData(val items: List<Int>)
@@ -96,33 +96,33 @@ fun Application.module() {
 }
 ```
 
-Now you can run the server and open a browser pointing to <http://127.0.0.1:8080/html-freemarker>{:target="_blank"} to see the results:
+现在可以运行服务器并用浏览器打开 <http://127.0.0.1:8080/html-freemarker>{:target="_blank"}  来查看结果：
 
 ![](/quickstart/guides/website/website1.png){:.rounded-shadow}
 
-Nice!
+很好！
 
-## Serving static files: styles, scripts, images... 
+## 提供静态文件服务：样式、脚本、图片……
 
-In addition to templates, you will want to serve static content.
-Static content will serve faster, and is compatible with other features like Partial Content that allows
-you to resume downloads or partially download files.
+除了模板外，还会需要提供静态内容服务。
+提供静态内容服务会更快，并且与一些其他特性（如部分内容）兼容，部分内容特性支持<!--
+-->恢复文件下载或者部分下载文件）。
 
-For now, we are going to serve a simple `styles.css` file to apply styles to our simple page.
+现在，我们将提供一个简单的 `styles.css` 文件来将样式应用到之前的简单页面中。
 
-Serving static files doesn't require installing any features, but it is a plain Route handler.
-To serve static files at the `/static` url, from `/resources/static`, you would write the following code:
+提供静态文件服务无需安装任何特性，而是一个简单路由处理程序。
+如需以 `/resources/static` 在 `/static` url 提供静态文件服务，可以编写以下代码：
 
 ```kotlin
 routing {
-    // ...
+    // ……
     static("/static") {
         resources("static")
     }
 }
 ```
 
-Now let's create the `resources/static/styles.css` file with the following content:
+现在我们来使用以下内容创建 `resources/static/styles.css` 文件：
 
 ```css
 body {
@@ -130,7 +130,7 @@ body {
 }
 ```
 
-In addition to this, we will have to update our template to include the `style.css` file:
+除此之外，还必须更新模板以包含 `style.css` 文件：
 ```freemarker
 <#-- @ftlvariable name="data" type="com.example.IndexData" -->
 <html>
@@ -138,39 +138,39 @@ In addition to this, we will have to update our template to include the `style.c
         <link rel="stylesheet" href="/static/styles.css">
     </head>
 	<body>
-	    <!-- ... -->
+	    <!-- …… -->
 	</body>
 </html>
 ```
 
-And the result:
+其结果为：
 
 ![](/quickstart/guides/website/website2.png){:.rounded-shadow}
 
-Now we have a colorful website from 1990!
+现在我们有一个来自 1990 年的彩色网站！
 
-Static files are not only text files! Try to add an image (what about a fancy animated blinking gif file? 👩🏻‍🎨) to the `static` folder, and include a `<img src="...">` tag to the HTML template.
+静态文件并非只有文本文件！试试向 `static` 文件夹中添加一个图片（花哨的动画闪烁 gif 文件怎么样？👩🏻‍🎨），并在 HTML 模板中包含一个 `<img src="……">` 标签。
 {: .note.exercise}
 
-## Enabling partial content: large files and videos
+## 启用部分内容特性：大文件与视频
 
-Though not really needed for this specific case, if you enable partial content support, people will be able
-to resume larger static files on connections with frequent problems, or allow seeking support when
-serving and watching videos.
+虽然对于目前这个场景并非真正需要，但是如果启用部分内容支持，那么人们就能够<!--
+-->在频繁出问题的连接上恢复较大的静态文件传输，也能够当提供视频服务并观看视频时<!--
+-->支持拖动进度。
 
-Enabling partial content is straightforward:
+启用部分内容特性非常简单：
 
 ```kotlin
 install(PartialContent) {
 }
 ```
 
-## Creating a form
+## 创建一个表单
 
-Now we are going to create a fake login form. To make it simple, we are going to accept users with the same password,
-and we are not going to implement a registration form.
+现在要创建一个伪登录表单。为简单起见，我们会接受用户名与密码相同，
+并且不会实现注册表单。
 
-Create a `resources/templates/login.ftl`:
+创建 `resources/templates/login.ftl`：
 
 ```kotlin
 <html>
@@ -192,7 +192,7 @@ Create a `resources/templates/login.ftl`:
 </html>
 ```
 
-In addition to the template, we need to add some logic to it. In this case we are going to handle GET and POST methods in different blocks of code:
+除了模板，还需为其添加一些逻辑。在本例中，会在不同的代码块中处理 GET 与 POST 方法：
 
 ```kotlin
 route("/login") {
@@ -210,14 +210,14 @@ route("/login") {
 }
 ```
 
-As we said, we are accepting `username` with the same `password`, but we are not accepting null values.
-If the login is valid, we respond with a single OK for now, while we reuse the template if the login fails
-to display the same form but with an error.
+如上所述，接受 `username` 与 `password` 相同，但不接受空值。
+如果登录有效，现在只响应一个 OK，而如果登录失败，我们复用该模板<!--
+-->以显示相同表单，只是带有错误信息。
 
-## Redirections
+## 重定向
 
-In some cases, like route refactoring or forms, we will want to perform redirections (either temporary or permanent).
-In this case, we want to temporarily redirect to the homepage upon successful login, instead of replying with plain text.
+在某些场景中，如路由重构或者表单提交，会希望执行（临时或永久）重定向。
+在本例中，我们希望在成功登录后临时重定向到主页，而不是使用纯文本回复。
 
 <table class="compare-table"><thead><tr><th>Original:</th><th>Change:</th></tr></thead><tbody><tr><td markdown="1">
 
@@ -233,10 +233,10 @@ call.respondRedirect("/", permanent = false)
 
 </td></tr></tbody></table>
 
-## Using the Form authentication
+## 使用表单认证
 
-To illustrate how to receive POST parameters we have handled the login manually, but we can also use the authentication
-feature with a form provider:
+为了阐述如何接收 POST 参数，我们已手动处理登录，但是我们也可以使用以表单提供的身份认证<!--
+-->特性：
 
 ```kotlin
 install(Authentication) {
@@ -249,7 +249,7 @@ install(Authentication) {
 }
 route("/login") {
     get {
-        // ...
+        // ……
     }
     authenticate("login") {
         post {
@@ -260,10 +260,10 @@ route("/login") {
 }
 ```
 
-## Sessions
+## 会话
 
-To prevent having to authenticate all the pages, we are going to store the user in a session, and that session will
-be propagated to all the pages using a session cookie.
+为了防止必须对所有页面都进行身份认证，我们会把用户存储在会话中，并<!--
+-->使用会话 cookie 将该会话传播到所有页面中。
 
 ```kotlin
 data class MySession(val username: String)
@@ -282,10 +282,10 @@ fun Application.module() {
 } 
 ```
 
-Inside our pages, we can try to get the session and produce different results:
+在页面内部，我们可以尝试获取会话并产生不同的结果：
 
 fun Application.module() {
-    // ...
+    // ……
     get("/") {
         val session = call.sessions.get<MySession>()
         if (session != null) {
@@ -296,11 +296,11 @@ fun Application.module() {
     }
 }
 
-## Using HTML DSL instead of FreeMarker
+## 使用 HTML DSL 取代 FreeMarker
 
-You can choose to generate HTML directly from the code instead of using a Template Engine.
-For that you can use the HTML DSL. This DSL doesn't require installation, but requires an additional artifact.
-This artifact provides an extension to respond with HTML blocks:
+可以选择直接由代码生成 HTML 而不是使用模板引擎。
+为此，可以使用 HTML DSL。这个 DSL 并不需要安装，但需要一个额外的构件。
+这个构件提供了使用 HTML 块来响应的扩展：
 
 ```kotlin
 get("/") { 
@@ -320,19 +320,19 @@ get("/") {
 }
 ```
 
-The main benefits of an HTML DSL is that you have full statically typed access to variables and it is thoroughly integrated
-with the code base.
+HTML DSL 的主要好处是可以对变量进行完全静态类型访问，并<!--
+-->与代码完全整合。
 
-The downside of all this is that you have to recompile to change the HTML, and you can't search complete HTML blocks.
-But it is lightning fast, and you can use the [autoreload feature](https://ktor.io/servers/autoreload.html) to recompile
-on change and reload the relevant JVM classes.
+所有这些的代价是必须重新编译才能更改 HTML，并且无法搜索完整的 HTML 块。
+不过它快如闪电，还可以使用[自动加载特性](https://ktor.io/servers/autoreload.html)<!--
+-->在变更时重新编译并重新加载相关的 JVM 类。
 
-## Exercises
+## 练习
 
-### Exercise 1
+### 练习一
 
-Make a registeration page and store the user/password datasource in memory in a hashmap.
+制作一个注册页并将用户名/密码数据源存储在内存中的 hashmap 中。
 
-### Exercise 2
+### 练习二
 
-Use a database to store the users.
+使用数据库存储用户。
