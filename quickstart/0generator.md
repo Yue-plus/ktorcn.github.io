@@ -9,7 +9,7 @@ redirect_from:
 
 <!--<https://ktor.io/start>-->
 
-**NOTE: You can also use the [Ktor IntelliJ plugin](/quickstart/quickstart/intellij-idea/plugin.html) instead.**
+**注：除了在线生成，还可以使用 [Ktor IntelliJ 插件](/quickstart/quickstart/intellij-idea/plugin.html)。**
 
 <div id="generator_id"></div>
 
