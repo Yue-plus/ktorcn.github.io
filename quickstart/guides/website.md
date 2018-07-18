@@ -284,6 +284,7 @@ fun Application.module() {
 
 在页面内部，我们可以尝试获取会话并产生不同的结果：
 
+```kotlin
 fun Application.module() {
     // ……
     get("/") {
@@ -295,6 +296,7 @@ fun Application.module() {
         }
     }
 }
+```
 
 ## 使用 HTML DSL 取代 FreeMarker
 
