@@ -56,10 +56,10 @@ IETF RFC 或者其他协议的逻辑，而不依赖外部 JVM 库。
 > 如果代理服务器提供了正确的头，并且已安装 `XForwardedHeadersSupport` 特性，
 > 那么 `call.request.origin` 属性会提供原始调用者（代理）的连接信息。
 
-## 遇到错误“java.lang.IllegalStateException: No instance for key AttributeKey: Locations”
+## 出现错误“java.lang.IllegalStateException: No instance for key AttributeKey: Locations”
 {: #no-attribute-key-locations }
 
-> 如果试图使用 location 特性但没有实际安装之，就会遇到这个错误。请查阅 location 特性：
+> 如果试图使用 location 特性但没有实际安装它，就会出现这个错误。请查阅 location 特性：
 > <https://ktor.kotlincn.net/features/locations.html>
 
 ## 客户端未发送 Accept 头时出现 406 错误。使用 WRK 在添加 JSON 支持后得到非 2xx 响应
@@ -112,7 +112,7 @@ IETF RFC 或者其他协议的逻辑，而不依赖外部 JVM 库。
 Ktor 为路由功能提供了跟踪机制以帮助解决<!--
 -->路由决策问题。请查阅路由页的[追踪路由决策](/features/routing.html#tracing)一节。
 
-## 收到报错 `io.ktor.pipeline.InvalidPhaseException: Phase Phase('YourPhase') was not registered for this pipeline`.
+## 出现报错 `io.ktor.pipeline.InvalidPhaseException: Phase Phase('YourPhase') was not registered for this pipeline`.
 {: #invalid-phase }
 
 这意味着正在试图使用一个未注册为另一阶段（phase）引用的阶段。
@@ -125,7 +125,7 @@ route.addPhase(PhaseDefinedInAncestor)
 route.insertPhaseAfter(PhaseDefinedInAncestor, MyNodePhase)
 ```
 
-## 收到报错 `io.ktor.server.engine.BaseApplicationResponse$ResponseAlreadySentException: Response has already been sent`
+## 出现报错 `io.ktor.server.engine.BaseApplicationResponse$ResponseAlreadySentException: Response has already been sent`
 {: #response-already-sent }
 
 这意味着你或者一个特性或拦截器已经调用了 `call.respond*` 函数，而你又再次调用了它<!--
@@ -136,10 +136,10 @@ route.insertPhaseAfter(PhaseDefinedInAncestor, MyNodePhase)
 
 这里有一个[解释 Ktor 应用级事件系统](/advanced/events.html)的页面。
 
-## I get a `Exception in thread "main" com.typesafe.config.ConfigException$Missing: No configuration setting found for key 'ktor'` exception
+## 出现 `Exception in thread "main" com.typesafe.config.ConfigException$Missing: No configuration setting found for key 'ktor'` 异常
 {: #cannot-find-application-conf }
 
-This means that Ktor was not able to find the `application.conf` file. Re-check that it is in the `resources` folder,
-and that the resources folder is marked as such.
-You can consider to set-up a project using the [project generator](/quickstart/generator.html) or the [IntelliJ plugin](/quickstart/intellij-idea/plugin.html)
-to have a working project as base.
+这意味着 Ktor 无法找到 `application.conf` 文件。请重新检查它是否在 `resources` 文件夹中<!--
+-->并且该资源文件夹已正确标记。
+可以考虑使用[项目生成器](/quickstart/generator.html)或者 [IntelliJ 插件](/quickstart/intellij-idea/plugin.html)<!--
+-->搭建项目作为工作项目的基础。
