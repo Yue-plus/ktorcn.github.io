@@ -144,12 +144,12 @@ route.insertPhaseAfter(PhaseDefinedInAncestor, MyNodePhase)
 可以考虑使用[项目生成器](/quickstart/generator.html)或者 [IntelliJ 插件](/quickstart/intellij-idea/plugin.html)<!--
 -->搭建项目作为工作项目的基础。
 
-## Can I use ktor on Android?
+## 可以在 Android 上使用 ktor 吗？
 {: #android-support }
 
-Ktor 0.9.3 and lower is know to work on Android 7 or greater (API 24). It will fail in lower versions like Android 5.
+已知 Ktor 0.9.3 及以前版本适用于 Android 7 或更高版本（API 24）。会在 Android 5 等较低版本中失败。
 
-In unsupported versions it would fail with an exception similar to:
+在不支持的版本中会失败并出现类似以下异常：
 
 ```
 E/AndroidRuntime: FATAL EXCEPTION: main Process: com.mypackage.example, PID: 4028 java.lang.NoClassDefFoundError:
@@ -162,5 +162,5 @@ io.ktor.server.engine.EmbeddedServerKt.embeddedServer(EmbeddedServer.kt:40) at
 io.ktor.server.engine.EmbeddedServerKt.embeddedServer$default(EmbeddedServer.kt:27)
 ```
 
-For more informatio, check [Issue #495](https://github.com/ktorio/ktor/issues/495) and [StackOverflow
-question](https://stackoverflow.com/questions/49945584/attempting-to-run-an-embedded-ktor-http-server-on-android)
+更多相关信息，请查阅[问题 #495](https://github.com/ktorio/ktor/issues/495) 以及 [StackOverflow
+上的问题](https://stackoverflow.com/questions/49945584/attempting-to-run-an-embedded-ktor-http-server-on-android)
