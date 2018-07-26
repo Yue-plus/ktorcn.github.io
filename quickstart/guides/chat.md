@@ -1,59 +1,59 @@
 ---
-title: Chat
-caption: How to implement a chat with WebSockets
+title: 聊天
+caption: 如何使用 WebSocket 实现聊天
 category: quickstart
 ---
 
-In this tutorial, you will learn to make a Chat application using Ktor.
-We are going to use WebSockets for a real-time bidirectional communication.
+在本教程中，你会学习如何使用 Ktor 创建聊天应用。
+我们会使用 WebSocket 进行实时双向通信。
 
-This is an advanced tutorial and you are required to have some basic concepts about Ktor,
-so first you should follow the [guide about making a Website](/quickstart/guides/website.html).
+这是一个高级教程，你需要有一些关于 Ktor 的基本概念，
+所有首先你应该学习[关于制作网站的指南](/quickstart/guides/website.html)。
 
-To achieve this, we are going to use the [Routing], [WebSockets] and [Sessions] features.
+为了实现这一点，我们会用到[路由]、 [WebSocket] 以及[会话]这些特性。
 
-[Routing]: /features/routing.html
-[WebSockets]: /features/websockets.html
-[Sessions]: /features/sessions.html
+[路由]: /features/routing.html
+[WebSocket]: /features/websockets.html
+[会话]: /features/sessions.html
 
-**Table of contents:**
+**目录：**
 
 * TOC
 {:toc}
 
-## Setting up the project
+## 搭建项目
 
-The first step is to set up a project. You can follow the [Quick Start](/quickstart/index.html) guide,
-or use the following form to create one:
+第一步是搭建一个项目。可以按照[快速入门](/quickstart/index.html)指南操作，
+或者使用以下表单创建：
 
-[**Open the pre-configured generator form**](javascript:$('#start_ktor_io_form').toggle())
+[**打开预先配置好的生成器表单**](javascript:$('#start_ktor_io_form').toggle())
 
 <iframe src="{{ site.ktor_init_tools_url }}#dependency=ktor-sessions&dependency=routing&dependency=ktor-websockets&artifact-name=chat" id="start_ktor_io_form" style="border:1px solid #343a40;width:100%;height:574px;display:none;"></iframe>
 
-## Understanding WebSockets
+## 理解 WebSocket
 
-WebSockets is a subprotocol of HTTP. It starts as a normal HTTP request with an upgrade request header,
-and the connection switches to be a bidirectional communication instead of a request response one.
+WebSocket 是 HTTP 的子协议。它以具有 upgrade 请求头的普通 HTTP 请求开始，
+并且该连接会切换为双向通信取代请求响应通信。
 
-The smallest unit of transmission that can be sent as part of the WebSocket protocol, is a `Frame`.
-For a single message, TCP can be fragmented in several packets. A WebSocket Frame defines a type and a length,
-thus could be transmitted in several TCP packets, but will be reassembled into a single Frame.
+可以作为 WebSocket 协议一部分发送的最小传输单元是 `Frame`（帧）。
+对于单条消息，TCP 可以分段成几个数据包。WebSocket Frame 定义了类型与长度，
+因此可以在多个 TCP 数据包中传输，但会重新组装成单个帧。
 
-You can see Frames as WebSocket messages. Frames could be the following types: text, binary, close, ping and pong.
+可以将帧（Frame）视为 WebSocket 消息。帧可以是以下类型：文本、 二进制、 关闭、 “乒”与“乓”。
 
-You will normally handle `Text` and `Binary` frames, and the other will be handled by Ktor in most of the cases
-(though you can use a raw mode).
+你通常会处理 `Text` 与 `Binary` 帧，其他帧在大多数情况下会由 Ktor 处理
+（虽然你可以使用原始模式）。
 
-In its page, you can read more about the [WebSockets feature](/features/websockets.html).  
+可以在 [WebSocket 特性](/features/websockets.html)页中查阅关于它的更多信息。
 
-## WebSocket route
+## WebSocket 路由
 
-This first step is to create a route for the WebSocket. In this case we are going to define the `/chat` route.
-We are going to start with an echo WebSocket route, that will send you back the same messages that you send to it.
+第一步是为 WebSocket 创建路由。在本例中，我们会定义 `/chat` 路由。
+我们会从回显 WebSocket 路由开始，它会发回与发给它的消息相同的消息。
 
-`webSocket` routes are intended to be long-lived. Since it is a suspend block and uses lightweight Kotlin coroutines,
-it is fine and you can handle (depending on the machine and the complexity) hundreds of thousands of connections
-at once, while keeping your code easy to read and to write.
+`webSocket` 路由是准备长期活跃的。由于它是一个挂起块并且使用轻量级 Kotlin 协程，
+因此可以很好地同时处理数十万个连接（具体取决于计算机与复杂性）<!--
+-->，同时保持代码易读易写。
 
 ```kotlin
 routing {
@@ -71,10 +71,10 @@ routing {
 }
 ```
 
-## Keeping a set of opened connections
+## 保存一组打开的连接
 
-We can use a Set to keep a list of opened connections. We can use a plain `try...finally` to keep track of them.
-Since Ktor is multithreaded by default we should use thread-safe collections or [limit the body to a single thread with newSingleThreadContext](https://github.com/Kotlin/kotlinx.coroutines/blob/master/coroutines-guide.md#coroutine-context-and-dispatchers){:target="_blank"}. 
+我们可以使用 Set 来保存打开的连接列表。可以使用一个普通的 `try...finally` 来跟踪它们。
+由于 Ktor 默认是多线程的，因此我们应该使用线程安全的集合或者[以 newSingleThreadContext 将代码体限制为单线程](https://github.com/Kotlin/kotlinx.coroutines/blob/master/coroutines-guide.md#coroutine-context-and-dispatchers){:target="_blank"}。
 
 ```kotlin
 routing {
@@ -85,7 +85,7 @@ routing {
         try {
             while (true) {
                 val frame = incoming.receive()
-                // ...
+                // ……
             }
         } finally {
             wsConnections -= this
@@ -94,11 +94,11 @@ routing {
 }
 ```
 
-## Propagating a message among all the connections
+## 在所有连接之间广播消息
 
-Now that we have a set of connections, we can iterate over them and use the session
-to send the frames we need.
-Everytime a user send a message, we are going to propagate to all the connected clients.
+现在我们有了一组连接，可以对它们进行迭代并使用会话<!--
+-->来发送需要的帧。
+每当用户发送一条消息时，我们都会广播到所有已连接的客户端。
 
 ```kotlin
 routing {
@@ -112,7 +112,7 @@ routing {
                 when (frame) {
                     is Frame.Text -> {
                         val text = frame.readText()
-                        // Iterate over all the connections
+                        // 迭代所有连接
                         for (conn in wsConnections) {
                             conn.outgoing.send(Frame.Text(text))
                         }
@@ -126,11 +126,11 @@ routing {
 }
 ```
 
-## Assigning names to users/connections
+## 为用户/连接分配名称
 
-We might want to associate some information, like a name to an oppened connection,
-we can create a object that includes the WebSocketSession and store it instead
-like this:
+我们可能希望将一些信息关联起来，如将名称与打开的连接关联，
+可以创建一个包含 WebSocketSession 的对象并将其存储<!--
+-->如下：
 
 ```kotlin
 class ChatClient(val session: DefaultWebSocketSession) {
@@ -151,7 +151,7 @@ routing {
                 when (frame) {
                     is Frame.Text -> {
                         val text = frame.readText()
-                        // Iterate over all the connections
+                        // 迭代所有连接
                         val textToSend = "${client.name} said: $text"
                         for (other in clients.toList()) {
                             other.session.outgoing.send(Frame.Text(textToSend))
@@ -166,13 +166,13 @@ routing {
 }
 ```
 
-## Exercises
+## 练习
 
-### Creating a client
+### 创建一个客户端
 
-Create a JavaScript client connecting to this endpoint and serve it with ktor.
+创建一个连接到这个端点的 JavaScript 客户端并以 ktor 为其提供服务。
 
 ### JSON
 
-Use [kotlinx.serialization](https://github.com/Kotlin/kotlinx.serialization) to send and receive VOs
+使用 [kotlinx.serialization](https://github.com/Kotlin/kotlinx.serialization) 来发送与接收 VO
 
