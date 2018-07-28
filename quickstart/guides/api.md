@@ -428,7 +428,7 @@ val snippets = Collections.synchronizedList(mutableListOf(
 ```
 
 现在我们可以在插入新片段时<!--
--->使用（在 JWT 认证时由身份认证特性生成的）当事人信息了：
+-->使用（在 JWT 认证时由身份认证特性生成的）身份了：
 
 ```kotlin
 routing {

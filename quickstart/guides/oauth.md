@@ -1,31 +1,31 @@
 ---
 title: Google OAuth
-caption: How to implement an OAuth login with Google
+caption: 如何通过 Google 实现 OAuth 登录
 category: quickstart
 ---
 
 {::options toc_levels="1..2" /}
 
-In this guide we are going to implement a login using OAuth. You should already have some notion of Ktor.
-For example, you can make the [Website guide](/quickstart/guides/website.html)
+在本指南中，我们会使用 OAuth 实现登录。你应该已经有一些 Ktor 的概念了。
+例如，可以制作[网站](/quickstart/guides/website.html)
 
-**Table of contents:**
+**目录：**
 
 * TOC
 {:toc}
 
-## Creating a host entry pointing to 127.0.0.1
+## 创建一个指向 127.0.0.1 的主机名条目
 
-Google's OAuth requires redirect URLs that can't be IP addresses or localhost.
-So for development purposes we will need a proper host pointing to 127.0.0.1.
-It is not required that this host be accessible from outside our computer, so we can just set up for local host.
-There is a public domain <http://lvh.me/> pointing to localhost/127.0.0.1, but you might want to provide your
-own host locally for security reasons.
+Google 的 OAuth 要求重定向 URL 不能是 IP 地址或者 localhost。
+因此，出于开发目的，我们需要一个合适的主机名指向 127.0.0.1。
+由于并不需要从计算机外部访问该主机名，因此可以只为本地主机设置。
+有一个公网域名 <http://lvh.me/> 指向 localhost/127.0.0.1，但是出于安全原因考虑，你可能希望<!--
+-->在本地提供自己的主机名。
 
-For this, you can add an entry in [the hosts file](https://en.wikipedia.org/wiki/Hosts_(file)) of your machine.
+为此，可以在计算机的 [host 文件](https://zh.wikipedia.org/wiki/Hosts%E6%96%87%E4%BB%B6)中添加一个条目。
 
-For this guide we are going to associate `me.mydomain.com` to `127.0.0.1`, but you can change it according to your needs,
-as long as it is like a public top-level domain (.com, .org...) or has at least two components.
+对于本指南，我们会将 `me.mydomain.com` 关联到 `127.0.0.1`，不过你可以根据自己的需要进行更改，
+只要它像公网顶级域名（.com、.org……）一样或者至少有两个组成部分即可。
 
 ```
 127.0.0.1       me.mydomain.com
@@ -33,60 +33,60 @@ as long as it is like a public top-level domain (.com, .org...) or has at least 
 
 ![](/quickstart/guides/oauth/etc_hosts.png){:.rounded-shadow}
 
-The structure of this file is simple: <kbd>#</kbd> character for comments,
-and each non empty and non-comment line, should contain an IP address followed
-by several host names separated by spaces or tabs.
+这个文件的结构很简单：<kbd>#</kbd> 字符用于注释，
+每个非空且非注释行都应该包含一个 IP 地址，后跟<!--
+-->几个由空格或者制表符（tab）分隔的主机名。
 
 ### MacOS/Linux
 
-In MacOS and Linux computers, you can find the host file in `/etc/hosts`. You will need root access to edit it.
+在 MacOS 与 Linux 计算机中，可以在 `/etc/hosts` 处找到主机名文件。会需要 root 权限才能对其编辑。
 
 ```sudo nano /etc/hosts```
-or
+或者
 ```sudo vi /etc/hosts```
 
 ### Windows
 
-In Windows, the host file is held here `%SystemRoot%\System32\drivers\etc\hosts`. You will need admin privileges
-to edit this file. For example, you can use Notepad++ opened as administrator.
+在 Windows 中，主机名文件保存在这里 `%SystemRoot%\System32\drivers\etc\hosts`。需要管理员权限<!--
+-->才能编辑这个文件。例如，可以使用以管理员身份打开的 [wxMEdit](https://wxmedit.github.io/zh_CN/) 来编辑。
 
-You can also paste `%SystemRoot%\System32\drivers\etc` in the Windows Explorer the path and then right click
-in the hosts file to edit it. The structure is the same as MacOS/Linux.
+还可以在 Windows 资源管理器中粘贴 `%SystemRoot%\System32\drivers\etc` 路径，然后右击
+hosts 文件来编辑它。其结构与 MacOS/Linux 相同。
 
-## Google Developers Console
+## Google 开发者控制台
 
-To be able to use OAuth with any provider, you will need a public `clientId`, and a private `clientSecret`.
-In the case of Google login, you can create it using the Google Developers Console:
+为了能够使用任何提供商的 OAuth，会需要一个公开的 `clientId` 以及一个私有的 `clientSecret`。
+对于 Google 登录，可以使用 Google 开发者控制台创建它：
 <https://console.developers.google.com/>{:target="_blank"}
 
-First you have to create a new project in the developers console:
+首先，必须在开发者控制台中创建一个新项目：
 
 ![](/quickstart/guides/oauth/1.png){:.rounded-shadow}
 ![](/quickstart/guides/oauth/2.png){:.rounded-shadow}
 
-Inside `API & Services` → `Credentials`, there is a `Create Credentials` button with an `OAuth Client Id` option:
+在 `API & Services` → `Credentials` 内部有一个带有 `OAuth Client Id` 选项的 `Create Credentials` 按钮：
 
 ![](/quickstart/guides/oauth/3.png){:.rounded-shadow}
 ![](/quickstart/guides/oauth/4.png){:.rounded-shadow}
 ![](/quickstart/guides/oauth/5.png){:.rounded-shadow}
 ![](/quickstart/guides/oauth/6.png){:.rounded-shadow}
 
-But first, we have to Configure the OAuth consent screen:
+不过首先，我们必须配置（Configure）OAuth consent screen：
 
 ![](/quickstart/guides/oauth/7.png){:.rounded-shadow}
 ![](/quickstart/guides/oauth/8.png){:.rounded-shadow}
 
-Now we can create the OAuth credentials, with the following information:
+现在，我们可以使用以下信息创建 OAuth 凭据：
 * **Authorized JavaScript origins:** http://me.mydomain.com:8080
 * **Authorized redirect URIs:** http://me.mydomain.com:8080/login
 
-Press the `Create` button.
+点击 `Create` 按钮。
 
 ![](/quickstart/guides/oauth/9.png){:.rounded-shadow}
 
-You can change these values later, or add additional authorized urls by editing the credentials.
+可以稍后更改这些值，也可以通过编辑凭据添加其他授权的 URL。
 
-You will see a modal dialog with the following:
+会看到一个模式对话框，其中包含以下内容：
 
 OAuth client
 * Here is your client ID: xxxxxxxxxxx.apps.googleusercontent.com
@@ -94,11 +94,11 @@ OAuth client
 
 ![](/quickstart/guides/oauth/10.png){:.rounded-shadow}
 
-## Configuring our application
+## 配置应用
 
-First we have to define the settings for our OAuth provider. We have to replace the `clientId` and `clientSecret`
-with the values obtained from the previous step. Depending on what we need from the user, we can adjust the `defaultScopes`
-list to something else `profile` will have access to id, full name, and picture but not to the email or anything else:
+首先，必须为 OAuth 提供商定义设置。必须用上一步获得的值替换 `clientId` 与 `clientSecret`
+。根据我们对用户的需求，可以将 `defaultScopes`
+列表调整为除了 `profile`（会访问 id、全名与图片，但不会访问电子邮件及其他任何内容）还有其他项：
 
 ```kotlin
 val googleOauthProvider = OAuthServerSettings.OAuth2ServerSettings(
@@ -109,16 +109,16 @@ val googleOauthProvider = OAuthServerSettings.OAuth2ServerSettings(
 
     clientId = "xxxxxxxxxxx.apps.googleusercontent.com",
     clientSecret = "yyyyyyyyyyy",
-    defaultScopes = listOf("profile") // no email, but gives full name, picture, and id
+    defaultScopes = listOf("profile") // 无电子邮件，但提供全名、图片与 id
 )
 ```
 
-Remember to adjust the defaultScopes to just request what you really need for the sake of security, user privacy, and trust. 
+请记住为了安全性、用户隐私与信任，请将 defaultScopes 调整为只请求你真正需要的内容。
 {: .note}
 
-We also have to install the OAuth feature and configure it. We need to provide a HTTP client instance, a provider lookup
-where we determine the provider from the call (we don't need to put logic here since we are just supporting Google for this guide) and
-a urlProvider giving the redirection url that must match the one specified as authorized redirection in the Google Developers Console, in this case `http://me.mydomain.com:8080/login`:
+我们还必须安装 OAuth 特性并进行配置。需要提供一个 HTTP 客户端实例、一个提供商查找程序——
+由该调用确定提供商（不需要在这里输入逻辑，因为本指南只支持 Google）以及<!--
+-->一个给出重定向 url 的 urlProvider，必须匹配在 Google 开发者控制台中指定为 authorized redirection 的 url——在本例中是 `http://me.mydomain.com:8080/login`：
 
 ```kotlin
 install(Authentication) {
@@ -138,19 +138,19 @@ private fun ApplicationCall.redirectUrl(path: String): String {
 
 ```
 
-Then we have to define the `/login` route that must be authenticated against our authentication provider.
-When no get parameters are passed to that URL, the authentication feature will hook the handler, and will
-redirect us to the OAuth Consent Screen from Google, and it will redirect us back to our `/login` route with the
-`status` and `code` arguments that will be used by the authentication provider to call back to Google to obtain
-an `accessToken` and attach a `OAuthAccessTokenResponse.OAuth2` principal to our call. And this time,
-our handler will be executed.
+然后必须定义 `/login` 路由，该路由必须由我们的认证提供商进行认证。
+当没有 get 参数传给该 URL 时，身份认证特性会 hook 住其处理程序，并会<!--
+-->将我们重定向到 Google 的 OAuth Consent Screen，而它会重定向回我们的 `/login` 路由并带有
+`status` 与 `code` 参数——会用于由认证提供方回调 Google 以获取<!--
+-->`accessToken` 并将 `OAuthAccessTokenResponse.OAuth2` 身份附加到我们的调用中。而这一次，
+我们的处理程序会执行。
 
-We can retrieve that `accessToken` by getting the generated `OAuthAccessTokenResponse.OAuth2` principal and
-`accessToken`. Then we can use the <https://www.googleapis.com/userinfo/v2/me>{:target="_blank"} URL
-with our `accessToken` passed as Authorization Bearer, to get a JSON with the user information.
-You can check the contents of this JSON by using the [Google OAuth playground](https://developers.google.com/oauthplayground){:target="_blank"}.
+我们可以通过获取生成的 `OAuthAccessTokenResponse.OAuth2` 身份与 `accessToken`
+来取得 `accessToken`。然后我们可以使用  <https://www.googleapis.com/userinfo/v2/me>{:target="_blank"} URL
+并传入 `accessToken` 作为 Authorization Bearer 来获取带有用户信息的 JSON。
+可以使用 [Google OAuth playground](https://developers.google.com/oauthplayground){:target="_blank"} 检验该 JSON 的内容。
 
-In this case, once we get the User ID, we are going to store it in a session, and then redirect to another place.
+在本例中，一旦我们获取了用户 ID，我们就会将其存储在一个会话中，然后重定向到另一个地方。
 
 ```kotlin
 class MySession(val userId: String)
@@ -177,20 +177,20 @@ authenticate("google-oauth") {
 } 
 ```
 
-We have to install the Session feature first. Check the [Full Example](#full-example) for details:
+必须先安装会话特性。详见[完整示例](#full-example)：
 {: .note }
 
-The ID from the user information is a string that looks like a number. Remember that JSON does not define long types,
-and that in cases like Twitter or Google, that have tons and tons of users and entities, that ID could be greater
-than 31 bits for a signed integer or even than 51 bits of precision from a standard Double.<br /> 
-As a rule of thumb you should always treat IDs and other number-like values as strings if you don't need
-to do arithmetic with them.
+用户信息中的 ID 是一个看起来像数字的字符串。请记住 JSON 没有定义长整型，
+并且对于 Twitter 或者 Google 来说，他们有大量的用户与实体，其 ID 可能会超过<!--
+-->有符号整型的 31 比特，甚至超过标准 Double 的 51 比特精度。<br />
+一般来说，如果你不需要对其进行算术运算，
+那么应该将 ID 以及其他类似数字的值始终视为字符串。
 {: .note }
 
-## Full Example
+## 完整示例
 {: #full-example }
 
-A simple embedded application would look like this:
+一个简单的嵌入式应用如下所示：
 
 ```kotlin
 val googleOauthProvider = OAuthServerSettings.OAuth2ServerSettings(
@@ -199,8 +199,8 @@ val googleOauthProvider = OAuthServerSettings.OAuth2ServerSettings(
     accessTokenUrl = "https://www.googleapis.com/oauth2/v3/token",
     requestMethod = HttpMethod.Post,
 
-    clientId = "xxxxxxxxxxx.apps.googleusercontent.com", // @TODO: Remember to change this! 
-    clientSecret = "yyyyyyyyyyy", // @TODO: Remember to change this! 
+    clientId = "xxxxxxxxxxx.apps.googleusercontent.com", // @TODO: 记得更改这个！
+    clientSecret = "yyyyyyyyyyy", // @TODO: 记得更改这个！
     defaultScopes = listOf("profile") // no email, but gives full name, picture, and id
 )
 
@@ -211,7 +211,7 @@ fun main(args: Array<String>) {
         install(WebSockets)
         install(Sessions) {
             cookie<MySession>("oauthSampleSessionId") {
-                val secretSignKey = hex("000102030405060708090a0b0c0d0e0f") // @TODO: Remember to change this! 
+                val secretSignKey = hex("000102030405060708090a0b0c0d0e0f") // @TODO: 记得更改这个！
                 transform(SessionTransportTransformerMessageAuthentication(secretSignKey))
             }
         }
@@ -261,12 +261,12 @@ private fun ApplicationCall.redirectUrl(path: String): String {
 }
 ```
 
-## Testing
+## 测试
 
-You can [provide a test HttpClient for testing OAuth](https://github.com/ktorio/ktor-samples/commit/56119d2879d9300cf51d66ea7114ff815f7db752).
+可以[提供一个测试 HttpClient 来测试 OAuth](https://github.com/ktorio/ktor-samples/commit/56119d2879d9300cf51d66ea7114ff815f7db752)。
 
-## Additional resources
+## 补充资源
 
-* Google OAuth playground: <https://developers.google.com/oauthplayground/>{:target="_blank"}
-* List of available google oauth scopes: <https://developers.google.com/identity/protocols/googlescopes>{:target="_blank"} 
-* Example with several oauth providers: <https://github.com/ktorio/ktor-samples/blob/master/feature/auth/src/io/ktor/samples/auth/OAuthLoginApplication.kt>{:target="_blank"} 
+* Google OAuth playground：<https://developers.google.com/oauthplayground/>{:target="_blank"}
+* 可用的谷歌 oauth 授权范围列表：<https://developers.google.com/identity/protocols/googlescopes>{:target="_blank"}
+* 几个 oauth 提供商的示例：<https://github.com/ktorio/ktor-samples/blob/master/feature/auth/src/io/ktor/samples/auth/OAuthLoginApplication.kt>{:target="_blank"}
