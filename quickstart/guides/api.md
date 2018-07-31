@@ -20,10 +20,11 @@ category: quickstart
 [内容协商]: /features/content-negotiation.html
 [Jackson]: /features/content-negotiation/jackson.html
 
-While many frameworks advocate how to create REST API's the majority aren't actually talking about REST APIs but HTTP APIs.
-Ktor, much like many other frameworks can be used to create systems that comply with REST constraints. However,
-this tutorial is not talking about REST but HTTP APIs, i.e. endpoints using HTTP verbs that may or may not return JSON, XML or any other format.
-If you want to learn more about RESTful systems, you can start reading <https://en.wikipedia.org/wiki/Representational_state_transfer>{:target="_blank"}.
+虽然许多框架都提倡如何创建 REST API，但是其中大多数实际上并不是讨论 REST API 而是 HTTP API。
+与一些其他框架一样，Ktor 可用于创建遵循 REST 约束的系统。然而，
+本教程并不是讨论 REST API 而是讨论 HTTP API，也就是说使用 HTTP 动词的端点可能会也可能不会返回 JSON、
+XML 或者任何其他格式。
+如果你想了解关于 RESTful 系统的更多信息，可以阅读  <https://zh.wikipedia.org/wiki/表现层状态转换>{:target="_blank"}。
 {: .note }
 
 **目录：**
