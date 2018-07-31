@@ -1,5 +1,5 @@
 ---
-title: REST API
+title: HTTP API
 caption: 如何使用 ktor 创建 API
 category: quickstart
 ---
@@ -19,6 +19,12 @@ category: quickstart
 [CORS]: /features/cors.html
 [内容协商]: /features/content-negotiation.html
 [Jackson]: /features/content-negotiation/jackson.html
+
+While many frameworks advocate how to create REST API's the majority aren't actually talking about REST APIs but HTTP APIs.
+Ktor, much like many other frameworks can be used to create systems that comply with REST constraints. However,
+this tutorial is not talking about REST but HTTP APIs, i.e. endpoints using HTTP verbs that may or may not return JSON, XML or any other format.
+If you want to learn more about RESTful systems, you can start reading <https://en.wikipedia.org/wiki/Representational_state_transfer>{:target="_blank"}.
+{: .note }
 
 **目录：**
 
@@ -54,7 +60,7 @@ fun Application.module() {
 
 ## 提供 JSON 内容服务
 
-REST API 通常以 JSON 响应。可以使用以 *Jackson* 进行*内容协商*这一特性来实现：
+HTTP API 通常以 JSON 响应。可以使用以 *Jackson* 进行*内容协商*这一特性来实现：
 
 ```kotlin
 fun Application.module() {
@@ -115,7 +121,7 @@ fun Application.module() {
 
 ## 处理其他 HTTP 方法
 
-REST API 使用大部分 HTTP 方法/动词（_HEAD_、 _GET_、 _POST_、 _PUT_、 _PATCH_、 _DELETE_、 _OPTIONS_）来执行操作。
+HTTP API 使用大部分 HTTP 方法/动词（_HEAD_、 _GET_、 _POST_、 _PUT_、 _PATCH_、 _DELETE_、 _OPTIONS_）来执行操作。
 我们来创建一个添加新片段的路由。为此，我们需要读取 POST 请求的 JSON 正文。
 为此我们会使用 `call.receive<Type>()`：
 
@@ -140,13 +146,13 @@ routing {
 
 现在是时候试一下后端服务了。
 
-如果有 IntelliJ Ultimate，可以使用其 HTTP 请求客户端；
+如果有 IntelliJ IDEA Ultimate，可以使用其 HTTP 请求客户端；
 如果没有，也可以使用 postman 或者 curl：
 
-### IntelliJ Ultimate：
+### IntelliJ IDEA Ultimate：
 {: #first-request-intellij }
 
-IntelliJ Ultimate 还有 PhpStorm 以及其他 JetBrains IDE 都包含一个<!--
+IntelliJ IDEA Ultimate 还有 PhpStorm 以及其他 JetBrains IDE 都包含一个<!--
 -->很好的[基于编辑器的 Rest 客户端](https://blog.jetbrains.com/phpstorm/2017/09/editor-based-rest-client/){:target="_blank"}.
 
 首先，必须创建 HTTP Request 文件（`api` 或者 `http` 扩展名均可）
@@ -337,7 +343,7 @@ routing {
 ### IntelliJ
 {% endcomment %}
 
-如果使用 IntelliJ Ultimate 的基于编辑器的 HTTP 客户端，
+如果使用 IntelliJ IDEA Ultimate 的基于编辑器的 HTTP 客户端，
 可以发出 POST 请求并检验其内容是否有效，
 然后将令牌存储在环境变量中：
 
@@ -483,12 +489,11 @@ curl -v \
 {% endcomment %}
 
 
-
 好极了！
 
 ## 状态页
 
-现在我们来细化一下。REST API 应该使用 Http 状态码来提供错误相关的语义信息。
+现在我们来细化一下。HTTP API 应该使用 Http 状态码来提供错误相关的语义信息。
 现在，当异常抛出时（例如当试图用已存在的用户获取 JWT 令牌，
 但密码错误时），会返回 500 服务器错误。 我们可以做的更好，并且状态页特性<!--
 -->会允许通过捕获指定的异常并生成结果来实现这个功能。
