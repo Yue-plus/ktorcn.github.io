@@ -24,41 +24,41 @@ redirect_from:
 
 > `kay-tor`
 
-## How do I put questions/report bugs/contact you/contribute/give feedback, etc.?
+## 如何提出问题/报告错误/与你联系/做出贡献/提供反馈等？
 {: #feedback }
 
-Depending on the content, you might consider several channels:
+根据具体内容，可以考虑以下几个渠道：
 
-* **GitHub:** Feature request, change suggestions/proposals, bugs and PRs.
-* **Slack:** Questions, troubleshooting, guidance etc.
-* **StackOverflow:** Questions.
+* **GitHub:** 功能请求、更改建议/提议、错误以及 PR。
+* **Slack:** 问题、疑难解决、指导等。
+* **StackOverflow:** 问题。
 
-**Rationale:**
+**理由：**
 
-For questions or troubleshooting we highly recommend you to use Slack or StackOverflow.
+对于问题或疑难解决，我们强烈建议使用 Slack 或者 StackOverflow。
 
-Think that using GitHub issues would notify all the people that is subscribed potentially with emails,
-troubleshooting usually requires several questions and answers, that could be a lot of emails
-pread in the time, and maybe the people subscribed want to be informed about bugs, fixes, new things introduced
-or proposed, but maybe are not interested in other things.
+考虑到使用 GitHub issues 会通知所有可能通过电子邮件订阅的人，
+疑难解决通常需要几个问题与答案，这可能会一时产生很多电子邮件<!--
+-->，也许订阅的人们希望了解错误、修复、引入或提出的新功能相关内容<!--
+-->，而对其他事情也许并不感兴趣。
 
-If you have enough time or you prefer not to join Slack, you can also ask questions at StackOverflow.
-With slack being an hybrid between chat and forum, we can contact each other faster and troubleshoot things in less time.
+如果有足够时间或者并不想加入 Slack，也可以在 StackOverflow 上提问。
+鉴于 slack 是聊天与论坛的混合体，我们可以更快地相互联系并且在更短的时间内解决问题。
 
-When troubleshooting, if we determine that there is a bug, or something to improve, you can report it a GitHub.
-Of course, it is not a good idea either to keep a bug report (once confirmed) just in Slack since it could be forgotten,
-so lets put them in GitHub.
+在进行疑难解决时，如果我们确定存在错误或需要改进的地方，可以在 GitHub 上报告。
+当然，在 Slack 中进行错误报告（一旦确认）并不是一个好主意，因为可能会被遗忘，
+所以我们将其放在 GitHub 中。
 
-**Pull Requests:**
+**Pull Requests：**
 
-If you have a functionality or bugfix you think would be worth including in Ktor, you can create a PR.
+如果有一项你认为值得包含进 Ktor 的功能或者错误修复，可以创建 PR。
 
-Have in mind that we usually review and merge PRs in batches, so the PR could be outstanding for a few weeks.
-But still we encourage you to contribute if you can!
+请记住，我们通常会批量评审与合并 PR，因此该 PR 可能会等待几周。
+不过，如果可以，我们仍然鼓励你做出贡献！
 
-If you have a bugfix that need to use right away we recommend you to fork Ktor, compile it yourself,
-and temporarily publish a patched version in your own artifactory, bintray or similar and use that version
-until it is merged and a new version released or prereleased (since the timing might not be aligned with your needs).
+如果你有一个需要立即使用的错误修复，我们建议你 fork Ktor、
+自行编译，然后在自己的 artifactory、bintray 或者类似的地方临时发布打补丁后的版本，
+直到它被合并并且随新版本或者预览版发布（因为时间安排可能不能满足你的需求）。
 
 ## CIO 是什么意思？
 {: #cio }
