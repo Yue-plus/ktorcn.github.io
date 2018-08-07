@@ -13,7 +13,7 @@ permalink: /blog
         <div class="col-md-12 px-0">
             <h1 class="display-4"><a href="{{ post.url|relative_url }}" style="color:white;">{{ post.title }}</a></h1>
             <div class="mb-1">
-                <small>{{ post.date | date_to_long_string }}</small>
+                <small>{{ post.date | date: "%Y-%m-%d" }}</small>
             </div>
             <p class="lead my-3">{{ post.excerpt }}</p>
             <p class="lead mb-0"><a href="{{ post.url|relative_url }}" class="text-white btn btn-primary">Continue
@@ -39,7 +39,7 @@ permalink: /blog
                     <h3 class="mb-0" style="padding-bottom:0.3rem;">
                         <a class="text-dark" href="{{ post.url|relative_url }}">{{ post.title }}</a>
                     </h3>
-                    <div class="mb-1 text-muted">{{ post.date | date_to_long_string }}</div>
+                    <div class="mb-1 text-muted">{{ post.date | date: "%Y-%m-%d" }}</div>
                     <p class="card-text mb-auto">{{ post.excerpt }}</p>
                     <a href="{{ post.url|relative_url }}" class="btn btn-light">继续阅读……</a>
                 </div>
@@ -55,11 +55,10 @@ permalink: /blog
         <div class="col-md-8 blog-main">
             <h3 class="pb-3 mb-4 font-italic border-bottom">All Posts</h3>
 
-            {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
             {%- for post in site.posts -%}
             <div class="blog-post">
                 <h2 class="blog-post-title"><a href="{{ post.url|relative_url }}">{{ post.title | escape }}</a></h2>
-                <p class="blog-post-meta">{{ post.date | date: date_format }}</p>
+                <p class="blog-post-meta">{{ post.date | date: date: "%Y-%m-%d" }}</p>
 
                 {{ post.excerpt }}
 
