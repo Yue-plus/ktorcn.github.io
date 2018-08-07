@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="{{ 'favicon.ico'|relative_url }}">
+
+    <title>Blog Template for Bootstrap</title>
+
+    <link rel="stylesheet" href="{{ '/assets/plugins/bootstrap4/css/bootstrap.css'|relative_url }}" />
+    <link rel="stylesheet" href="{{ '/assets/blog.css'|relative_url }}" />
+
+    <link rel="stylesheet" href="{{ '/assets/plugins/font-awesome5/css/all.css' }}" />
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900">
+
+    <link href="{{ '/assets/plugins/prism/prism.css' }}" rel="stylesheet" />
+    <script src="{{ '/assets/plugins/prism/prism.js' }}"></script>
+
+    <style type="text/css">
+        .code-snippet {
+            white-space: pre;
+            font: 1rem monospace;
+            overflow: auto;
+            height: 16rem;
+            border: 1px solid #ddd;
+            border-top: none;
+            border-bottom-left-radius: 0.2rem;
+            border-bottom-right-radius: 0.2rem;
+            padding: 0.4rem;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <header class="blog-header py-3">
+        <div class="row flex-nowrap justify-content-between align-items-center">
+            <div class="col-4 pt-1">
+                <a class="text-muted" href="https://feedly.com/i/subscription/feed/https://ktor.io/feed.xml"><i class="fas fa-rss"></i> RSS</a>
+            </div>
+            <div class="col-4 text-center">
+                <a class="blog-header-logo text-dark" href="{{ '/blog'|relative_url }}"><img src="{{ '/assets/images/ktor_logo.svg' }}" style="width:auto;height:48px;" alt="Ktor" title="Ktor" /> <small>Blog</small></a>
+            </div>
+            <div class="col-4 d-flex justify-content-end align-items-center">
+                <a class="text-muted" href="#">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-3"><circle cx="10.5" cy="10.5" r="7.5"></circle><line x1="21" y1="21" x2="15.8" y2="15.8"></line></svg>
+                </a>
+                <a class="btn btn-sm btn-outline-secondary" href="/">
+                    <i class="fas fa-book"></i>
+                    Documentation
+                </a>
+            </div>
+        </div>
+    </header>
+
+
+    <!--
+    <div class="nav-scroller py-1 mb-2">
+        <nav class="nav d-flex justify-content-between">
+            <a class="p-2 text-muted" href="{{ '/blog'|relative_url }}">Blog</a>
+            <a class="p-2 text-muted" href="{{ '/blog/releases'|relative_url }}">Releases</a>
+            <a class="p-2 text-muted" href="{{ '/blog/eap'|relative_url }}">EAP</a>
+            <a class="p-2 text-muted" href="{{ '/blog/plugin'|relative_url }}">IntelliJ Plugin</a>
+            <a class="p-2 text-muted" href="{{ '/'|relative_url }}">Documentation</a>
+        </nav>
+    </div>
+    -->
+
+    {{content}}
+
+    <footer class="blog-footer">
+        <p>
+            <a href="#">Back to top</a>
+        </p>
+    </footer>
+</div>
+
+<script src="{{ '/assets/plugins/jquery-3.3.1.min.js'|relative_url }}"></script>
+<script src="{{ '/assets/plugins/bootstrap4/js/bootstrap.bundle.js'|relative_url }}"></script>
+
+<script type="text/javascript">
+    async function loadSnippet(url, into, lang) {
+        const res = await((await(fetch(url))).text());
+        const html = Prism.highlight(res, Prism.languages[lang], lang);
+        //console.log(res);
+        //$(into).text(res);
+        $(into).html(html);
+    }
+
+    $('.code-snippet').each(function() {
+        loadSnippet($(this).data('src'), this, $(this).data('lang') || 'json');
+    });
+</script>
+
+</body>
+</html>
