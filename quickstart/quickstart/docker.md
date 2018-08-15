@@ -184,8 +184,9 @@ fun Application.main() {
 
 ```text
 FROM openjdk:8-jre-alpine
-COPY ./build/libs/my-application.jar /root/my-application.jar
-WORKDIR /root
+RUN mkdir /app
+COPY ./build/libs/my-application.jar /app/my-application.jar
+WORKDIR /app
 CMD ["java", "-server", "-XX:+UnlockExperimentalVMOptions", "-XX:+UseCGroupMemoryLimitForHeap", "-XX:InitialRAMFraction=2", "-XX:MinRAMFraction=2", "-XX:MaxRAMFraction=2", "-XX:+UseG1GC", "-XX:MaxGCPauseMillis=100", "-XX:+UseStringDeduplication", "-jar", "my-application.jar"]
 ```
 
@@ -200,8 +201,9 @@ FROM openjdk:8-jre-alpine
 我们选择的也是只有 JRE 的镜像，因为我们并不需要在镜像中编译代码，只需要运行预编译的类。
 
 ```text
-COPY ./build/libs/my-application.jar /root/my-application.jar
-WORKDIR /root
+RUN mkdir /app
+COPY ./build/libs/my-application.jar /app/my-application.jar
+WORKDIR /app
 ```
 
 这几行将已打包的应用复制到 Docker 镜像中，并将工作目录设置为复制后的位置。
