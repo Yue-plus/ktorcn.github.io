@@ -182,13 +182,8 @@ fun Application.main() {
 
 在项目的根文件夹中创建一个名为 `Dockerfile` 的文件，其内容如下：
 
-```text
-FROM openjdk:8-jre-alpine
-RUN mkdir /app
-COPY ./build/libs/my-application.jar /app/my-application.jar
-WORKDIR /app
-CMD ["java", "-server", "-XX:+UnlockExperimentalVMOptions", "-XX:+UseCGroupMemoryLimitForHeap", "-XX:InitialRAMFraction=2", "-XX:MinRAMFraction=2", "-XX:MaxRAMFraction=2", "-XX:+UseG1GC", "-XX:MaxGCPauseMillis=100", "-XX:+UseStringDeduplication", "-jar", "my-application.jar"]
-```
+{% capture my_include %}{% include docker-sample.md %}{% endcapture %}
+{{ my_include | markdownify }}
 
 我们来看下都是什么：
 
