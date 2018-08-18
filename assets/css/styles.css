@@ -1670,7 +1670,7 @@ code.highlighter-rouge {
 .note.artifact:before { content: "构件"; }
 .note.api:before { content: "API"; }
 .note.experimental:before { content: "实验性的"; }
-.note.summarizing:before { content: "SUMMARIZING"; }
+.note.summarizing:before { content: "总结"; }
 .note.example:before { content: "示例"; }
 .note.performance:before { content: "性能说明"; font-weight: bold; }
 .note.security:before { content: "安全说明"; font-weight: bold; }
