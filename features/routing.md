@@ -10,6 +10,12 @@ feature:
 
 Routing is a feature that is installed into an Application to simplify and structure page request handling.
 
+This page explains the routing feature. Extracting information about a request,
+and generating valid responses inside a route, is described on the [requests] and [responses] pages.
+
+[requests]: /servers/calls/requests.html
+[responses]: /servers/calls/responses.html
+
 ```kotlin
     application.install(Routing) {
         get("/") {
