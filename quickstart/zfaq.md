@@ -201,11 +201,11 @@ io.ktor.server.engine.EmbeddedServerKt.embeddedServer$default(EmbeddedServer.kt:
 更多相关信息，请查阅[问题 #495](https://github.com/ktorio/ktor/issues/495) 以及 [StackOverflow
 上的问题](https://stackoverflow.com/questions/49945584/attempting-to-run-an-embedded-ktor-http-server-on-android)
 
-## CURL -I returns a 404 Not Found
+## CURL -I 返回 404 Not Found
 {: #curl-head-not-found }
 
-`CURL -I` that is an alias of `CURL --head` that performs a `HEAD` request.
-By default Ktor doesn't handle `HEAD` requests for `GET` handlers, so you might get something like:
+`CURL -I` 是执行 `HEAD` 请求的 `CURL --head` 的别名。
+默认情况下，Ktor 不会处理对 `GET` 处理程序的 `HEAD` 请求，因此可能会遇到类似这样的内容：
 
 ```kotlin
 curl -I http://localhost:8080
@@ -213,7 +213,7 @@ HTTP/1.1 404 Not Found
 Content-Length: 0
 ```
 
-for:
+对于：
 
 ```kotlin
 routing {
@@ -221,4 +221,4 @@ routing {
 }
 ```
 
-Ktor can automatically handle `HEAD` requests, but requires you to first install the [`AutoHeadResponse` feature](/features/autoheadresponse.html).
+Ktor 可以自动处理 `HEAD` 请求，不过需要先安装 [`AutoHeadResponse` 特性](/features/autoheadresponse.html)。
