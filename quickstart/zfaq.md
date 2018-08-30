@@ -89,7 +89,7 @@ IETF RFC 或者其他协议的逻辑，而不依赖外部 JVM 库。
 ## 如何在代理服务器后获取客户端 IP？
 {: #proxy-ip }
 
-> 如果代理服务器提供了正确的头，并且已安装 `XForwardedHeadersSupport` 特性，
+> 如果代理服务器提供了正确的头，并且已安装 `XForwardedHeaderSupport` 特性，
 > 那么 `call.request.origin` 属性会提供原始调用者（代理）的连接信息。
 
 ## 出现错误“java.lang.IllegalStateException: No instance for key AttributeKey: Locations”
@@ -222,3 +222,16 @@ routing {
 ```
 
 Ktor 可以自动处理 `HEAD` 请求，不过需要先安装 [`AutoHeadResponse` 特性](/features/autoheadresponse.html)。
+
+## I get an infinite redirect when using the `HttpsRedirect` feature
+{: #infinite-redirect }
+
+The most probable cause is that your backend is behind a reverse-proxy or a load balancer, and that the reverse-proxy
+is making normal HTTP requests to your backend, thus the HttpsRedirect feature inside your Ktor backend believes
+that it is a normal HTTP request and responds with the redirect.
+
+Normally, reverse-proxies send some headers describing the original request (like it was https, or the original IP address),
+and there is a feature [`XForwardedHeaderSupport`](/features/forward-headers.html)
+to parse those headers so the [`HttpsRedirect`](/features/https-redirect.html) feature knows that the original request was HTTPS.
+
+
