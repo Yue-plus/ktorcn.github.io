@@ -235,3 +235,8 @@ Ktor 可以自动处理 `HEAD` 请求，不过需要先安装 [`AutoHeadResponse
 会解析这些头，所以 [`HttpsRedirect`](/features/https-redirect.html) 特性知道原始请求是 HTTPS。
 
 
+## I get a `UnsafeHeaderException: Header Content is controlled by the engine and cannot be set explicitly` exception
+{: #UnsafeHeaderException }
+
+Check the [0.9.4 migration guide](/quickstart/migration/0.9.4.html#UnsafeHeaderException) for more information about how to fix it.
+
