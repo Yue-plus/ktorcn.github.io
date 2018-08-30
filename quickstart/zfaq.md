@@ -223,15 +223,15 @@ routing {
 
 Ktor 可以自动处理 `HEAD` 请求，不过需要先安装 [`AutoHeadResponse` 特性](/features/autoheadresponse.html)。
 
-## I get an infinite redirect when using the `HttpsRedirect` feature
+## 我在使用 `HttpsRedirect` 特性时出现了无限重定向
 {: #infinite-redirect }
 
-The most probable cause is that your backend is behind a reverse-proxy or a load balancer, and that the reverse-proxy
-is making normal HTTP requests to your backend, thus the HttpsRedirect feature inside your Ktor backend believes
-that it is a normal HTTP request and responds with the redirect.
+最可能的原因是你的后端服务位于反向代理或者负载均衡之后，而那些反向代理<!--
+-->正向你的后端服务发出正常的 HTTP 请求，因此你的 Ktor 后端服务内部的 HttpsRedirect 特性认为<!--
+-->它是正常 HTTP 请求并以重定向进行响应。
 
-Normally, reverse-proxies send some headers describing the original request (like it was https, or the original IP address),
-and there is a feature [`XForwardedHeaderSupport`](/features/forward-headers.html)
-to parse those headers so the [`HttpsRedirect`](/features/https-redirect.html) feature knows that the original request was HTTPS.
+通常，反向代理会发送一些描述原始请求的头（例如它是 https，或者原始 IP 地址），
+并且有一个特性 [`XForwardedHeaderSupport`](/features/forward-headers.html)
+会解析这些头，所以 [`HttpsRedirect`](/features/https-redirect.html) 特性知道原始请求是 HTTPS。
 
 
