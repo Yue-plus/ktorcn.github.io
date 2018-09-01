@@ -35,7 +35,7 @@ main:
     category: kotlinx
     url: /kotlinx/index.html
     icon_url: '/assets/images/icon_kotlinx.svg'
-    summary: Kotlinx libraries, a set of multiplatform libraries
+    summary: Kotlinx 库，一组多平台库
     color: pink
     icon: arrow_triangle-right_alt
 
