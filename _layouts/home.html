@@ -48,7 +48,7 @@ layout: default
             <div class="item item-{{ section.color }} col-md-4 col-sm-6 col-xs-6">
                 <div class="item-inner">
                     <div class="icon-holder">
-                        <span aria-hidden="true" class="icon icon_{{ section.icon }}"></span>
+                        <span aria-hidden="true" class="icon {{ section.icon }}"></span>
                     </div><!--//icon-holder-->
                     <h3 class="title">{{ section.title }} </h3>
                     <p class="intro">{{ section.summary }}</p>
@@ -56,7 +56,8 @@ layout: default
                 </div>
             </div>
             {% endfor %}
-
+        </div>
+        <div style="max-width:860px;">
             <a href="https://confluence.jetbrains.com/display/ALL/JetBrains+on+GitHub"><img src="{{ '/assets/logo/jb_official.svg' | relative_url }}" style="width:70px;height:20px;" alt="JB official" /></a>
             <a href="https://bintray.com/kotlin/ktor/ktor/{{site.ktor_version}}"><img src="{{ '/assets/logo/download_stable.svg' }}" style="width:104px;height:20px;" alt="Download {{ site.ktor_version }}" /></a>
             <a href="https://teamcity.jetbrains.com/viewType.html?buildTypeId=KotlinTools_Ktor_BuildGradle&branch_KotlinTools_Ktor=%3Cdefault%3E&tab=buildTypeStatusDiv"><img src="https://img.shields.io/teamcity/http/teamcity.jetbrains.com/s/KotlinTools_Ktor_BuildGradle.svg" alt="Build status" /></a>

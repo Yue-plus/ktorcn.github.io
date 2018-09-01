@@ -5,7 +5,7 @@ main:
     icon_url: '/assets/images/icon_quick-start.svg'
     summary: 建立环境并启动
     color: green
-    icon: gift
+    icon: icon_gift
 
   - title: 服务器
     category: servers
@@ -13,7 +13,7 @@ main:
     icon_url: '/assets/images/icon_servers.svg'
     summary: 创建 web 应用与服务
     color: purple
-    icon: cloud
+    icon: icon_cloud
 
   - title: 客户端
     category: clients
@@ -21,7 +21,7 @@ main:
     icon_url: '/assets/images/icon_clients.svg'
     summary: 连接到服务与应用
     color: orange
-    icon: link_alt
+    icon: icon_link_alt
 
   - title: 各种特性
     category: features
@@ -29,7 +29,15 @@ main:
     icon_url: '/assets/images/icon_features.svg'
     summary: 用可扩展的各种特性来定制应用
     color: blue
-    icon: tools
+    icon: icon_tools
+
+  - title: Kotlinx
+    category: kotlinx
+    url: /kotlinx/index.html
+    icon_url: '/assets/images/icon_kotlinx.svg'
+    summary: Kotlinx libraries, a set of multiplatform libraries
+    color: pink
+    icon: arrow_triangle-right_alt
 
   - title: 样例
     category: samples
@@ -37,7 +45,7 @@ main:
     icon_url: '/assets/images/icon_samples.svg'
     summary: 样例与开源项目
     color: primary
-    icon: toolbox_alt
+    icon: icon_toolbox_alt
 
   - title: 高级
     category: advanced
@@ -45,4 +53,4 @@ main:
     icon_url: '/assets/images/icon_advanced.svg'
     summary: 高级主题与实现细节
     color: red
-    icon: cone
+    icon: icon_cone
