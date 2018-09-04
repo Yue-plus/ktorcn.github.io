@@ -1,5 +1,5 @@
 ---
-title: Kotlinx Libraries
+title: Kotlinx 库
 caption: Kotlinx Libraries
 category: kotlinx
 permalink: /kotlinx/index.html
