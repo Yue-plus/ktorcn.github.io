@@ -13,13 +13,13 @@ category: quickstart
 为了实现这一点，我们会用到[路由]、 [状态页]、 [身份认证]、 [会话]、 [静态内容]、
 [FreeMarker] 以及 [HTML DSL] 这些特性。
 
-[路由]: /features/routing.html
-[状态页]: /features/status-pages.html
-[身份认证]: /features/authentication.html
-[会话]: /features/sessions.html
-[静态内容]: /features/static-content.html
-[FreeMarker]: /features/templates/freemarker.html
-[HTML DSL]: /features/templates/html-dsl.html
+[路由]: /servers/features/routing.html
+[状态页]: /servers/features/status-pages.html
+[身份认证]: /servers/features/authentication.html
+[会话]: /servers/features/sessions.html
+[静态内容]: /servers/features/static-content.html
+[FreeMarker]: /servers/features/templates/freemarker.html
+[HTML DSL]: /servers/features/templates/html-dsl.html
 
 **目录：**
 

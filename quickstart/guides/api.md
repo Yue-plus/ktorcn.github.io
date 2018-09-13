@@ -12,13 +12,13 @@ category: quickstart
 为了实现这一点，我们会用到[路由]、 [状态页]、 [身份认证]、 [JWT 认证]、
 [CORS]、 [内容协商]以及 [Jackson] 这些特性。
 
-[路由]: /features/routing.html
-[状态页]: /features/status-pages.html
-[身份认证]: /features/authentication.html
-[JWT 认证]: /features/authentication/jwt.html
-[CORS]: /features/cors.html
-[内容协商]: /features/content-negotiation.html
-[Jackson]: /features/content-negotiation/jackson.html
+[路由]: /servers/features/routing.html
+[状态页]: /servers/features/status-pages.html
+[身份认证]: /servers/features/authentication.html
+[JWT 认证]: /servers/features/authentication/jwt.html
+[CORS]: /servers/features/cors.html
+[内容协商]: /servers/features/content-negotiation.html
+[Jackson]: /servers/features/content-negotiation/jackson.html
 
 虽然许多框架都提倡如何创建 REST API，但是其中大多数实际上并不是讨论 REST API 而是 HTTP API。
 与一些其他框架一样，Ktor 可用于创建遵循 REST 约束的系统。然而，

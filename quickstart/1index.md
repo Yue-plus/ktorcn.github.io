@@ -19,7 +19,7 @@ Ktor 是一个轻松构建联网应用（web 应用、 HTTP 服务、 移动应�
 环境，并将客户端支持引入到原生与 JavaScript 环境。
 
 {::comment}
-Ktor embraces the strongly typed nature of the Kotlin programming language and provides [strongly typed end-points (Locations)](/features/locations.html) and
+Ktor embraces the strongly typed nature of the Kotlin programming language and provides [strongly typed end-points (Locations)](/servers/features/locations.html) and
 the ability to exchange data with classes shared across platforms.
 {:/comment}
 

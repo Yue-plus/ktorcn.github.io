@@ -12,9 +12,9 @@ category: quickstart
 
 为了实现这一点，我们会用到[路由]、 [WebSocket] 以及[会话]这些特性。
 
-[路由]: /features/routing.html
-[WebSocket]: /features/websockets.html
-[会话]: /features/sessions.html
+[路由]: /servers/features/routing.html
+[WebSocket]: /servers/features/websockets.html
+[会话]: /servers/features/sessions.html
 
 **目录：**
 
@@ -44,7 +44,7 @@ WebSocket 是 HTTP 的子协议。它以具有 upgrade 请求头的普通 HTTP �
 你通常会处理 `Text` 与 `Binary` 帧，其他帧在大多数情况下会由 Ktor 处理
 （虽然你可以使用原始模式）。
 
-可以在 [WebSocket 特性](/features/websockets.html)页中查阅关于它的更多信息。
+可以在 [WebSocket 特性](/servers/features/websockets.html)页中查阅关于它的更多信息。
 
 ## WebSocket 路由
 

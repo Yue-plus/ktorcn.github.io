@@ -23,20 +23,12 @@ main:
     color: orange
     icon: icon_link_alt
 
-  - title: 各种特性
-    category: features
-    url: /features/index.html
-    icon_url: '/assets/images/icon_features.svg'
-    summary: 用可扩展的各种特性来定制应用
-    color: blue
-    icon: icon_tools
-
   - title: Kotlinx
     category: kotlinx
     url: /kotlinx/index.html
     icon_url: '/assets/images/icon_kotlinx.svg'
     summary: Kotlinx 库，一组多平台库
-    color: pink
+    color: blue
     icon: arrow_triangle-right_alt
 
   - title: 样例

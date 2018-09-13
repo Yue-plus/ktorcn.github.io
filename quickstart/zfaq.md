@@ -115,7 +115,7 @@ IETF RFC 或者其他协议的逻辑，而不依赖外部 JVM 库。
 ## 如何确定我用的是哪个版本的 ktor？
 {: #ktor-version-used }
 
-可以使用 [`DefaultHeaders` 特性](/features/default-headers.html)来发送一个<!--
+可以使用 [`DefaultHeaders` 特性](/servers/features/default-headers.html)来发送一个<!--
 -->包含 ktor 版本的 Server 头。
 所发送的响应头中包含类似这样的内容： `Server: ktor-server-core/0.9.2-alpha-3 ktor-server-core/0.9.2-alpha-3`
 
@@ -146,7 +146,7 @@ IETF RFC 或者其他协议的逻辑，而不依赖外部 JVM 库。
 {: #route-not-executing }
 
 Ktor 为路由功能提供了跟踪机制以帮助解决<!--
--->路由决策问题。请查阅路由页的[追踪路由决策](/features/routing.html#tracing)一节。
+-->路由决策问题。请查阅路由页的[追踪路由决策](/servers/features/routing.html#tracing)一节。
 
 ## 出现报错 `io.ktor.pipeline.InvalidPhaseException: Phase Phase('YourPhase') was not registered for this pipeline`.
 {: #invalid-phase }
@@ -177,7 +177,7 @@ route.insertPhaseAfter(PhaseDefinedInAncestor, MyNodePhase)
 
 这意味着 Ktor 无法找到 `application.conf` 文件。请重新检查它是否在 `resources` 文件夹中<!--
 -->并且该资源文件夹已正确标记。
-可以考虑使用[项目生成器](/quickstart/generator.html)或者 [IntelliJ 插件](/quickstart/intellij-idea/plugin.html)<!--
+可以考虑使用[项目生成器](/quickstart/generator.html)或者 [IntelliJ 插件](/quickstart/quickstart/intellij-idea/plugin.html)<!--
 -->搭建项目作为工作项目的基础。
 
 ## 可以在 Android 上使用 ktor 吗？
@@ -221,7 +221,7 @@ routing {
 }
 ```
 
-Ktor 可以自动处理 `HEAD` 请求，不过需要先安装 [`AutoHeadResponse` 特性](/features/autoheadresponse.html)。
+Ktor 可以自动处理 `HEAD` 请求，不过需要先安装 [`AutoHeadResponse` 特性](/servers/features/autoheadresponse.html)。
 
 ## 我在使用 `HttpsRedirect` 特性时出现了无限重定向
 {: #infinite-redirect }
@@ -231,9 +231,8 @@ Ktor 可以自动处理 `HEAD` 请求，不过需要先安装 [`AutoHeadResponse
 -->它是正常 HTTP 请求并以重定向进行响应。
 
 通常，反向代理会发送一些描述原始请求的头（例如它是 https，或者原始 IP 地址），
-并且有一个特性 [`XForwardedHeaderSupport`](/features/forward-headers.html)
-会解析这些头，所以 [`HttpsRedirect`](/features/https-redirect.html) 特性知道原始请求是 HTTPS。
-
+并且有一个特性 [`XForwardedHeaderSupport`](/servers/features/forward-headers.html)
+会解析这些头，所以 [`HttpsRedirect`](/servers/features/https-redirect.html) 特性知道原始请求是 HTTPS。
 
 ## 出现 `UnsafeHeaderException: Header Content is controlled by the engine and cannot be set explicitly` 异常
 {: #UnsafeHeaderException }
