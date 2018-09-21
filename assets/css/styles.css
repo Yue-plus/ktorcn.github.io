@@ -547,6 +547,7 @@ select {
 
 .doc-content {
     margin-left: 230px;
+    overflow: hidden;
 }
 
 .doc-section {
@@ -1911,5 +1912,14 @@ table.compare-table pre.highlight {
 }
 
 .nomnoml {
+    display: none;
+}
+
+pre {
+    background: transparent;
+    border: none;
+}
+
+pre .language-nomnoml {
     display: none;
 }
