@@ -203,7 +203,7 @@ $(document).ready(function() {
             lines.push(`<small style="color:#999;">And ${invisibleLinks} more...</small>`);
         }
         if (query !== '' && !containsHash) {
-            lines.push(`<a href="https://www.google.com/search?q=site:ktor.kotlincn.net+${encodeURIComponent(query.trim())}">在谷歌 site:ktor.kotlincn.net 中搜索 <code>${query.trim().escapeHTML()}</code></a>`)
+            lines.push(`<a href="https://www.google.com/search?q=site:ktor.kotlincn.net+-site:*.ktor.kotlincn.net+${encodeURIComponent(query.trim())}">在谷歌 site:ktor.kotlincn.net 中搜索 <code>${query.trim().escapeHTML()}</code></a>`)
         }
         let outLines = [];
         for (let n = 0; n < lines.length; n++) {
