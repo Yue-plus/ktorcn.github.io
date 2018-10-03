@@ -72,7 +72,7 @@ IETF RFC 或者其他协议的逻辑，而不依赖外部 JVM 库。
 > 请确保包含了 ktor 构件。例如，对于 gradle 及 Netty 引擎会是：
 > ```kotlin
 > dependencies {
->     compile "io.ktor:ktor-server-netty:$ktor_version"
+>     compile("io.ktor:ktor-server-netty:$ktor_version")
 > }
 > ```
 > * 对于 gradle，请查阅：<https://ktor.kotlincn.net/quickstart/gradle.html#engine>

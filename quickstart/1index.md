@@ -46,8 +46,57 @@ Ktor has a [start.ktor.io](https://soywiz.github.io/start-ktor-io-proposal/) web
 
 ![Ktor Build with Gradle](/quickstart/1/ktor_build_gradle.png)
 
-文本版：
+{% capture gradle-kotlin-build %}
+```kotlin
+// build.gradle.kts
+
+import org.jetbrains.kotlin.gradle.dsl.Coroutines
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
+group = "Example"
+version = "1.0-SNAPSHOT"
+
+val ktor_version = "{{ site.ktor_version }}"
+
+plugins {
+    application
+    kotlin("jvm") version "{{ site.kotlin_version }}"
+}
+
+kotlin.experimental.coroutines = Coroutines.ENABLE
+
+repositories {
+    mavenCentral()
+    jcenter()
+    maven { url = uri("https://dl.bintray.com/kotlin/ktor") }
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+}
+
+tasks.withType<KotlinCompile>().all {
+    kotlinOptions.jvmTarget = "1.8"
+}
+
+application {
+    mainClassName = "MainKt"
+}
+
+dependencies {
+    compile(kotlin("stdlib-jdk8"))
+    compile("io.ktor:ktor-server-netty:$ktor_version")
+    compile("ch.qos.logback:logback-classic:1.2.3")
+    testCompile(group = "junit", name = "junit", version = "4.12")
+}
+```
+{: .compact}
+{% endcapture %}
+
+{% capture gradle-groovy-build %}
 ```groovy
+// build.gradle
+
 group 'Example'
 version '1.0-SNAPSHOT'
 
@@ -82,13 +131,17 @@ repositories {
 }
 
 dependencies {
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version"
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     compile "io.ktor:ktor-server-netty:$ktor_version"
-    compile "ch.qos.logback:logback-classic:1.2.1"
+    compile "ch.qos.logback:logback-classic:1.2.3"
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }
 ```
 {: .compact}
+{% endcapture %}
+
+文本版：
+{% include gradle.html gradle-kotlin=gradle-kotlin-build gradle-groovy=gradle-groovy-build %}
 
 由于 Ktor 还没到 1.0，我们（官方）用自定义的 Maven 仓库来分发早期预览版构件。
 必须设置如下所示的几个仓库，以便工具可以找到 Ktor 构件及其依赖。

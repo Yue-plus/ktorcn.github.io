@@ -55,8 +55,8 @@ priority: 0
     ![Ktor IntelliJ: Project Structure](/quickstart/intellij-idea/project-structure.png)
 
 7.  更新 `build.gradle` 文件，添加使相关类可用的构件与仓库：
-    * 将 `compile "io.ktor:ktor-server-netty:$ktor_version"` 包含到 `build.gradle` 的 `dependencies` 块中
-    * 将  `maven { url "http://kotlin.bintray.com/ktor" }` 与 `jcenter()` 包含到 `repositories` 块中
+    * 将 `compile("io.ktor:ktor-server-netty:$ktor_version")` 包含到 `build.gradle` 的 `dependencies` 块中
+    * 将  `maven { url = uri("http://kotlin.bintray.com/ktor") }` 与 `jcenter()` 包含到 `repositories` 块中
 
     ![Ktor IntelliJ: Build Gradle](/quickstart/intellij-idea/build-gradle.png)
 
@@ -168,11 +168,32 @@ ktor {
 
 因为 IntelliJ IDEA 不能自动找到主类，这需要我们指定一个新的主类。在 `build.gradle` 添加：
 
+{% capture gradle-groovy-build %}
 ```groovy
+// build.gradle
+
 apply plugin: 'application'
 
 mainClassName = 'io.ktor.server.netty.DevelopmentEngine'
 ```
+{% endcapture %}
+
+{% capture gradle-kotlin-build %}
+```kotlin
+// build.gradle.kts
+
+plugins {
+    application
+    // ...
+}
+
+application {
+    mainClassName = "io.ktor.server.netty.DevelopmentEngine"
+}
+```
+{% endcapture %}
+
+{% include gradle.html gradle-kotlin=gradle-kotlin-build gradle-groovy=gradle-groovy-build %}
 
 然后转到 `Run -> Edit Configurations` 选择 `blog.BlogAppKt` 配置并将其 Main class 修改为：
 `io.ktor.server.netty.DevelopmentEngine`
