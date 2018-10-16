@@ -1,6 +1,6 @@
 ---
 title: SSL
-caption: 如何获取免费证书以及在 Ktor 中使用 SSL
+caption: 指南：如何获取免费证书以及在 Ktor 中使用 SSL
 category: quickstart
 keywords: tls ssl https let's encrypt letsencrypt
 ---

@@ -1,6 +1,6 @@
 ---
 title: 聊天
-caption: 如何使用 WebSocket 实现聊天
+caption: 指南：如何使用 WebSocket 实现聊天
 category: quickstart
 ---
 

@@ -9,8 +9,207 @@ $(document).ready(function() {
             document.getSelection().empty();
             compact.text('+');
         }
-
     }
+
+    /*
+    function getLeafDescendants(node, out = []) {
+        const children = node.childNodes;
+        if (children.length === 0) {
+            out.push(node);
+        } else {
+            for (let n = 0; n < children.length; n++) {
+                const child = children[n];
+                getLeafDescendants(child, out);
+            }
+        }
+        return out
+    }
+
+    function indexesOf(string, pattern) {
+        var match,
+            indexes = {};
+
+        const regex2 = new RegExp(pattern, "g");
+
+        while (match = regex2.exec(string)) {
+            if (!indexes[match[0]]) indexes[match[0]] = [];
+            indexes[match[0]].push(match.index);
+        }
+
+        return indexes;
+    }
+
+    function highlight(highlightText, node) {
+        const children = getLeafDescendants(node);
+        console.log('highlight', node);
+        for (const v of children) {
+            console.log(v.name, v.tagName, v.nodeValue, v);
+
+            //const isLeaf = $v.children().length === 0;
+            //if (isLeaf) {
+            //    const text = $v.text();
+            //    //console.log(v.nodeName);
+            //    const indexes = indexesOf(text, highlightText);
+            //    console.log(text, indexes);
+            //} else {
+            //    const text = $v.text();
+            //    console.log('NO LEAF', text);
+            //}
+
+        }
+    }
+    */
+
+    //function highlight(text, inputText) {
+    //    var innerHTML = inputText.innerHTML;
+    //    var index = innerHTML.indexOf(text);
+    //    if (index >= 0) {
+    //        innerHTML = innerHTML.substring(0,index) + "<span class='highlight'>" + innerHTML.substring(index,index+text.length) + "</span>" + innerHTML.substring(index + text.length);
+    //        inputText.innerHTML = innerHTML;
+    //    }
+    //}
+
+    var InstantSearch = {
+
+        "highlight": function (container, highlightText)
+        {
+            var internalHighlighter = function (options)
+                {
+
+                    var id = {
+                            container: "container",
+                            tokens: "tokens",
+                            all: "all",
+                            token: "token",
+                            className: "className",
+                            sensitiveSearch: "sensitiveSearch"
+                        },
+                        tokens = options[id.tokens],
+                        allClassName = options[id.all][id.className],
+                        allSensitiveSearch = options[id.all][id.sensitiveSearch];
+
+
+                    function checkAndReplace(node, tokenArr, classNameAll, sensitiveSearchAll)
+                    {
+                        var nodeVal = node.nodeValue, parentNode = node.parentNode,
+                            i, j, curToken, myToken, myClassName, mySensitiveSearch,
+                            finalClassName, finalSensitiveSearch,
+                            foundIndex, begin, matched, end,
+                            textNode, span, isFirst;
+
+                        for (i = 0, j = tokenArr.length; i < j; i++)
+                        {
+                            curToken = tokenArr[i];
+                            myToken = curToken[id.token];
+                            myClassName = curToken[id.className];
+                            mySensitiveSearch = curToken[id.sensitiveSearch];
+
+                            finalClassName = (classNameAll ? myClassName + " " + classNameAll : myClassName);
+
+                            finalSensitiveSearch = (typeof sensitiveSearchAll !== "undefined" ? sensitiveSearchAll : mySensitiveSearch);
+
+                            isFirst = true;
+                            while (true)
+                            {
+                                if (finalSensitiveSearch)
+                                    foundIndex = nodeVal.indexOf(myToken);
+                                else
+                                    foundIndex = nodeVal.toLowerCase().indexOf(myToken.toLowerCase());
+
+                                if (foundIndex < 0)
+                                {
+                                    if (isFirst)
+                                        break;
+
+                                    if (nodeVal)
+                                    {
+                                        textNode = document.createTextNode(nodeVal);
+                                        parentNode.insertBefore(textNode, node);
+                                    } // End if (nodeVal)
+
+                                    parentNode.removeChild(node);
+                                    break;
+                                } // End if (foundIndex < 0)
+
+                                isFirst = false;
+
+
+                                begin = nodeVal.substring(0, foundIndex);
+                                matched = nodeVal.substr(foundIndex, myToken.length);
+
+                                if (begin)
+                                {
+                                    textNode = document.createTextNode(begin);
+                                    parentNode.insertBefore(textNode, node);
+                                } // End if (begin)
+
+                                span = document.createElement("span");
+                                span.className += finalClassName;
+                                span.appendChild(document.createTextNode(matched));
+                                parentNode.insertBefore(span, node);
+
+                                nodeVal = nodeVal.substring(foundIndex + myToken.length);
+                            } // Whend
+
+                        } // Next i
+                    }; // End Function checkAndReplace
+
+                    function iterator(p)
+                    {
+                        if (p === null) return;
+
+                        var children = Array.prototype.slice.call(p.childNodes), i, cur;
+
+                        if (children.length)
+                        {
+                            for (i = 0; i < children.length; i++)
+                            {
+                                cur = children[i];
+                                if (cur.nodeType === 3)
+                                {
+                                    checkAndReplace(cur, tokens, allClassName, allSensitiveSearch);
+                                }
+                                else if (cur.nodeType === 1)
+                                {
+                                    iterator(cur);
+                                }
+                            }
+                        }
+                    }; // End Function iterator
+
+                    iterator(options[id.container]);
+                } // End Function highlighter
+            ;
+
+
+            internalHighlighter(
+                {
+                    container: container
+                    , all:
+                        {
+                            className: "highlighter"
+                        }
+                    , tokens: [
+                        {
+                            token: highlightText
+                            , className: "highlight"
+                            , sensitiveSearch: false
+                        }
+                    ]
+                }
+            ); // End Call internalHighlighter
+
+        } // End Function highlight
+
+    };
+
+    function highlight(highlightText, node) {
+        if (highlightText !== "") {
+            InstantSearch.highlight(node, highlightText);
+        }
+    }
+
+    //highlight('Ktor', document.body);
 
     $(".compact").each((index, element) => {
         //$(element).prepend(
@@ -165,6 +364,21 @@ $(document).ready(function() {
 // Prefetch
     fetchSearchOnce();
 
+    //const arrow = "↬⇒";
+    const sectionSeparator = " <span class='search-separator'>↬</span> ";
+
+    function getHeadings(h) {
+        const hlevel = parseInt(h.tagName.substr(1));
+        const $h = $(h);
+        const prevAll = $h.prevAll(`h${hlevel - 1}`);
+        const prev = prevAll[0];
+        if (prev === undefined) {
+            return [h];
+        } else {
+            return getHeadings(prev).concat([h]);
+        }
+    }
+
     async function updateSearchResults() {
         let query = $('#search-input').val().trim();
         let containsHash = query.indexOf('#') >= 0;
@@ -180,23 +394,27 @@ $(document).ready(function() {
                 comparerBy((it) => String(it.search))
             ))
             .filter((it) => String(it.search).match(querySearch))
+            .sorted(composeComparers(
+                comparerBy((it) => it.search.length >= 0 ? String(it.search).regexIndexOf(querySearch) : 0)
+            ))
         ;
 
         let filteredResults = filteredResultsAll.slice(0, 10);
 
         $(".doc-content").find("h2,h3,h4,h5,h6").filter("[id]").each(function () {
-            const id = $(this).attr('id');
-            const headerText = $(this).text();
-
-            const searchTextLC = `${headerText} ${id}`.normalizeForSearch();
+            const $this = $(this);
+            const id = $this.attr('id');
+            const headings = getHeadings(this);
+            const searchTextLC = headings.map((v) => ($(v).text() + " " + id).normalizeForSearch()).join(" ");
+            const headerRealHtml = headings.map((v) => $(v).text().escapeHTML()).join(sectionSeparator);
 
             if (searchTextLC.match(querySearchForSection)) {
-                lines.push(`<a href='#${id.escapeHTML()}'># ${headerText.escapeHTML()}</a>`);
+                lines.push(`<a href='#${id.escapeHTML()}'># ${headerRealHtml}</a>`);
             }
         });
 
         for (const result of filteredResults) {
-            lines.push(`<a href="${result.url.escapeHTML()}" title="${result.title.escapeHTML()}"><span style="color:#777;">${result.categoryName.escapeHTML()}</span> - ${result.title.escapeHTML()} - ${result.caption.escapeHTML()}</a>`);
+            lines.push(`<a href="${result.url.escapeHTML()}" title="${result.title.escapeHTML()}"><span class="search-section ${result.categoryName.escapeHTML()}">${result.categoryName.escapeHTML()}</span> - ${result.title.escapeHTML()} - ${result.caption.escapeHTML()}</a>`);
         }
         if (filteredResults.length < filteredResultsAll.length) {
             const invisibleLinks = filteredResultsAll.length - filteredResults.length;
@@ -208,14 +426,21 @@ $(document).ready(function() {
         let outLines = [];
         for (let n = 0; n < lines.length; n++) {
             const line = lines[n];
-            let active = (n === 0) ? ' active' : '';
-            let google = (line.indexOf('google.com/search') >= 0) ? ' google-search' : '';
-            outLines.push(`<li class="${active}${google}">${line}</li>`);
+            const isHash = line.indexOf(">#") >= 0;
+            const active = (n === 0) ? ' active' : '';
+            const google = (line.indexOf('google.com/search') >= 0) ? ' google-search' : '';
+            const hash = isHash ? ' hash' : '';
+            //console.log(line);
+            outLines.push(`<li class="${active}${google}${hash}">${line}</li>`);
         }
         if (outLines.length === 0) {
             outLines.push('<li>未找到结果</li>');
         }
         searchResults.html(outLines.join(''));
+        const squery = query.replace('#', '');
+        if (squery !== "") {
+            highlight(squery.replace('#', ''), searchResults[0]);
+        }
     }
 
     $('#search-input').on('focus', function() {
@@ -302,3 +527,25 @@ function sectionPriority(category) {
     }
     return 7;
 }
+
+String.prototype.regexIndexOf = function(regex, startpos) {
+    var indexOf = this.substring(startpos || 0).search(regex);
+    return (indexOf >= 0) ? (indexOf + (startpos || 0)) : indexOf;
+};
+
+String.prototype.regexLastIndexOf = function(regex, startpos) {
+    regex = (regex.global) ? regex : new RegExp(regex.source, "g" + (regex.ignoreCase ? "i" : "") + (regex.multiLine ? "m" : ""));
+    if(typeof (startpos) == "undefined") {
+        startpos = this.length;
+    } else if(startpos < 0) {
+        startpos = 0;
+    }
+    var stringToWorkWith = this.substring(0, startpos + 1);
+    var lastIndexOf = -1;
+    var nextStop = 0;
+    while((result = regex.exec(stringToWorkWith)) != null) {
+        lastIndexOf = result.index;
+        regex.lastIndex = ++nextStop;
+    }
+    return lastIndexOf;
+};

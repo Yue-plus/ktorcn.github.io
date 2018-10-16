@@ -1,6 +1,6 @@
 ---
 title: 网站
-caption: 如何使用 ktor 创建普通网站
+caption: 指南：如何使用 ktor 创建普通网站
 category: quickstart
 ---
 

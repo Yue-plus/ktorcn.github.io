@@ -1,6 +1,6 @@
 ---
 title: Google OAuth
-caption: 如何通过 Google 实现 OAuth 登录
+caption: 指南：如何通过 Google 实现 OAuth 登录
 category: quickstart
 ---
 

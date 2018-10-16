@@ -1863,6 +1863,10 @@ h1 a.anchored-heading:hover {
     border-top: 1px dotted #eee;
 }
 
+.search-results-inline-container .search-results li.hash {
+    font-weight: bold;
+}
+
 .search-results-inline-container .search-results li.google-search:only-child {
     border-top: none;
 }
@@ -1953,3 +1957,39 @@ pre .language-nomnoml {
     position: relative;
     top: -1px;
 }
+
+p {
+    line-height: 1.7;
+}
+
+h2 {
+    font-weight: bold;
+}
+
+h3, h3 a, h3 a.anchored-heading {
+    font-weight: bold;
+    font-style: italic;
+    color: #666;
+}
+
+.search-separator {
+    color: #aaa;
+}
+
+.highlight.highlighter {
+    background: yellow;
+    border-radius: 0.4em;
+    /*
+    padding: 2px;
+    position: relative;
+    left: -2px;
+    */
+}
+
+.search-section { color: #777; font-weight: bold; }
+.search-section.Quick.Start { color: #75c181; }
+.search-section.Servers { color: #8A40A7; }
+.search-section.Clients { color: #F88C30; }
+.search-section.Kotlinx { color: #58bbee; }
+.search-section.Samples { color: #40babd; }
+.search-section.Advanced { color: #f77b6b; }
