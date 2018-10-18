@@ -30,6 +30,7 @@ port: 4002
 
 # these are the files and directories that jekyll will exclude from the build
 exclude:
+  - ktor.pdf
   - .gradle
   - .idea
   - .gitignore

@@ -3,6 +3,7 @@ title: 生成器
 caption: 生成一个 Ktor 项目
 category: quickstart
 permalink: /quickstart/generator.html
+skip_pdf: true
 redirect_from:
   - /quickstart/quickstart/generator.html
 ---

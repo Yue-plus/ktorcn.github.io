@@ -30,9 +30,7 @@ category: quickstart
 
 第一步是搭建一个项目。可以按照[快速入门](/quickstart/index.html)指南操作，或者使用以下表单创建：
 
-[**打开预先配置好的生成器表单**](javascript:$('#start_ktor_io_form').toggle())
-
-<iframe src="{{ site.ktor_init_tools_url }}#dependency=html-dsl&dependency=css-dsl&dependency=freemarker&dependency=static-content&dependency=auth&dependency=ktor-sessions&dependency=status-pages&dependency=routing&artifact-name=website-example" id="start_ktor_io_form" style="border:1px solid #343a40;width:100%;height:574px;display:none;"></iframe>
+{% include preconfigured-form.html hash="dependency=html-dsl&dependency=css-dsl&dependency=freemarker&dependency=static-content&dependency=auth&dependency=ktor-sessions&dependency=status-pages&dependency=routing&artifact-name=website-example" %}
 
 ## 简单路由
 

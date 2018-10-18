@@ -3,7 +3,7 @@
     {% for item in site.data.navigation.main %}categoryNames["{{ item.category | json }}"] = "{{ item.title | json }}";
     {% endfor %}
 </script>
-<form action="https://www.google.com/search" method="get">
+<form id="search-form" action="https://www.google.com/search" method="get">
 <div class="page-inline-search" style="margin-bottom:8px;">
     <div class="input-group">
         <input name="q" id="search-input" type="text" class="form-control" placeholder="搜索……（按“s”激活，或者按“#”转到章节）" data-placeholder-focus="搜索……（用“↑”、 “↓”及“⏎”选择结果）" data-placeholder-blur="搜索……（按“s”激活，或者按“#”转到章节）" autocomplete="off">

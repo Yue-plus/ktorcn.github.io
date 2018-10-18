@@ -36,9 +36,7 @@ XML 或者任何其他格式。
 
 第一步是搭建一个项目。可以按照[快速入门](/quickstart/index.html)指南操作，或者使用以下表单创建：
 
-[**打开预先配置好的生成器表单**](javascript:$('#start_ktor_io_form').toggle())
-
-<iframe src="{{ site.ktor_init_tools_url }}#dependency=auth&dependency=auth-jwt&dependency=ktor-jackson&dependency=cors&artifact-group=com.example&artifact-name=api-example" id="start_ktor_io_form" style="border:1px solid #343a40;width:100%;height:500px;display:none;"></iframe>
+{% include preconfigured-form.html hash="dependency=auth&dependency=auth-jwt&dependency=ktor-jackson&dependency=cors&artifact-group=com.example&artifact-name=api-example" %}
 
 ## 简单路由
 
