@@ -81,9 +81,9 @@ IETF RFC 或者其他协议的逻辑，而不依赖外部 JVM 库。
 ## ktor 是否提供了捕获 ipc 信号（如 SIGTERM 或 SIGINT）的方法，以便可以优雅处理服务器关机？
 {: #sigterm }
 
-> 如果运行的是 `DevelopmentEngine`，那么会自动处理。
+> 如果运行的是 `DevelopmentEngine`/`EngineMain`，那么会自动处理。
 >
-> 否则必须[手动处理](https://github.com/ktorio/ktor/blob/80f8c7bf352ac8075b8922b7f1aa94d7dc2ffdce/ktor-server/ktor-server-cio/src/io/ktor/server/cio/DevelopmentEngine.kt#L12)。
+> 否则必须[手动处理](https://github.com/ktorio/ktor/blob/6c724f804bd6f25158d284d05c49235c67573019/ktor-server/ktor-server-cio/src/io/ktor/server/cio/EngineMain.kt#L18)。
 > 可以使用 JVM 的 `Runtime.getRuntime().addShutdownHook` 工具。
 
 ## 如何在代理服务器后获取客户端 IP？

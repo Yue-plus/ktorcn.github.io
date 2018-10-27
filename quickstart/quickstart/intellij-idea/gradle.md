@@ -174,7 +174,7 @@ ktor {
 
 apply plugin: 'application'
 
-mainClassName = 'io.ktor.server.netty.DevelopmentEngine'
+mainClassName = 'io.ktor.server.netty.EngineMain'
 ```
 {% endcapture %}
 
@@ -188,7 +188,7 @@ plugins {
 }
 
 application {
-    mainClassName = "io.ktor.server.netty.DevelopmentEngine"
+    mainClassName = "io.ktor.server.netty.EngineMain"
 }
 ```
 {% endcapture %}
@@ -196,6 +196,6 @@ application {
 {% include gradle.html gradle-kotlin=gradle-kotlin-build gradle-groovy=gradle-groovy-build %}
 
 然后转到 `Run -> Edit Configurations` 选择 `blog.BlogAppKt` 配置并将其 Main class 修改为：
-`io.ktor.server.netty.DevelopmentEngine`
+`io.ktor.server.netty.EngineMain`
 
 现在，当我们运行新的配置时，应用程序会再次启动。
