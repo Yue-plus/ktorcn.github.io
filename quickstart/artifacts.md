@@ -33,7 +33,7 @@ Ktor 分为以下几组模块：
   * `ktor-freemarker` 将 Ktor 与 [Freemarker 模板](/servers/features/templates/freemarker.html)集成
   * `ktor-velocity` 将 Ktor 与 [Velocity 模板](/servers/features/templates/velocity.html)集成
   * `ktor-gson` 与 [Gson](/servers/features/content-negotiation/gson.html) 集成并添加 JSON 内容协商
-  * `ktor-jackson` 与 [Jackson](/servers/features/content-negotiation/gson.html) 集成并添加 JSON 内容协商
+  * `ktor-jackson` 与 [Jackson](/servers/features/content-negotiation/jackson.html) 集成并添加 JSON 内容协商
   * `ktor-html-builder` 将 Ktor 与 [kotlinx.html 构建器](/servers/features/templates/html-dsl.html)集成
   * `ktor-locations` 包含对[类型化 location](/servers/features/locations.html) 的实验性的支持
   * `ktor-metrics` 添加了为服务器添加一些[指标](/servers/features/metrics.html)的能力
