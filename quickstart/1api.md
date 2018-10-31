@@ -1,5 +1,5 @@
 ---
-title: API Docs
+title: API 文档
 caption: API 文档
 category: quickstart
 permalink: /quickstart/api.html
