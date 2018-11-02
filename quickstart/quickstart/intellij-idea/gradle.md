@@ -174,8 +174,8 @@ ktor {
 
 apply plugin: 'application'
 
-//mainClassName = 'io.ktor.server.netty.DevelopmentEngine' // For versions < 1.0.0-beta-3
-mainClassName = 'io.ktor.server.netty.EngineMain' // Starting with 1.0.0-beta-3
+//mainClassName = 'io.ktor.server.netty.DevelopmentEngine' // 对于版本 < 1.0.0-beta-3
+mainClassName = 'io.ktor.server.netty.EngineMain' // 1.0.0-beta-3 起
 ```
 {% endcapture %}
 
@@ -185,7 +185,7 @@ mainClassName = 'io.ktor.server.netty.EngineMain' // Starting with 1.0.0-beta-3
 
 plugins {
     application
-    // ...
+    // ……
 }
 
 application {
