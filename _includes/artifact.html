@@ -11,8 +11,8 @@
 
 {% capture _ignored %}{% increment autoid %}{% endcapture %}
 
-<div class="note artifact artifact-small" id="artifact-info-{{ autoid }}">
-    <div id="artifact-{{ autoid }}">
+<div class="note artifact artifact-small exclude-anchor" id="artifact-info-{{ autoid }}">
+    <div class="note-inner" id="artifact-{{ autoid }}">
         {% if include.kind %}
         本{{ include.kind }}在<!--
         {% else %}
@@ -72,7 +72,7 @@
 <div id="artifact-gradle-kotlin-{{ autoid }}" class="tab-pane fade in">
     {% if include.test %}
     <div><code style="white-space: pre;font-size: 0.9em">dependencies {
-    testCompile("{{ include.test }}")
+    testCompile("{{ include.artifact }}")
 }
 </code></div>
     {% else %}
