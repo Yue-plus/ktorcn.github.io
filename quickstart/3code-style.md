@@ -1,25 +1,25 @@
 ---
-title: Code Style
-caption: Code Style
+title: 编码风格
+caption: 编码风格
 category: quickstart
 permalink: /quickstart/code-style.html
 toc: false
 ---
 
-### Official Code Convention
+### 官方编码规范
 
-Ktor as well as other official Kotlin libraries use the [official Coding Conventions](https://kotlinlang.org/docs/reference/coding-conventions.html).
+Ktor 以及其他官方 Kotlin 库都使用[官方编码规范](https://www.kotlincn.net/docs/reference/coding-conventions.html)。
 
-You can use the official coding standard by adding `kotlin.code.style=official` to your `gradle.properties` file.
+可以通过在 `gradle.properties` 文件中添加 `kotlin.code.style=official` 来使用官方编码标准。
 
-### With Star Imports
+### 使用星导入
 
-The Official Coding Conventions dont't define what's the recommended way of using imports.
-The IntelliJ default is to include star (`*`) imports after importing at least 5 symbols from a package. But in Ktor we use and recommend using star imports always.
+官方编码规范并没有定义使用导入的推荐方式。
+IntelliJ 默认在从一个包中导入至少 5 个符号后使用星（`*`）导入。但是在 Ktor 中，我们总是使用并且建议使用星导入。
 
-The rationale behind it is that usually when you include a class, you will probably want to include all the extension methods and properties declared for that class.
-That's specially convenient for operator extension methods.
+其背后的逻辑依据是，通常当你包含一个类时，你可能想要包含为该类声明的全部扩展方法与扩展属性。
+这对操作符扩展方法尤其方便。
 
-And then you can change the import configuration in `Preferences... -> Editor -> Code Style -> Kotlin -> Imports`:
+于是可以在 `Preferences... -> Editor -> Code Style -> Kotlin -> Imports` 中更改导入配置：
 
 ![](/quickstart/code-style/code-style-imports.png)
