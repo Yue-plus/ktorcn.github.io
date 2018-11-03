@@ -1,8 +1,8 @@
 ---
-title: WebSockets
+title: WebSocket
 category: clients
 permalink: /clients/websockets.html
-caption: WebSockets  
+caption: WebSocket
 feature:
     artifact: io.ktor:ktor-client-websocket:$ktor_version,io.ktor:ktor-client-cio:$ktor_version
     class: io.ktor.client.features.websocket.WebSockets
@@ -10,20 +10,20 @@ feature:
 
 {% include feature.html %}
 
-Ktor provides a WebSocket client only supporting the CIO engine in addition to supporting [WebSockets at server side](/servers/features/websockets.html). 
+除了支持[服务器端 WebSocket](/servers/features/websockets.html) 之外，Ktor 还提供仅支持 CIO 引擎的 WebSocket 客户端。
 
-Once connected, client and server WebSockets share the same [WebSocketSession](/servers/features/websockets.html#WebSocketSession)
-interface for communication.
+一旦连接后，客户端与服务器的 WebSocket 就共享相同的 [WebSocketSession](/servers/features/websockets.html#WebSocketSession)
+接口进行通信。
 
-Right now, client WebSockets are only available for the CIO Client Engine.
+目前，客户端 WebSocket 仅适用于 CIO 客户端引擎。
 
-The basic usage to create a http client supporting WebSockets is pretty simple:
+创建支持 WebSocket 的 http 客户端的基本用法非常简单：
 
 ```kotlin
 val client = HttpClient(CIO).config { install(WebSockets) }
 ```
 
-Once created we can perform a request, starting a `WebSocketSession`:
+一旦创建后就可以执行请求，启动一个 `WebSocketSession`：
 
 ```kotlin
 client.ws(method = HttpMethod.Get, host = "127.0.0.1", port = 8080, path = "/route/path/to/ws") { // this: WebSocketSession
@@ -35,11 +35,11 @@ client.ws(method = HttpMethod.Get, host = "127.0.0.1", port = 8080, path = "/rou
 }
 ```
 
-You can configure timeout and ping periods by casting to `DefaultWebSocketSession` (next version won't require this):
+可以通过类型转换为 `DefaultWebSocketSession`（下一版将无需如此）来配置超时与 ping 周期：
 
 ```kotlin
-client.ws(...) { // this: WebSocketSession
+client.ws(……) { // this: WebSocketSession
     (this as DefaultWebSocketSession).timeout = Duration.ofMinutes(10)
-    (this as DefaultWebSocketSession).pingInterval = Duration.ofMinutes(10) // null to disable it
+    (this as DefaultWebSocketSession).pingInterval = Duration.ofMinutes(10) // null 则表示禁用
 }
 ```
