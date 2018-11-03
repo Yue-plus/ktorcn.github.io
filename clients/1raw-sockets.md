@@ -1,14 +1,14 @@
 ---
-title: Sockets
+title: 套接字
 category: clients
 permalink: /clients/raw-sockets.html
-caption: Raw Sockets  
+caption: 原始套接字
 ---
 
-Ktor support Client Raw Sockets that allows you to connect, for example,
-to a telnet server, or to write custom CIO (Coroutine I/O) clients to
-connect to databases or your own servers using binary or text protocols.
+Ktor 支持客户端原始套接字，让你能够连接到例如<!--
+-->telnet 服务器，或者编写自定义的 CIO（协程 I/O）客户端，
+以便使用二进制或文本协议连接到数据库或者你自己的服务器。
 
-Since raw sockets, apply to both: clients and servers, 
-the documentation is unified in the **[Raw Sockets](/servers/raw-sockets.html)** page
-in the server section.
+由于原始套接字既适用于客户端也适用于服务器，
+因此其文档统一在服务器章节的**[原始套接字](/servers/raw-sockets.html)**<!--
+-->页中。
