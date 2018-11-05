@@ -1,10 +1,10 @@
 ---
-title: Open Source
+title: 开源
 category: samples
 permalink: /samples/open-source.html
-caption: Explore Open Source Projects  
+caption: 浏览开源项目
 ---
 
 * [Javanese.Online](https://github.com/JavaneseOnline/JavaneseBackend)
-* Contribute your project!
+* 贡献你的开源项目！
 
