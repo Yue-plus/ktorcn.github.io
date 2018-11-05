@@ -26,7 +26,7 @@ val client = HttpClient(CIO).config { install(WebSockets) }
 一旦创建后就可以执行请求，启动一个 `WebSocketSession`：
 
 ```kotlin
-client.ws(method = HttpMethod.Get, host = "127.0.0.1", port = 8080, path = "/route/path/to/ws") { // this: WebSocketSession
+client.ws(method = HttpMethod.Get, host = "127.0.0.1", port = 8080, path = "/route/path/to/ws") { // this: DefaultClientWebSocketSession
     send(Frame.Text("Hello World"))
 
     for (message in incoming.map { it as? Frame.Text }.filterNotNull()) {
@@ -35,11 +35,11 @@ client.ws(method = HttpMethod.Get, host = "127.0.0.1", port = 8080, path = "/rou
 }
 ```
 
-可以通过类型转换为 `DefaultWebSocketSession`（下一版将无需如此）来配置超时与 ping 周期：
+可以配置超时与 ping 周期：
 
 ```kotlin
-client.ws(……) { // this: WebSocketSession
-    (this as DefaultWebSocketSession).timeout = Duration.ofMinutes(10)
-    (this as DefaultWebSocketSession).pingInterval = Duration.ofMinutes(10) // null 则表示禁用
+client.ws(……) { // this: DefaultClientWebSocketSession
+    timeout = Duration.ofMinutes(10)
+    pingInterval = Duration.ofMinutes(10) // null 则表示禁用
 }
 ```

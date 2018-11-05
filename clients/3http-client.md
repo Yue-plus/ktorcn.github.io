@@ -44,6 +44,8 @@ suspend fun sequentialRequests() {
     
     // 完成上一个请求后，获取另一个 URL 的内容。
     val bytes2 = client.call("https://127.0.0.1:8080/b").response.readBytes() // 挂起点。
+
+    client.close()
 }
 ```
 
@@ -61,6 +63,8 @@ suspend fun parallelRequests() {
     // 请求都完成。
     val bytes1 = req1.await() // 挂起点。
     val bytes2 = req2.await() // 挂起点。
+
+    client.close()
 }
 ```
 
