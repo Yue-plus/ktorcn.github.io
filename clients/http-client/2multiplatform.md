@@ -5,7 +5,7 @@ permalink: /clients/http-client/multiplatform.html
 caption: Multiplatform Http Client 
 ---
 
-The HTTP Client supports several platforms, using the experimental [multiplatform support](https://kotlinlang.org/docs/reference/multiplatform.html)
+The HTTP Client supports several platforms, using the experimental [multiplatform support](https://www.kotlincn.net/docs/reference/multiplatform.html)
 that was introduced in [Kotlin 1.2](https://blog.jetbrains.com/kotlin/2017/11/kotlin-1-2-released/).
 
 Right now, the supported platforms are JVM, Android and iOS, but in future versions, there will be more supported.
@@ -44,7 +44,7 @@ and then open or build the XCode project.
 
 ## Common
 
-For [multiplatform projects](https://kotlinlang.org/docs/reference/multiplatform.html) that for example
+For [multiplatform projects](https://www.kotlincn.net/docs/reference/multiplatform.html) that for example
 share code between Android and iOS, we can create a common module.
 That common module can only access APIs that are available on all the targets.
 Ktor HTTP Client exposes a common module that can be used for such projects:

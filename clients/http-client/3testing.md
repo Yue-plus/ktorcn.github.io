@@ -13,7 +13,7 @@ and generates a response.
 
 ## Usage
 
-The usage is very simple: the MockEngine class has a [`operator invoke`](https://kotlinlang.org/docs/reference/operator-overloading.html#invoke) method,
+The usage is very simple: the MockEngine class has a [`operator invoke`](https://www.kotlincn.net/docs/reference/operator-overloading.html#invoke) method,
 that receives a block/callback that will handle the request. This callback receives an `HttpRequest` as this, a `HttpClientCall` as a parameter,
 and must return a `MockHttpResponse`. The MockHttpResponse, includes the HTTP Status Code, a ByteReadChannel with the body, and a set of headers.
 

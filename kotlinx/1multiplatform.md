@@ -21,4 +21,4 @@ but will have specific implementations per platform.
 * `actual` is available for non-common projects (JVM, JS and Native) and must match the expect structure in each platform
 that will be supported.
 
-**Reference: <https://kotlinlang.org/docs/reference/multiplatform.html>**
+**Reference: <https://www.kotlincn.net/docs/reference/multiplatform.html>**
