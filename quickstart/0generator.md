@@ -11,7 +11,7 @@ ktor_version_review: 1.0.0
 
 <!--<https://ktor.io/start>-->
 
-**注：除了在线生成，还可以使用 [Ktor IntelliJ 插件](/quickstart/quickstart/intellij-idea/plugin.html)。** This page can also be accessed at [start.ktor.io](https://start.ktor.io/).
+**注：除了在线生成，还可以使用 [Ktor IntelliJ 插件](/quickstart/quickstart/intellij-idea/plugin.html)。** 也可以在 [start.ktor.io](https://start.ktor.io/) 访问这个页面。
 
 <div id="generator_id"></div>
 
