@@ -4,6 +4,7 @@ caption: Basic and Form authentication
 category: servers
 redirect_from:
 - /features/authentication/basic.html
+ktor_version_review: 1.0.0
 ---
 
 Ktor supports two methods of authentication with the user and raw password as credentials:
@@ -30,7 +31,7 @@ or null for invalid credentials. That callback is marked as *suspending*, so tha
 
 You can use several strategies for validating:
 
-### Strategy: Manual credential validation
+## Strategy: Manual credential validation
 
 Since there is a validate callback for authentication, you can just put your code there.
 So you can do things like checking the password against a constant, authenticating using a database
@@ -52,7 +53,7 @@ Remember to escape and/or validate them when accessing with those values to the 
 when storing them, or generating HTML with its content, etc.
 {: .security.note }
 
-### Strategy: Validating using UserHashedTableAuth
+## Strategy: Validating using UserHashedTableAuth
 
 There is a class that handles hashed passwords in-memory to authenticate `UserPasswordCredential`.
 You can populate it from constants in code or from another source. You can use predefined digest functions

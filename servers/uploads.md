@@ -4,16 +4,12 @@ caption: Handling HTTP Uploads
 category: servers
 keywords: multipart receiving reading files
 permalink: /servers/uploads.html
-priority: 1200
 ---
 
 Ktor supports handling HTTP Uploads. As well as [receiving any other kind of content](/servers/calls/requests.html).
 
 You can check out the [Youkube example](/samples/youkube.html) for a full example of it in action.
 {: .note.example }
-
-There is a [known bug](https://github.com/ktorio/ktor/issues/364) preventing this feature from working in 0.9.1. It is already fixed in master and 0.9.2.
-{: .note.bug }
 
 ## Receiving files using multipart
 

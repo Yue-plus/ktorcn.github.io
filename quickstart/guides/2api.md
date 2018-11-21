@@ -2,6 +2,8 @@
 title: HTTP API
 caption: 指南：如何使用 ktor 创建 API
 category: quickstart
+permalink: /quickstart/guides/api.html
+ktor_version_review: 1.0.0
 ---
 
 {::options toc_levels="1..2" /}
@@ -40,12 +42,12 @@ XML 或者任何其他格式。
 
 ## 简单路由
 
-首先，我们要使用路由特性。 这个特性是 Ktor 核心的一部分，因此不需要<!--
+首先，我们要使用[路由特性](/servers/features/routing.html)。 这个特性是 Ktor 核心的一部分，因此不需要<!--
 -->包含任何其他构件。
 
-这一特性在使用 `routing { }` 块时自动安装。
+这一特性在使用 `routing { }` DSL 块时自动安装。
 
-让我们开始创建一个响应为“OK”的简单 GET 路由：
+Let's start creating a simple GET route that responds with `OK` by using the `get` method available inside the `routing` block:
 
 ```kotlin
 fun Application.module() {
@@ -59,7 +61,7 @@ fun Application.module() {
 
 ## 提供 JSON 内容服务
 
-HTTP API 通常以 JSON 响应。可以使用以 *Jackson* 进行*内容协商*这一特性来实现：
+HTTP API 通常以 JSON 响应。可以使用以 [Jackson](/servers/features/content-negotiation/jackson.html) 进行[内容协商](/servers/features/content-negotiation.html)这一特性来实现：
 
 ```kotlin
 fun Application.module() {
@@ -73,7 +75,7 @@ fun Application.module() {
 }
 ```
 
-为了以 JSON 响应调用，必须调用 `call.respond` 方法并传入任意对象。
+为了以 JSON 响应请求，必须调用 `call.respond` 方法并传入任意对象。
 
 ```kotlin
 routing {
@@ -83,10 +85,10 @@ routing {
 }
 ```
 
-现在浏览器应该以 `{"OK":true}` 来响应 `http://127.0.0.1:8080/snippets`
+现在浏览器或客户端应该以 `{"OK":true}` 来响应 `http://127.0.0.1:8080/snippets`
 
 如果出现类似 `Response pipeline couldn't transform '...' to the OutgoingContent` 的错误，请检查是否已经<!--
--->安装了采用 Jackson 的内容协商特性。
+-->安装了采用 Jackson 的[内容协商](/servers/features/content-negotiation.html)特性。
 {: .note}
 
 也可以使用类型化的对象作为回复的一部分（但要确保该类不是在<!--
@@ -336,7 +338,7 @@ routing {
 }
 ```
 
-有了这些，我们就可以尝试获取用户的 JWT 令牌：
+现在我们就可以尝试获取用户的 JWT 令牌：
 
 {% comment %}
 ### IntelliJ
@@ -492,7 +494,7 @@ curl -v \
 
 ## 状态页
 
-现在我们来细化一下。HTTP API 应该使用 Http 状态码来提供错误相关的语义信息。
+现在我们来细化一下。HTTP API 应该使用 HTTP 状态码来提供错误相关的语义信息。
 现在，当异常抛出时（例如当试图用已存在的用户获取 JWT 令牌，
 但密码错误时），会返回 500 服务器错误。 我们可以做的更好，并且状态页特性<!--
 -->会允许通过捕获指定的异常并生成结果来实现这个功能。
@@ -531,36 +533,6 @@ routing {
 
 我们来试试这个：
 
-{% comment %}
-
-<table class="compare-table"><thead><tr><th>Bash:</th><th>Response:</th></tr></thead><tbody><tr><td markdown="1">
-
-```bash
-curl -v \
-  --request POST \
-  --header "Content-Type: application/json" \
-  --data '{"user" : "test", "password" : "invalid-password"}' \
-  http://127.0.0.1:8080/login-register
-```
-
-</td><td markdown="1">
-
-```bash
-< HTTP/1.1 401 Unauthorized
-< Content-Length: 53
-< Content-Type: application/json; charset=UTF-8
-```
-```json
-{
-  "OK" : false,
-  "error" : "Invalid credentials"
-}
-```
-
-</td></tr></tbody></table>
-
-{% endcomment %}
-
 ![](/quickstart/guides/api/IU-bad-credentials/bad-credentials-request.png)
 
 ![](/quickstart/guides/api/IU-bad-credentials/bad-credentials-response.png)
@@ -594,8 +566,8 @@ fun Application.module() {
 
 ## 完整代码
 
-### `application.kt`
 
+{% capture application-kt %}
 ```kotlin
 package com.example
 
@@ -698,10 +670,11 @@ class InvalidCredentialsException(message: String) : RuntimeException(message)
 
 class LoginRegister(val user: String, val password: String)
 ```
-{: .compact}
+{% endcapture %}
 
-### `my-api.http`
 
+
+{% capture my-api-http %}
 ```
 {% raw %}
 # 获取所有片段
@@ -740,10 +713,9 @@ Content-Type: application/json
 ###
 {% endraw %}
 ```
-{: .compact}
+{% endcapture %}
 
-### `http-client.env.json`
-
+{% capture http-client-env-json %}
 ```json
 {
   "localhost": {
@@ -754,7 +726,13 @@ Content-Type: application/json
   }
 }
 ```
-{: .compact}
+{% endcapture %}
+
+{% include tabbed-code.html
+    tab1-title="application.kt" tab1-content=application-kt
+    tab2-title="my-api.http" tab2-content=my-api-http
+    tab3-title="http-client.env.json" tab3-content=http-client-env-json
+%}
 
 ## 练习
 
@@ -762,7 +740,7 @@ Content-Type: application/json
 
 ### 练习一
 
-为每个片段添加唯一 id，并为 /snippets 添加一个 DELETE http 动词，以允许通过身份认证的用户删除<!--
+为每个片段添加唯一 id，并为 `/snippets` 添加一个 DELETE http 动词，以允许通过身份认证的用户删除<!--
 -->自己的片段。
 
 ### 练习二

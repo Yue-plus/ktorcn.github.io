@@ -6,11 +6,12 @@ permalink: /quickstart/generator.html
 skip_pdf: true
 redirect_from:
   - /quickstart/quickstart/generator.html
+ktor_version_review: 1.0.0
 ---
 
 <!--<https://ktor.io/start>-->
 
-**注：除了在线生成，还可以使用 [Ktor IntelliJ 插件](/quickstart/quickstart/intellij-idea/plugin.html)。**
+**注：除了在线生成，还可以使用 [Ktor IntelliJ 插件](/quickstart/quickstart/intellij-idea/plugin.html)。** This page can also be accessed at [start.ktor.io](https://start.ktor.io/).
 
 <div id="generator_id"></div>
 

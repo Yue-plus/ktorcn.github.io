@@ -31,8 +31,7 @@ For native, it uses the predefined one.
 ## Configuring engines
 {: #configuring}
 
-Ktor HttpClient lets you configure the parameters of each engine by calling `Engine.config { }`, but since 0.9.4,
-the preferred way is to use `HttpClient(MyHttpEngine) { engine { ... } }` instead.
+Ktor HttpClient lets you configure the parameters of each engine by calling `HttpClient(MyHttpEngine) { engine { ... } }`.
 
 Every engine config has two common properties that can be set:
 
@@ -140,7 +139,7 @@ val client = HttpClient(Jetty) {
 ### OkHttp
 {: #okhttp }
 
-Since Ktor 0.9.4, there is a engine based on OkHttp.
+There is a engine based on OkHttp:
 
 ```kotlin
 val client = HttpClient(OkHttp) {
@@ -191,6 +190,19 @@ val client = HttpClient(Ios) {
 ```
 
 {% include artifact.html kind="engine" class="io.ktor.client.engine.ios.Ios" artifact="io.ktor:ktor-client-ios:$ktor_version" %}
+
+## Js (JavaScript)
+
+The `Js` engine, uses the [`fetch`](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) API internally. And have no additional configuration.
+
+```kotlin
+val client = HttpClient(Js) {
+}
+```
+
+You can also call the `JsClient()` function to get the `Js` engine singleton.
+
+{% include artifact.html kind="engine" class="io.ktor.client.engine.js.Js" artifact="io.ktor:ktor-client-js:$ktor_version" %}
 
 ## Testing
 {: #testing }

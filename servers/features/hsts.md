@@ -9,6 +9,7 @@ feature:
   class: io.ktor.features.HSTS
 redirect_from:
 - /features/hsts.html
+ktor_version_review: 1.0.0
 ---
 
 This feature will add the required _HTTP Strict Transport Security_ headers to the request according to the [RFC 6797](https://tools.ietf.org/html/rfc6797).
@@ -22,19 +23,19 @@ for the given period of time.
 
 {% include feature.html %}
 
-### Usage
+## Usage
 
 ```kotlin
 fun Application.main() {
-  ...
+  // ...
   install(HSTS) 
-  ...
+  // ...
 }
 ```
 
 The code above installs HSTS with the default configuration.  
 
-### Configuration
+## Configuration
 
 * `maxAge` (default is 1 year): duration to tell the client to keep the host in a list of known HSTS hosts
 * `includeSubDomains` (default is true): adds includeSubDomains directive, which applies this policy to this domain and any subdomains

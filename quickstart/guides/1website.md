@@ -2,6 +2,8 @@
 title: 网站
 caption: 指南：如何使用 ktor 创建普通网站
 category: quickstart
+permalink: /quickstart/guides/website.html
+ktor_version_review: 1.0.0
 ---
 
 {::options toc_levels="1..2" /}

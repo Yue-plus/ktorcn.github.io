@@ -6,13 +6,12 @@ permalink: /servers/features/call-id.html
 feature:
   artifact: io.ktor:ktor-server-core:$ktor_version
   class: io.ktor.features.CallId
+ktor_version_review: 1.0.0
 ---
 
 The CallId feature allows to identify a request/call and can work along the [CallLogging](/servers/features/call-logging.html) feature.
 
-It has been introduced in Ktor 0.9.5.
-
-### Generating Call IDs 
+## Generating Call IDs 
 
 ```kotlin
 install(CallId) {
@@ -46,7 +45,7 @@ install(CallId) {
 }
 ```
 
-### Extending [CallLogging](/servers/features/call-logging.html)
+## Extending [CallLogging](/servers/features/call-logging.html)
 {: #call-logging-interop }
 
 The CallId feature includes a `callIdMdc` extension method to be used when configuring the CallLogging.

@@ -5,13 +5,13 @@ permalink: /clients/http-client/testing.html
 caption: Testing Http Client (MockEngine) 
 ---
 
-Since Ktor 0.9.3, we expose a `MockEngine` for the HttpClient. This engine allows to simulate HTTP calls without
+Ktor exposes a `MockEngine` for the HttpClient. This engine allows to simulate HTTP calls without
 actually connecting to the endpoint. It allows to set a code block, that can handle the request,
 and generates a response.
 
 {% include artifact.html kind="engine" class="io.ktor.client.engine.mock.MockEngine" artifact="io.ktor:ktor-client-mock:$ktor_version" test="true" %}
 
-### Usage
+## Usage
 
 The usage is very simple: the MockEngine class has a [`operator invoke`](https://kotlinlang.org/docs/reference/operator-overloading.html#invoke) method,
 that receives a block/callback that will handle the request. This callback receives an `HttpRequest` as this, a `HttpClientCall` as a parameter,

@@ -3,7 +3,6 @@ title: Sockets
 caption: Raw Sockets  
 category: servers
 permalink: /servers/raw-sockets.html
-priority: 700
 ---
 
 In addition to HTTP handling for the [server](/servers/application.html) and the [client](/clients/http-client.html), Ktor supports client and server, TCP and UDP raw sockets.
@@ -74,8 +73,9 @@ If you want to support multiple clients at once, remember to call `launch { }` t
 the function that is accepting the sockets from suspending.
 {: .note}
 
-*Simple Echo Server*:
+### Simple Echo Server:
 
+{% capture echo-server-kt %}
 ```kotlin
 fun main(args: Array<String>) {
     runBlocking {
@@ -107,7 +107,11 @@ fun main(args: Array<String>) {
     }
 }
 ```
-{: .compact}
+{% endcapture %}
+
+{% include tabbed-code.html
+    tab1-title="echo-server.kt" tab1-content=echo-server-kt
+%}
 
 Then you can connect to it using *telnet* and start typing:
 
@@ -140,8 +144,9 @@ a `Socket`:
 val socket = aSocket(selector).tcp().connect(InetSocketAddress("127.0.0.1", 2323))
 ```
 
-*Simple Client Connecting to an Echo Server:*
+### Simple Client Connecting to an Echo Server:
 
+{% capture echo-client-kt %}
 ```kotlin
 fun main(args: Array<String>) {
     runBlocking {
@@ -155,6 +160,12 @@ fun main(args: Array<String>) {
     }
 }
 ```
+{% endcapture %}
+
+{% include tabbed-code.html
+    tab1-title="echo-client.kt" tab1-content=echo-client-kt
+    no-height="true"
+%}
 
 ## Secure Sockets (SSL/TLS)
 {: #secure }

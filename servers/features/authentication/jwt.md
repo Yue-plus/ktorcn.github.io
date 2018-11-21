@@ -8,6 +8,7 @@ feature:
   method: io.ktor.auth.jwt.jwt
 redirect_from:
 - /features/authentication/jwt.html
+ktor_version_review: 1.0.0
 ---
 
 Ktor supports [JWT (JSON Web Tokens)](https://jwt.io/), which is a mechanism for authenticating JSON-encoded payloads.
@@ -25,17 +26,17 @@ class JWTCredential(val payload: Payload) : Credential
 class JWTPrincipal(val payload: Payload) : Principal
 ```
 
-*Configuring server/routes:*
+## Configuring server/routes:
 
 JWT and JWK each have their own method with slightly different parameters. 
 Both require the `realm` parameter, which is used in the WWW-Authenticate response header.
 
-Using a verifier and a validator:
+## Using a verifier and a validator:
 
 The verifier will use the secret to verify the signature to trust the source.
 You can also check the payload within `validate` callback to ensure everything is right and to produce a Principal.
 
-application.conf:
+### application.conf:
 
 ```kotlin
 jwt {
@@ -45,7 +46,7 @@ jwt {
 }
 ```
 
-JWT auth:
+### JWT auth:
 
 ```kotlin
 val jwtIssuer = environment.config.property("jwt.domain").getString()
@@ -63,7 +64,7 @@ install(Authentication) {
 }
 ```
 
-Using a JWK provider:
+## Using a JWK provider:
 
 ```kotlin
 fun AuthenticationPipeline.jwtAuthentication(jwkProvider: JwkProvider, issuer: String, realm: String, validate: (JWTCredential) -> Principal?)

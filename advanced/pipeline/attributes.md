@@ -3,6 +3,7 @@ title: Attributes
 category: advanced
 caption: Passing information among interceptors
 keywords: attributes Passing information among interceptors dependency injector instance container
+ktor_version_review: 1.0.0
 ---
 
 Ktor offers an `Attributes` class that acts as a small typed instance container/dependency injector.
@@ -15,7 +16,7 @@ You can set as many attributes as required per call on an interceptor and retrie
 In the case of the client, the `HttpRequest` also contains an `attributes` property.
 So from a `HttpClientCall` instance, you can access the attributes with `call.request.attributes`.
 
-### Basic usage
+## Basic usage
 
 It is possible to define your own typed attributes by creating instances of the `AttributeKey` class like this:
 
@@ -36,7 +37,7 @@ And retrieve them in another interceptor by calling:
 attributes.get(MyAttributeKey)
 ```
 
-### API reference
+## API reference
 
 The full interface for this class looks like:
 

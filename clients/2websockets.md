@@ -6,6 +6,7 @@ caption: WebSocket
 feature:
     artifact: io.ktor:ktor-client-websocket:$ktor_version,io.ktor:ktor-client-cio:$ktor_version
     class: io.ktor.client.features.websocket.WebSockets
+ktor_version_review: 1.0.0
 ---
 
 {% include feature.html %}
@@ -15,9 +16,9 @@ feature:
 一旦连接后，客户端与服务器的 WebSocket 就共享相同的 [WebSocketSession](/servers/features/websockets.html#WebSocketSession)
 接口进行通信。
 
-目前，客户端 WebSocket 仅适用于 CIO 客户端引擎。
+目前，客户端 WebSocket 仅适用于 [CIO 客户端引擎](/clients/http-client/engines.html#cio)。
 
-创建支持 WebSocket 的 http 客户端的基本用法非常简单：
+创建支持 WebSocket 的 HTTP 客户端的基本用法非常简单：
 
 ```kotlin
 val client = HttpClient(CIO).config { install(WebSockets) }
@@ -43,3 +44,5 @@ client.ws(……) { // this: DefaultClientWebSocketSession
     pingInterval = Duration.ofMinutes(10) // null 则表示禁用
 }
 ```
+
+For more information about the WebSocketSession, check the [WebSocketSession page](/servers/features/websockets.html#WebSocketSession).

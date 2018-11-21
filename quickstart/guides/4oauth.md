@@ -2,12 +2,16 @@
 title: Google OAuth
 caption: 指南：如何通过 Google 实现 OAuth 登录
 category: quickstart
+permalink: /quickstart/guides/oauth.html
+ktor_version_review: 1.0.0
 ---
 
 {::options toc_levels="1..2" /}
 
-在本指南中，我们会使用 OAuth 实现登录。你应该已经有一些 Ktor 的概念了。
-例如，可以制作[网站](/quickstart/guides/website.html)
+在本指南中，我们会使用 OAuth 实现登录。
+
+This is an advanced tutorial and it assumes you have some basic knowledge about Ktor,
+so you should follow the [guide about making a Website](/quickstart/guides/website.html) first.
 
 **目录：**
 
@@ -39,7 +43,7 @@ Google 的 OAuth 要求重定向 URL 不能是 IP 地址或者 localhost。
 
 ### MacOS/Linux
 
-在 MacOS 与 Linux 计算机中，可以在 `/etc/hosts` 处找到主机名文件。会需要 root 权限才能对其编辑。
+在 MacOS 与 Linux（Unix）计算机中，可以在 `/etc/hosts` 处找到主机名文件。会需要 root 权限才能对其编辑。
 
 ```sudo nano /etc/hosts```
 或者
@@ -47,11 +51,11 @@ Google 的 OAuth 要求重定向 URL 不能是 IP 地址或者 localhost。
 
 ### Windows
 
-在 Windows 中，主机名文件保存在这里 `%SystemRoot%\System32\drivers\etc\hosts`。需要管理员权限<!--
+在 Windows 中，主机名文件保存在 `%SystemRoot%\System32\drivers\etc\hosts`。需要管理员权限<!--
 -->才能编辑这个文件。例如，可以使用以管理员身份打开的 [wxMEdit](https://wxmedit.github.io/zh_CN/) 来编辑。
 
 还可以在 Windows 资源管理器中粘贴 `%SystemRoot%\System32\drivers\etc` 路径，然后右击
-hosts 文件来编辑它。其结构与 MacOS/Linux 相同。
+hosts 文件来编辑它。这个文件的结构与 MacOS/Linux 相同。
 
 ## Google 开发者控制台
 
@@ -77,8 +81,8 @@ hosts 文件来编辑它。其结构与 MacOS/Linux 相同。
 ![](/quickstart/guides/oauth/8.png){:.rounded-shadow}
 
 现在，我们可以使用以下信息创建 OAuth 凭据：
-* **Authorized JavaScript origins:** http://me.mydomain.com:8080
-* **Authorized redirect URIs:** http://me.mydomain.com:8080/login
+* **Authorized JavaScript origins:** `http://me.mydomain.com:8080`
+* **Authorized redirect URIs:** `http://me.mydomain.com:8080/login`
 
 点击 `Create` 按钮。
 
@@ -88,9 +92,9 @@ hosts 文件来编辑它。其结构与 MacOS/Linux 相同。
 
 会看到一个模式对话框，其中包含以下内容：
 
-OAuth client
-* Here is your client ID: xxxxxxxxxxx.apps.googleusercontent.com
-* Here is your client secret: yyyyyyyyyyy
+**OAuth client**
+* `Here is your client ID: xxxxxxxxxxx.apps.googleusercontent.com`
+* `Here is your client secret: yyyyyyyyyyy`
 
 ![](/quickstart/guides/oauth/10.png){:.rounded-shadow}
 
@@ -98,7 +102,7 @@ OAuth client
 
 首先，必须为 OAuth 提供商定义设置。必须用上一步获得的值替换 `clientId` 与 `clientSecret`
 。根据我们对用户的需求，可以将 `defaultScopes`
-列表调整为除了 `profile`（会访问 id、全名与图片，但不会访问电子邮件及其他任何内容）还有其他项：
+列表调整为其他范围。`profile` 范围会访问用户 id、全名与图片，但不会访问电子邮件及其他任何内容：
 
 ```kotlin
 val googleOauthProvider = OAuthServerSettings.OAuth2ServerSettings(
@@ -118,7 +122,7 @@ val googleOauthProvider = OAuthServerSettings.OAuth2ServerSettings(
 
 我们还必须安装 OAuth 特性并进行配置。需要提供一个 HTTP 客户端实例、一个提供商查找程序——
 由该调用确定提供商（不需要在这里输入逻辑，因为本指南只支持 Google）以及<!--
--->一个给出重定向 url 的 urlProvider，必须匹配在 Google 开发者控制台中指定为 authorized redirection 的 url——在本例中是 `http://me.mydomain.com:8080/login`：
+-->一个给出重定向 URL 的 `urlProvider`，必须匹配在 Google 开发者控制台中指定为 authorized redirection 的 url——在本例中是 `http://me.mydomain.com:8080/login`：
 
 ```kotlin
 install(Authentication) {
@@ -192,6 +196,7 @@ authenticate("google-oauth") {
 
 一个简单的嵌入式应用如下所示：
 
+{% capture oauth-kt %}
 ```kotlin
 val googleOauthProvider = OAuthServerSettings.OAuth2ServerSettings(
     name = "google",
@@ -260,6 +265,13 @@ private fun ApplicationCall.redirectUrl(path: String): String {
     return "$protocol://$hostPort$path"
 }
 ```
+{% endcapture %}
+
+{% include tabbed-code.html
+    tab1-title="OAuthApp.kt" tab1-content=oauth-kt
+%}
+
+&nbsp;
 
 ## 测试
 

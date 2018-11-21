@@ -3,9 +3,9 @@ title: FAQ
 caption: 常见问题
 category: quickstart
 permalink: /quickstart/faq.html
-priority: 100
 redirect_from:
   - /servers/faq.html
+ktor_version_review: 1.0.0
 ---
 
 在本节中，我们（官方）为大家经常问我们的问题提供答案。
@@ -24,7 +24,7 @@ redirect_from:
 
 > `kay-tor`
 
-## 如何提出问题/报告 bug/与你联系/做出贡献/提供反馈等？
+## 如何提出问题、报告 bug、与你联系、做出贡献、提供反馈等？
 {: #feedback }
 
 根据具体内容，可以考虑以下几个渠道：
@@ -58,13 +58,13 @@ redirect_from:
 
 如果你有一个需要立即使用的 bug 修复，我们建议你 fork Ktor、
 自行编译，然后在自己的 artifactory、bintray 或者类似的地方临时发布打补丁后的版本，
-直到它被合并并且随新版本或者预览版发布（因为时间安排可能不能满足你的需求）。
+直到它被合并并且随新版本发布（因为时间安排可能不能满足你的需求）。
 
 ## CIO 是什么意思？
 {: #cio }
 
 CIO 代表基于协程的 I/O（Coroutine-based I/O）。 通常我们称之为引擎，它使用 Kotlin 以及协程来实现
-IETF RFC 或者其他协议的逻辑，而不依赖外部 JVM 库。
+IETF RFC 或者其他协议的逻辑，而不依赖基于 JVM 的外部库。
 
 ## Ktor 导入不能解析。导入是红的。
 {: #ktor-artifact }
@@ -78,7 +78,7 @@ IETF RFC 或者其他协议的逻辑，而不依赖外部 JVM 库。
 > * 对于 gradle，请查阅：<https://ktor.kotlincn.net/quickstart/gradle.html#engine>
 > * 对于 maven，请查阅：<https://ktor.kotlincn.net/quickstart/maven.html>
 
-## ktor 是否提供了捕获 ipc 信号（如 SIGTERM 或 SIGINT）的方法，以便可以优雅处理服务器关机？
+## ktor 是否提供了捕获 IPC 信号（如 SIGTERM 或 SIGINT）的方法，以便可以优雅处理服务器关机？
 {: #sigterm }
 
 > 如果运行的是 `DevelopmentEngine`/`EngineMain`，那么会自动处理。
@@ -98,35 +98,29 @@ IETF RFC 或者其他协议的逻辑，而不依赖外部 JVM 库。
 > 如果试图使用 location 特性但没有实际安装它，就会出现这个错误。请查阅 location 特性：
 > <https://ktor.kotlincn.net/features/locations.html>
 
-## 客户端未发送 Accept 头时出现 406 错误。使用 WRK 在添加 JSON 支持后得到非 2xx 响应
-{: #missing-accept-issue }
-
-> 这是一个 Ktor <= 0.9.1 的[已知问题](https://github.com/ktorio/ktor/issues/38)，
-> 当客户端未发送 Accept 头时，内容协商假定不接受任何内容。
-> 自 0.9.2-alpha-1 起，如果未发送 Accept 头，ktor 假定接受所有内容。
-
 ## 如何测试 master 上的最新提交？
 {: #bleeding-edge }
 
 可以使用 jitpack 从 master 获取尚未发布的版本：
 <https://jitpack.io/#ktorio/ktor>
-也可以[从源代码构建 ktor](/advanced/building-from-source.html) 并使用 mavenLocal 仓库提供构件。
+也可以[从源代码构建 Ktor](/advanced/building-from-source.html) 并使用 `mavenLocal` 仓库提供构件，
+or to upload your artifacts to your own artifactory/bintray.
 
-## 如何确定我用的是哪个版本的 ktor？
+## 如何确定我用的是哪个版本的 Ktor？
 {: #ktor-version-used }
 
 可以使用 [`DefaultHeaders` 特性](/servers/features/default-headers.html)来发送一个<!--
--->包含 ktor 版本的 Server 头。
-所发送的响应头中包含类似这样的内容： `Server: ktor-server-core/0.9.2-alpha-3 ktor-server-core/0.9.2-alpha-3`
+-->包含 Ktor 版本的 Server 头。
+所发送的响应头中包含类似这样的内容： `Server: ktor-server-core/1.0.0 ktor-server-core/1.0.0`。
 
 ## 网站辅助技巧与窍门
 {: #website-tricks }
 
 > 可以在文档网站的任何页面中<!--
 > -->使用 <kbd>s</kbd> 键（搜索）、<kbd>t</kbd> 键（github 文件查找器风格）或者 <kbd>#</kbd> 键访问搜索。
-> <kbd>#</kbd> 版限制为只在当前页的各节中搜索。
+> <kbd>#</kbd> 版限制为只在当前页的各节标题中搜索。
 
-> 在搜索时，既可以使用鼠标或手指选择选项，也可以使用键盘的箭头 <kbd>↑</kbd> <kbd>↓</kbd>
+> 在搜索时，既可以使用鼠标（或者触屏上使用手指）选择选项，也可以使用键盘的箭头 <kbd>↑</kbd> <kbd>↓</kbd>
 > 与回车键 <kbd>⏎</kbd> 转到到当前所选页面。
 
 > 这项搜索只使用页面标题与关键字搜索。也可以在
@@ -140,7 +134,7 @@ IETF RFC 或者其他协议的逻辑，而不依赖外部 JVM 库。
 > 在 mac 上使用 <kbd>cmd</kbd> + <kbd>c</kbd>，而在其他操作系统中使用 <kbd>ctrl</kbd> + <kbd>c</kbd>。
 
 > 可以点击标题以及一些注记来获取对应节的锚点链接。
-> 点击后，可以在浏览器中复制包含 `#` 链向指定节的新 url。
+> 点击后，可以在浏览器中复制包含 `#` 链向该页中指定节的新 url。
 
 ## 我的路由没有执行到，该如何调试？
 {: #route-not-executing }
@@ -167,7 +161,7 @@ route.insertPhaseAfter(PhaseDefinedInAncestor, MyNodePhase)
 这意味着你或者一个特性或拦截器已经调用了 `call.respond*` 函数，而你又再次调用了它<!--
 -->。
 
-## 如何订阅 ktor 事件？
+## 如何订阅  Ktor 事件？
 {: #ktor-events }
 
 这里有一个[解释 Ktor 应用级事件系统](/advanced/events.html)的页面。
@@ -183,7 +177,7 @@ route.insertPhaseAfter(PhaseDefinedInAncestor, MyNodePhase)
 ## 可以在 Android 上使用 ktor 吗？
 {: #android-support }
 
-已知 Ktor 0.9.3 及以前版本适用于 Android 7 或更高版本（API 24）。会在 Android 5 等较低版本中失败。
+已知 Ktor 适用于 Android 7 或更高版本（API 24）。会在 Android 5 等较低版本中失败。
 
 在不支持的版本中会失败并出现类似以下异常：
 
@@ -223,19 +217,17 @@ routing {
 
 Ktor 可以自动处理 `HEAD` 请求，不过需要先安装 [`AutoHeadResponse` 特性](/servers/features/autoheadresponse.html)。
 
+```kotlin
+install(AutoHeadResponse)
+```
+
 ## 我在使用 `HttpsRedirect` 特性时出现了无限重定向
 {: #infinite-redirect }
 
-最可能的原因是你的后端服务位于反向代理或者负载均衡之后，而那些反向代理<!--
--->正向你的后端服务发出正常的 HTTP 请求，因此你的 Ktor 后端服务内部的 HttpsRedirect 特性认为<!--
+最可能的原因是你的后端服务位于反向代理或者负载均衡之后，而这些间接层<!--
+-->正在向你的后端服务发出正常的 HTTP 请求，因此你的 Ktor 后端服务内部的 HttpsRedirect 特性认为<!--
 -->它是正常 HTTP 请求并以重定向进行响应。
 
-通常，反向代理会发送一些描述原始请求的头（例如它是 https，或者原始 IP 地址），
+通常，反向代理会发送一些描述原始请求的头（例如它是 HTTPS，或者原始 IP 地址），
 并且有一个特性 [`XForwardedHeaderSupport`](/servers/features/forward-headers.html)
 会解析这些头，所以 [`HttpsRedirect`](/servers/features/https-redirect.html) 特性知道原始请求是 HTTPS。
-
-## 出现 `UnsafeHeaderException: Header Content is controlled by the engine and cannot be set explicitly` 异常
-{: #UnsafeHeaderException }
-
-关于如何修复这个问题的更多信息请参见 [0.9.4 迁移指南](/quickstart/migration/0.9.4.html#UnsafeHeaderException)。
-

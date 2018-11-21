@@ -8,6 +8,7 @@ feature:
   class: io.ktor.features.DefaultHeaders
 redirect_from:
 - /features/default-headers.html
+ktor_version_review: 1.0.0
 ---
 
 This feature adds a default set of headers to HTTP responses. The list of headers is customizable, and the `Date` header is cached
@@ -15,7 +16,7 @@ to avoid building complex strings on each response.
 
 {% include feature.html %}
 
-### Usage
+## Usage
 
 ```kotlin
 fun Application.main() {
@@ -27,7 +28,7 @@ fun Application.main() {
 
 This will add `Date` and `Server` headers to each HTTP response.
 
-### Configuration
+## Configuration
  
 * `header(name, value)` will add another header to the list of default headers
 

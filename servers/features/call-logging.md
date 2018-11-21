@@ -8,6 +8,7 @@ feature:
   class: io.ktor.features.CallLogging
 redirect_from:
 - /features/call-logging.html
+ktor_version_review: 1.0.0
 ---
 
 You might want to log client requests: and the Call Logging feature does just that.
@@ -47,7 +48,7 @@ In the example, it will log both: `/section1/*` and `/section2/*` requests.
 ## MDC
 {: #mdc }
 
-Starting with Ktor 0.9.5, the `CallLogging` feature supports `MDC` (Mapped Diagnostic Context) from slf4j
+The `CallLogging` feature supports `MDC` (Mapped Diagnostic Context) from slf4j
 to associate information as part of the request.
 
 When installing the CallLogging, you can configure a parameter to associate to the request with the `mdc` method.

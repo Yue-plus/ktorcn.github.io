@@ -3,16 +3,16 @@ title: 构件
 caption: 构件列表
 permalink: /quickstart/artifacts.html
 category: quickstart
-priority: 1
 redirect_from:
   - /artifacts.html
+ktor_version_review: 1.0.0
 ---
 
 Ktor 分为多个模块，以便根据所需功能实现细粒度的依赖关系。
 典型的 Ktor 应用需要 `ktor-server-core` 以及一个相应的引擎，具体取决于它是自托管的<!--
 -->还是使用应用服务器（Application Server）。
 
-Ktor 中的所有构件都属于 `io.ktor` group 并且托管在 [Bintray](https://bintray.com/kotlin/ktor) 上。
+Ktor 中的所有构件都属于 `io.ktor` group 并且托管在 JCenter 与 Maven Central。Pre-release versions are published at [Bintray](https://bintray.com/kotlin/ktor)
 
 [![Download](https://api.bintray.com/packages/kotlin/ktor/ktor/images/download.svg?version={{site.ktor_version}})](https://bintray.com/kotlin/ktor/ktor/{{site.ktor_version}})
     

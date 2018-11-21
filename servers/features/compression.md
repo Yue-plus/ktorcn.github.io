@@ -8,6 +8,7 @@ feature:
   class: io.ktor.features.Compression
 redirect_from:
 - /features/compression.html
+ktor_version_review: 1.0.0
 ---
 
 Compression feature adds the ability to compress outgoing content using gzip, deflate or custom encoder and thus reduce the
@@ -19,7 +20,7 @@ install(Compression)
 
 {% include feature.html %}
 
-### Configuration
+## Configuration
 
 When the configuration block is omitted, the default configuration is used. It includes
  the following encoders:
@@ -72,7 +73,7 @@ gzip {
 }
 ```
 
-### Security with HTTPS
+## Security with HTTPS
 
 HTTPS with any kind of compression is vulnerable to the [BREACH](https://en.wikipedia.org/wiki/BREACH){:target="_blank"} attack.
 This kind of attack allows a malicious attacker to guess a secret (like a session, an auth token, a password,
@@ -108,7 +109,7 @@ that are forced to be done by your browser with either the javascript or image r
 {: .note.security }
 
 
-### Extensibility
+## Extensibility
 
 You can provide your own encoder by implementing the `CompressionEncoder` interface and providing a configuration function. 
 Since content can be provided as a `ReadChannel` or `WriteChannel`, it should be able to compress in both ways. 

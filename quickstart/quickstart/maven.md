@@ -6,7 +6,6 @@ toc: true
 permalink: /quickstart/quickstart/maven.html
 redirect_from:
   - /quickstart/maven.html
-priority: 0
 ---
 
 在本指南中，我们会展示如何创建  Maven `pom.xml` 文件<!--
@@ -24,6 +23,7 @@ Maven 是一个主要用于 Java 项目的构建自动化工具。
 它从 `pom.xml` 文件中读取项目配置。
 以下是用于构建 Kotlin 应用的基本`pom.xml`文件：
 
+{% capture pom-xml %}
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
@@ -93,7 +93,11 @@ Maven 是一个主要用于 Java 项目的构建自动化工具。
     </build>
 </project>
 ```
-{: .compact }
+{% endcapture %}
+
+{% include tabbed-code.html
+    tab1-title="pom.xml" tab1-content=pom-xml
+%}
 
 ## 添加 Ktor 依赖并配置构件设置
 {: #ktor-dependencies}
@@ -106,14 +110,6 @@ Ktor 构件位于 bintray 的指定仓库中。
    
 ```xml
 <repositories>
-    <repository>
-        <id>ktor</id>
-        <url>http://dl.bintray.com/kotlin/ktor</url>
-    </repository>
-    <repository>
-        <id>kotlinx</id>
-        <url>http://dl.bintray.com/kotlin/kotlinx</url>
-    </repository>
     <repository>
         <id>jcenter</id>
         <url>http://jcenter.bintray.com</url>
@@ -144,25 +140,6 @@ Ktor 构件位于 bintray 的指定仓库中。
 </dependency>
 ```
 
-截止到 Kotlin 1.2x，协程仍然是 Kotlin 中的一项实验性的功能，
-所以需要告诉编译器可以<!--
--->使用它们以避免警告：
-
-```xml
-<plugin>
-    <groupId>org.jetbrains.kotlin</groupId>
-    
-    ……
-    
-    <configuration>
-        <jvmTarget>1.8</jvmTarget>
-        <args>
-            <arg>-Xcoroutines=enable</arg>
-        </args>
-    </configuration>
-</plugin>
-```
-
 ## 选择引擎并配置之
 {: #engine}
 
@@ -191,6 +168,7 @@ Netty 作为 web 服务器以及运行基于其上的 Ktor
 
 完成后的 `pom.xml` 文件应该如下所示：
 
+{% capture pom-xml %}
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -276,21 +254,17 @@ Netty 作为 web 服务器以及运行基于其上的 Ktor
 
     <repositories>
         <repository>
-            <id>ktor</id>
-            <url>http://dl.bintray.com/kotlin/ktor</url>
-        </repository>
-        <repository>
-            <id>kotlinx</id>
-            <url>http://dl.bintray.com/kotlin/kotlinx</url>
-        </repository>
-        <repository>
             <id>jcenter</id>
             <url>http://jcenter.bintray.com</url>
         </repository>
     </repositories>
 </project>
 ```
-{: .compact}
+{% endcapture %}
+
+{% include tabbed-code.html
+    tab1-title="pom.xml" tab1-content=pom-xml
+%}
 
 现在可以运行 `mvn package`来获取依赖并验证所有设置是否正确了。
 

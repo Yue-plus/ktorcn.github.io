@@ -5,7 +5,6 @@ category: quickstart
 permalink: /quickstart/quickstart/docker.html
 redirect_from:
   - /quickstart/docker.html
-priority: 0
 ---
 
 [Docker](https://www.docker.com) 是一个容器平台：
@@ -23,7 +22,7 @@ priority: 0
 * TOC
 {:toc}
 
-### 使用 Gradle 打包应用
+## 使用 Gradle 打包应用
 
 在本教程中，我们会使用 Gradle [shadow 插件](https://github.com/johnrengelman/shadow)。
 它将所有输出的类、资源以及所有必需的依赖项打包到一个 JAR 文件中，
@@ -80,7 +79,7 @@ shadowJar {
 因此一个完整的 `build.gradle` 文件会如下所示：
 
 
-**`build.gradle`**:
+{% capture build-gradle %}
 ```groovy
 buildscript {
     ext.kotlin_version = '{{site.kotlin_version}}'
@@ -90,7 +89,6 @@ buildscript {
     repositories {
         jcenter()
         maven { url "https://plugins.gradle.org/m2/" }
-        maven { url "https://dl.bintray.com/kotlin/kotlin-eap" }
     }
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
@@ -111,8 +109,6 @@ sourceSets {
 
 repositories {
     jcenter()
-    maven { url "http://kotlin.bintray.com/ktor" }
-    maven { url "https://dl.bintray.com/kotlin/kotlin-eap" }
 }
 
 dependencies {
@@ -130,9 +126,9 @@ shadowJar {
     version = null
 }
 ```
-{: .compact}
+{% endcapture %}
 
-**`resources/application.conf`**:
+{% capture resources-application-conf %}
 ```groovy
 ktor {
     deployment {
@@ -144,9 +140,9 @@ ktor {
     }
 }
 ```
-{: .compact}
+{% endcapture %}
 
-**`src/HelloApplication.kt`**:
+{% capture src-hello-application-kt %}
 ```kotlin
 package io.ktor.samples.hello
 
@@ -175,21 +171,31 @@ fun Application.main() {
     }
 }
 ```
-{: .compact}
+{% endcapture %}
+
+{% include tabbed-code.html
+    tab1-title="build.gradle" tab1-content=build-gradle
+    tab2-title="resources/application.conf" tab2-content=resources-application-conf
+    tab3-title="src/HelloApplication.kt" tab3-content=src-hello-application-kt
+%}
+
 
 可以在 ktor-samples 仓库中检出这个[完整示例](https://github.com/ktorio/ktor-samples/tree/master/deployment/docker)。
 {: .note }
 
-### 准备 Docker 镜像
+## 准备 Docker 镜像
 
 在项目的根文件夹中创建一个名为 `Dockerfile` 的文件，其内容如下：
 
-{% capture my_include %}{% include docker-sample.md %}{% endcapture %}
-{{ my_include | markdownify }}
+{% capture dockerfile %}{% include docker-sample.md %}{% endcapture %}
+{% include tabbed-code.html
+    tab1-title="Dockerfile" tab1-content=dockerfile
+    no-height="true"
+%}
 
 我们来看下都是什么：
 
-```text
+```dockerfile
 FROM openjdk:8-jre-alpine
 ```
 
@@ -197,7 +203,7 @@ FROM openjdk:8-jre-alpine
 [OpenJDK registry](https://hub.docker.com/_/openjdk/) 中的其他镜像。Alpine Linux 的好处是镜像非常小。
 我们选择的也是只有 JRE 的镜像，因为我们并不需要在镜像中编译代码，只需要运行预编译的类。
 
-```text
+```dockerfile
 RUN mkdir /app
 COPY ./build/libs/my-application.jar /app/my-application.jar
 WORKDIR /app
@@ -205,29 +211,29 @@ WORKDIR /app
 
 这几行将已打包的应用复制到 Docker 镜像中，并将工作目录设置为复制后的位置。
 
-```text
+```dockerfile
 CMD ["java", "-server", "-XX:+UnlockExperimentalVMOptions", "-XX:+UseCGroupMemoryLimitForHeap", "-XX:InitialRAMFraction=2", "-XX:MinRAMFraction=2", "-XX:MaxRAMFraction=2", "-XX:+UseG1GC", "-XX:MaxGCPauseMillis=100", "-XX:+UseStringDeduplication", "-jar", "my-application.jar"]
 ```
 
 最后一行指示 Docker 使用 G1 GC、4G 内存以及已打包的应用来运行 `java`。
 
-### 构建并运行 Docker 镜像
+## 构建并运行 Docker 镜像
 
 构建应用包：
 
-```
+```bash
 ./gradlew build
 ```
 
 构建并标记镜像：
 
-```
+```bash
 docker build -t my-application .
 ```
 
 启动镜像：
 
-```
+```bash
 docker run -m512M --cpus 2 -it -p 8080:8080 --rm ktor-docker-sample-application
 ```
 
@@ -248,11 +254,11 @@ docker run -m512M --cpus 2 -it -p 8080:8080 --rm ktor-docker-sample-application
 关于运行 docker 镜像的更多信息，请参考 [docker run](https://docs.docker.com/engine/reference/run)
 文档。
 
-### 上传 docker 镜像
+## 上传 docker 镜像
 
 一旦应用能在本地成功运行，那么可能就到部署它的时候了：
 
-```text
+```bash
 docker tag my-application hub.example.com/docker/registry/tag
 docker push hub.example.com/docker/registry/tag
 ```
@@ -264,6 +270,6 @@ docker push hub.example.com/docker/registry/tag
 -->甚至特殊工具。请咨询你的组织或者云平台，或者<!--
 -->查阅 [docker push](https://docs.docker.com/engine/reference/commandline/push/) 文档。
 
-### 样例
+## 样例
 
 可以在 ktor-samples 仓库中检出[完整样例](https://github.com/ktorio/ktor-samples/tree/master/deployment/docker)。

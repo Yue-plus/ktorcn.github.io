@@ -2,19 +2,21 @@
 title: 聊天
 caption: 指南：如何使用 WebSocket 实现聊天
 category: quickstart
+permalink: /quickstart/guides/chat.html
+ktor_version_review: 1.0.0
 ---
 
 在本教程中，你会学习如何使用 Ktor 创建聊天应用。
 我们会使用 WebSocket 进行实时双向通信。
-
-这是一个高级教程，你需要有一些关于 Ktor 的基本概念，
-所有首先你应该学习[关于制作网站的指南](/quickstart/guides/website.html)。
 
 为了实现这一点，我们会用到[路由]、 [WebSocket] 以及[会话]这些特性。
 
 [路由]: /servers/features/routing.html
 [WebSocket]: /servers/features/websockets.html
 [会话]: /servers/features/sessions.html
+
+这是一个高级教程，假定你已具备关于 Ktor 的一些基础知识，
+所以首先你应该学习[关于制作网站的指南](/quickstart/guides/website.html)。
 
 **目录：**
 
@@ -33,21 +35,20 @@ category: quickstart
 WebSocket 是 HTTP 的子协议。它以具有 upgrade 请求头的普通 HTTP 请求开始，
 并且该连接会切换为双向通信取代请求响应通信。
 
-可以作为 WebSocket 协议一部分发送的最小传输单元是 `Frame`（帧）。
-对于单条消息，TCP 可以分段成几个数据包。WebSocket Frame 定义了类型与长度，
-因此可以在多个 TCP 数据包中传输，但会重新组装成单个帧。
+可以作为 WebSocket 协议一部分发送的最小传输单元是 `Frame`（帧）。 A WebSocket Frame defines a type, a length and a payload that might be binary or text.
+Internally those frames might be transparently sent in several TCP packets.
 
 可以将帧（Frame）视为 WebSocket 消息。帧可以是以下类型：文本、 二进制、 关闭、 “乒”与“乓”。
 
 你通常会处理 `Text` 与 `Binary` 帧，其他帧在大多数情况下会由 Ktor 处理
-（虽然你可以使用原始模式）。
+（虽然你可以使用原始模式  where you can handle those extra frame types yourself）。
 
 可以在 [WebSocket 特性](/servers/features/websockets.html)页中查阅关于它的更多信息。
 
 ## WebSocket 路由
 
-第一步是为 WebSocket 创建路由。在本例中，我们会定义 `/chat` 路由。
-我们会从回显 WebSocket 路由开始，它会发回与发给它的消息相同的消息。
+第一步是为 WebSocket 创建路由。在本例中，我们会定义 `/chat` 路由，
+but initially, we are going to make that route to act as an "echo" WebSocket route, that will send you back the same text messages that you send to it.
 
 `webSocket` 路由是准备长期活跃的。由于它是一个挂起块并且使用轻量级 Kotlin 协程，
 因此可以很好地同时处理数十万个连接（具体取决于计算机与复杂性）<!--
@@ -57,11 +58,11 @@ WebSocket 是 HTTP 的子协议。它以具有 upgrade 请求头的普通 HTTP �
 routing {
     webSocket("/chat") { // this: DefaultWebSocketSession
         while (true) {
-            val frame = incoming.receive()
+            val frame = incoming.receive() // suspend
             when (frame) {
                 is Frame.Text -> {
                     val text = frame.readText()
-                    outgoing.send(Frame.Text(text))
+                    outgoing.send(Frame.Text(text)) // suspend
                 }
             }
         }

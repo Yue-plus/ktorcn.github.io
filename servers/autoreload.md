@@ -4,7 +4,7 @@ caption: Saving Time with Automatic Reloading
 category: servers
 permalink: /servers/autoreload.html
 keywords: autoreload watchpaths
-priority: 100
+ktor_version_review: 1.0.0
 ---
 
 During development, it is important to have a fast feedback loop cycle. 
@@ -12,7 +12,7 @@ Often, restarting the server can take some time, so Ktor provides a basic auto-r
 reloads your Application classes.
 
 Autoreload [*doesn't* work in Java 9](https://github.com/ktorio/ktor/issues/359). If you want to use it,
-please stick to JDK 8 for now.
+please stick to **JDK 8** for now.
 {: .note }
 {: #java9 }
 
@@ -50,7 +50,7 @@ fun main(args: Array<String>) {
         watchPaths = listOf("solutions/exercise4"),
         port = 8080,
         module = Application::mymodule
-    ).apply { start(wait = true) 
+    ).apply { start(wait = true) }
 }
 
 fun Application.mymodule() {
@@ -61,7 +61,6 @@ fun Application.mymodule() {
     }
 }
 ```
-{: .compact}
 
 When using `watchPaths` you should *not* use a lambda to configure the server, but to provide a method reference to your
 Application module.
@@ -75,7 +74,8 @@ Exception in thread "main" java.lang.RuntimeException: Module function provided 
 
 To fix this error, you just have to extract your lambda body to an Application extension method (module) just like this:
 
-Code that *won't* work:
+{% capture left %}
+❌ Code that *won't* work:
 ```kotlin
 fun main(args: Array<String>) {
     // ERROR! Module function provided as lambda cannot be unlinked for reload
@@ -88,9 +88,11 @@ fun main(args: Array<String>) {
     }.start(true)
 }
 ```
-{: .compact.error }
+{: .error }
+{% endcapture %}
 
-Code that will work:
+{% capture right %}
+✅ Code that will work:
 ```kotlin
 fun main(args: Array<String>) {
     embeddedServer(
@@ -109,12 +111,15 @@ fun Application.mymodule() {
     }
 }
 ```
-{: .compact.success }
+{: .success }
+{% endcapture %}
+
+{% include two-column.html left=left right=right %}
 
 ## Using the `application.conf`
 {: #configuration-file}
 
-When using a configuration file, for example with a [`EngineMain`](/servers/engine.html) to either run
+When using a configuration file, for example with an [`EngineMain`](/servers/engine.html) to either run
 from the command line or hosted within a server container: 
 
 To enable this feature, add `watch` keys to `ktor.deployment` configuration. 
@@ -142,6 +147,9 @@ The exclusion can potentially be smaller, but it is hard to analyze all the tran
 startup.
 {: .note}
 
+Classpath entries look like `file:///path/to/project/build/classes/myproject.jar`, so `to/project` would match, but `com.mydomain` would not.
+{: .note}
+
 ## Recompiling automatically on source changes
 
 Since the Autoreload feature only detects changes in class files, you have to compile the application by yourself.
@@ -164,7 +172,7 @@ You can run the application by using either a `build.gradle` or directly within 
 Executing the main method in the example file, or by executing: `io.ktor.server.netty.EngineMain.main`.
 EngineMain using `commandLineEnvironment` will be in charge of loading the `application.conf` file (that is in HOCON format).
 
-`Main.kt`:
+{% capture main-kt %}
 ```kotlin
 package io.ktor.exercise.autoreload
 
@@ -193,9 +201,9 @@ fun Application.module() {
     }
 }
 ```
-{: .compact}
+{% endcapture %}
 
-`application.conf`:
+{% capture application-conf %}
 ```kotlin
 ktor {
     deployment {
@@ -208,6 +216,12 @@ ktor {
     }
 }
 ```
-{: .compact}
+{% endcapture %}
+
+{% include tabbed-code.html
+    tab1-title="main.kt" tab1-content=main-kt
+    tab2-title="application.conf" tab2-content=application-conf
+%}
+
 
 As you can see, you need to specify a list of strings to match the classloaders you want to watch –in this case only `solutions/exercise4`– which should then be reloaded upon modification.

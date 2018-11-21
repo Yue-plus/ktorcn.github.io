@@ -3,6 +3,8 @@ title: SSL
 caption: 指南：如何获取免费证书以及在 Ktor 中使用 SSL
 category: quickstart
 keywords: tls ssl https let's encrypt letsencrypt
+permalink: /quickstart/guides/ssl.html
+ktor_version_review: 1.0.0
 ---
 
 {::options toc_levels="1..2" /}
@@ -19,7 +21,7 @@ keywords: tls ssl https let's encrypt letsencrypt
 **也可以**使用 Let's Encrypt 自动获取 **免费证书** 来以 Ktor 提供支持 `https://` 与 `wss://` 请求<!--
 -->的服务。
 本页会介绍如何实现，既有通过直接配置 Ktor 以提供单个域名的 SSL 证书的服务，
-也有使用 Docker 与 nginx 轻松在一台计算机上为位于不同计算机的不同应用提供服务<!--
+也有使用 Docker 与 nginx 轻松在一台计算机上为位于不同容器中的不同应用提供服务<!--
 -->。
 
 ## 选项一：直接以 Ktor 提供 SSL 服务
@@ -56,9 +58,7 @@ export ALIAS=myalias
 certbot certonly -n -d $DOMAIN --email "$EMAIL" --agree-tos --standalone --preferred-challenges http --http-01-port $PORT
 ```
 
-<table>
-<tr>
-<td markdown="1" style="width:50%;">
+{% capture left %}
 ❌ 错误输出样例：
 
 ```text
@@ -93,8 +93,10 @@ IMPORTANT NOTES:
    also contain certificates and private keys obtained by Certbot so
    making regular backups of this folder is ideal.
 ```
-</td>
-<td markdown="1" style="width:50%;">
+{: .error}
+{% endcapture %}
+
+{% capture right %}
 ✅ 正常输出样例：
 
 ```text
@@ -120,9 +122,10 @@ IMPORTANT NOTES:
    Donating to ISRG / Let's Encrypt:   https://letsencrypt.org/donate
    Donating to EFF:                    https://eff.org/donate-le
 ```
-</td>
-</tr>
-</table>
+{: .success}
+{% endcapture %}
+
+{% include two-column.html left=left right=right %}
 
 ### 为 Ktor 转换私钥与证书
 
@@ -180,9 +183,9 @@ ktor {
 {: #docker}
 
 使用具有多个域名的 Docker 时，可能希望使用 [nginx-proxy] 镜像以及 [letsencrypt-nginx-proxy-companion]
-镜像在单个计算机/ip 中为多个域名/子域名提供服务，并使用 let’s encrypt 自动提供 HTTPS。
+镜像在单个计算机/ip 上为多个域名/子域名提供服务，并使用 Let’s encrypt 自动提供 HTTPS。
 
-在这个场景中，创建一个带 NGINX 的容器，可能会监听 80 与 443 端口，内部网络<!--
+在这个场景中，创建一个带 NGINX 的容器，可能会监听 `80` 与 `443` 端口，内部网络<!--
 -->只能在容器间访问，因此 nginx 可以连接并反向代理你的网站（包括 websocket），
 而 NGINX 伴侣通过自省已配置的 Docker 容器来处理域名证书。
 
@@ -338,3 +341,8 @@ networks:
 
 [Let's Encrypt companion] <-> [Nginx]
 ```
+
+### The XForwardedHeaderSupport feature
+
+In this case you are using nginx acting as reverse-proxy for your requests. If you want to get information about the original requests,
+instead of the proxied nginx request, you will have to use the [XForwardedHeaderSupport](/servers/features/forward-headers.html) feature.

@@ -4,6 +4,7 @@ caption: API 文档
 category: quickstart
 permalink: /quickstart/api.html
 skip_pdf: true
+ktor_version_review: 1.0.0
 ---
 
 <!--<https://api.ktor.io/>-->

@@ -4,6 +4,7 @@ permalink: /index.html
 layout: home
 landing_page: true
 caption: 用 Kotlin 开发互联应用
+ktor_version_review: 1.0.0
 ---
 
 Ktor 是一个使用强大的 [Kotlin 语言](https://www.kotlincn.net/)在互联系统中构建异步服务器与客户端的框架。
