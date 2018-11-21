@@ -235,7 +235,7 @@ dependencies {
 关于配置 `build.gradle` 文件的更详细的指南，请查阅[以 Gradle 入门](/quickstart/quickstart/gradle.html)一节。
 {: .note}
 
-## IntelliJ: Gradle 设置
+## IntelliJ：Gradle 设置
 
 本节假定你有一些 Gradle 的基本知识。如果你从未使用过 Gradle，
 那么可参考 gradle.org 提供的[一些指南](https://guides.gradle.org/building-java-applications/)来帮你入门。
