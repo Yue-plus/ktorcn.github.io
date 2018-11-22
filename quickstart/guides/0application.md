@@ -20,13 +20,13 @@ Ktor 应用可以使用通用构建系统（如 [Maven](/quickstart/quickstart/m
 {: #dependencies }
 
 Ktor 分为几组构件，
-允许只包含所需的功能。And thus reducing the size of a fat-jar containing all the code, and the startup time.
+允许只包含所需的功能。从而减少了包含所有代码的 fat-jar 的大小，也缩短了启动时间。
 
 在本例中，只需包含构件 `ktor-server-netty`。
 关于所有可用构件的列表，请查阅[构件](/quickstart/artifacts.html)页。
 
-Release versions of these dependencies are available at jcenter and maven central.
-For pre-releases we host them on [Bintray kotlin/ktor](https://bintray.com/kotlin/ktor).
+这些依赖关系的正式版可在 jcenter 与 maven central 中找到。
+对于预览版我们将其托管在 [Bintray kotlin/ktor](https://bintray.com/kotlin/ktor) 上。
 
 关于使用不同构建系统设置构建文件的更详细指南，请查阅：
 
