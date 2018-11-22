@@ -342,7 +342,7 @@ networks:
 [Let's Encrypt companion] <-> [Nginx]
 ```
 
-### The XForwardedHeaderSupport feature
+### XForwardedHeaderSupport 特性
 
-In this case you are using nginx acting as reverse-proxy for your requests. If you want to get information about the original requests,
-instead of the proxied nginx request, you will have to use the [XForwardedHeaderSupport](/servers/features/forward-headers.html) feature.
+在本例中使用 nginx 作为反向代理。如果想要获取原始请求（而不是 nginx 代理请求）的信息，
+就要使用 [XForwardedHeaderSupport](/servers/features/forward-headers.html) 特性。
