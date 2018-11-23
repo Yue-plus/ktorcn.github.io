@@ -237,8 +237,8 @@ dependencies {
 
 ## IntelliJ：Gradle 设置
 
-本节假定你有一些 Gradle 的基本知识。如果你从未使用过 Gradle，
-那么可参考 gradle.org 提供的[一些指南](https://guides.gradle.org/building-java-applications/)来帮你入门。
+本节假定你对 Gradle 有一些基本的了解。如果你从未使用过 Gradle，
+那么可以参考 gradle.org 提供的[一些指南](https://guides.gradle.org/building-java-applications/)来帮你入门。
 {: .note}
 
 可以像这样使用 Gradle 搭建一个简单的 Ktor 应用：

@@ -10,8 +10,8 @@ ktor_version_review: 1.0.0
 
 在本指南中，我们会使用 OAuth 实现登录。
 
-This is an advanced tutorial and it assumes you have some basic knowledge about Ktor,
-so you should follow the [guide about making a Website](/quickstart/guides/website.html) first.
+这是一篇高级教程，假定你已经对 Ktor 有一些基本的了解，
+因此你应该先看[关于制作网站的指南](/quickstart/guides/website.html)。
 
 **目录：**
 

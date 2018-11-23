@@ -15,8 +15,8 @@ ktor_version_review: 1.0.0
 [WebSocket]: /servers/features/websockets.html
 [会话]: /servers/features/sessions.html
 
-这是一个高级教程，假定你已具备关于 Ktor 的一些基础知识，
-所以首先你应该学习[关于制作网站的指南](/quickstart/guides/website.html)。
+这是一个篇级教程，假定你已经对 Ktor 有一些基本的了解，
+因此你应该先看[关于制作网站的指南](/quickstart/guides/website.html)。
 
 **目录：**
 
