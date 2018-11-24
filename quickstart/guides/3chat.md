@@ -35,20 +35,20 @@ ktor_version_review: 1.0.0
 WebSocket 是 HTTP 的子协议。它以具有 upgrade 请求头的普通 HTTP 请求开始，
 并且该连接会切换为双向通信取代请求响应通信。
 
-可以作为 WebSocket 协议一部分发送的最小传输单元是 `Frame`（帧）。 A WebSocket Frame defines a type, a length and a payload that might be binary or text.
-Internally those frames might be transparently sent in several TCP packets.
+可以作为 WebSocket 协议一部分发送的最小传输单元是 `Frame`（帧）。 WebSocket 帧定义了类型、长度以及可以是二进制或者文本的有效载荷。
+在内部，这些帧可以透明地以多个 TCP 包发送。
 
-可以将帧（Frame）视为 WebSocket 消息。帧可以是以下类型：文本、 二进制、 关闭、 “乒”与“乓”。
+可以将帧视为 WebSocket 消息。帧可以是以下类型：文本、 二进制、 关闭、 “乒”与“乓”。
 
 你通常会处理 `Text` 与 `Binary` 帧，其他帧在大多数情况下会由 Ktor 处理
-（虽然你可以使用原始模式  where you can handle those extra frame types yourself）。
+（虽然你可以使用原始模式，这样你可以自行处理那些额外的帧类型）。
 
 可以在 [WebSocket 特性](/servers/features/websockets.html)页中查阅关于它的更多信息。
 
 ## WebSocket 路由
 
 第一步是为 WebSocket 创建路由。在本例中，我们会定义 `/chat` 路由，
-but initially, we are going to make that route to act as an "echo" WebSocket route, that will send you back the same text messages that you send to it.
+不过最初，我们会让该路由充当“回声”WebSocket 路由，它会向你发回与你发给它的内容相同的消息。
 
 `webSocket` 路由是准备长期活跃的。由于它是一个挂起块并且使用轻量级 Kotlin 协程，
 因此可以很好地同时处理数十万个连接（具体取决于计算机与复杂性）<!--
@@ -72,7 +72,7 @@ routing {
 
 ## 保存一组打开的连接
 
-我们可以使用 Set 来保存打开的连接列表。可以使用一个普通的 `try...finally` 来跟踪它们。
+我们可以使用 Set 来保存打开的连接列表。可以使用一个普通的 `try……finally` 来跟踪它们。
 由于 Ktor 默认是多线程的，因此我们应该使用线程安全的集合或者[以 newSingleThreadContext 将代码体限制为单线程](https://github.com/Kotlin/kotlinx.coroutines/blob/master/coroutines-guide.md#coroutine-context-and-dispatchers){:target="_blank"}。
 
 ```kotlin
