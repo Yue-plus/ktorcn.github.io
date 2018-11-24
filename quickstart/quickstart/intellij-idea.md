@@ -8,31 +8,31 @@ redirect_from:
   - /quickstart/intellij-idea.html
 ---
 
-There is a [IntelliJ plugin adding a project wizard for Ktor projects](https://plugins.jetbrains.com/plugin/10823-ktor){:target="_blank"}.
+有一个[提供新建 Ktor 项目向导的 IntelliJ 插件](https://plugins.jetbrains.com/plugin/10823-ktor){:target="_blank"}。
 
-It will configure a project for you, it will configure the ktor features for you, and will provide some sample code for them. 
+它会为你配置项目、为你配置 ktor 特性也会提供关于这些的样例代码。
 
-## Using the plugin
+## 使用该 plugin
 
-Like this website, the plugin allows you to create a Ktor project, but with the
-additional convenience of being fully integrated in the IDE and automatically setting up
-the project.
+像官方网站一样，该插件能够创建 Ktor 项目，不过<!--
+-->更方便的是完全集成在 IDE 中并且自动搭建<!--
+-->该项目。
 
-Creating a new project a `Ktor` section will appear:
+创建一个新项目时会出现 `Ktor` 部分：
 
-1) In a first step, you can configure the project to generate and select features to install:
+1) 第一步，可以配置要生成的项目并选择要安装的特性：
 ![](/quickstart/quickstart/intellij-idea/plugin/ktor-plugin-1.png)
 
-2) In a second step, you can configure the project artifacts:
+2) 第二步，可以配置项目构件：
 ![](/quickstart/quickstart/intellij-idea/plugin/ktor-plugin-2.png)
 
-## Installing the plugin
+## 安装该插件
 
-You can get the plugin from:
+可以从以下位置获取该插件：
 
-* Plugin Website: <https://plugins.jetbrains.com/plugin/10823-ktor>{:target="_blank"}
-* Inside IntelliJ: `IntelliJ IDEA` → `Preferences...` → `Plugins` → `Install JetBrains Plugin...` → `Ktor` → `Install`
-* IntelliJ Welcome Screen: `Configure` → `Plugins` → `Install JetBrains Plugin...` → `Ktor` → `Install`
+* 插件网站： <https://plugins.jetbrains.com/plugin/10823-ktor>{:target="_blank"}
+* 在 IntelliJ 内： `IntelliJ IDEA` → `Preferences...` → `Plugins` → `Install JetBrains Plugin...` → `Ktor` → `Install`
+* IntelliJ 欢迎界面： `Configure` → `Plugins` → `Install JetBrains Plugin...` → `Ktor` → `Install`
 
 ![](/quickstart/quickstart/intellij-idea/plugin/install01.png)
 
