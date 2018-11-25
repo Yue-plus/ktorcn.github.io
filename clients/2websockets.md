@@ -45,4 +45,4 @@ client.ws(……) { // this: DefaultClientWebSocketSession
 }
 ```
 
-For more information about the WebSocketSession, check the [WebSocketSession page](/servers/features/websockets.html#WebSocketSession).
+关于 WebSocketSession 的更多信息请参见 [WebSocketSession 页](/servers/features/websockets.html#WebSocketSession)。
