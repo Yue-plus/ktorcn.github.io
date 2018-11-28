@@ -234,7 +234,7 @@ docker build -t my-application .
 启动镜像：
 
 ```bash
-docker run -m512M --cpus 2 -it -p 8080:8080 --rm ktor-docker-sample-application
+docker run -m512M --cpus 2 -it -p 8080:8080 --rm my-application
 ```
 
 通过这个命令，我们启动 Docker 进入前台模式。 它会等待服务器退出，
