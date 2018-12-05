@@ -5,7 +5,7 @@ permalink: /quickstart/artifacts.html
 category: quickstart
 redirect_from:
   - /artifacts.html
-ktor_version_review: 1.0.0
+ktor_version_review: 1.0.1
 ---
 
 Ktor 分为多个模块，以便根据所需功能实现细粒度的依赖关系。

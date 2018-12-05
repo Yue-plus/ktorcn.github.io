@@ -292,7 +292,7 @@ networks:
 {% capture my_include %}{% include docker-sample.md %}{% endcapture %}
 {{ my_include | markdownify }}
 
-可以在部署一节找到关于 [how to deploy a docker and the Dockerfile](/servers/deploy.html#docker) 的更多信息。
+可以找到关于 [how to deploy a docker and the Dockerfile](/quickstart/quickstart/docker.html) 的更多信息。
 
 ### 简要概述
 
