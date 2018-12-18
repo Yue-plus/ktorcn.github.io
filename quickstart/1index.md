@@ -25,7 +25,7 @@ Ktor 是一个轻松构建联网应用（web 应用、 HTTP 服务、 移动应�
 
 ## 搭建一个 Ktor 项目
 
-可以使用 [Maven](/quickstart/quickstart/maven.html)、 [Gradle](/quickstart/quickstart/gradle.html)、 [start.ktor.io](/quickstart/generator.html#) 以及 [IntelliJ 插件](/quickstart/quickstart/intellij-idea/plugin.html) 来搭建一个 Ktor 项目。
+可以使用 [Maven](/quickstart/quickstart/maven.html)、 [Gradle](/quickstart/quickstart/gradle.html)、 [start.ktor.io](/quickstart/generator.html#) 以及 [IntelliJ 插件](/quickstart/quickstart/intellij-idea.html) 来搭建一个 Ktor 项目。
 
 该插件让你可以像 [start.ktor.io](/quickstart/generator.html#) 一样创建 Ktor 项目，但是具有完全集成在 IDE 中的额外便利。
 如果你还未安装该插件，这里有一个关于[如何安装该插件](/quickstart/quickstart/intellij-idea/plugin.html)的页面。
