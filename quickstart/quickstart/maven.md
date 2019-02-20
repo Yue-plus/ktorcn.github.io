@@ -112,7 +112,7 @@ Ktor 构件位于 bintray 的指定仓库中。
 <repositories>
     <repository>
         <id>jcenter</id>
-        <url>http://jcenter.bintray.com</url>
+        <url>https://jcenter.bintray.com</url>
     </repository>
 </repositories>
 ``` 
