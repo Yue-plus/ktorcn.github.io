@@ -1,56 +1,56 @@
 ---
-title: Responses
-caption: HTTP Client Responses
+title: 响应
+caption: HTTP 客户端响应
 category: clients
 permalink: /clients/http-client/calls/responses.html
 ---
 
-## Receiving the body of a response
+## 接收响应的 body
 {: #receive}
 
-By default you can use `HttpResponse` or `String` as possible types for typed
-HttpClient requests. So for example:
+默认情况下，可以使用 `HttpResponse` 或者 `String` 作为类型化
+HttpClient 请求的类型。例如：
 
 ```kotlin
 val htmlContent = client.get<String>("https://en.wikipedia.org/wiki/Main_Page")
 val response = client.get<HttpResponse>("https://en.wikipedia.org/wiki/Main_Page")
 ```
 
-If *JsonFeature* is configured, and the server returns the header `Content-Type: application/json`,
-you can also specify a class for deserializing it.
+如果配置了 *JsonFeature*，并且服务端返回了头信息 `Content-Type: application/json`，
+那么还可以指定一个类来反序列化。
 
 ```kotlin
 val helloWorld = client.get<HelloWorld>("http://127.0.0.1:8080/")
 ```
 
-### The `HttpResponse` class
+### `HttpResponse` 类
 {: #HttpResponse }
 
-From an `HttpResponse`, you can get the response content easily:
+通过 `HttpResponse` 可以轻松获取响应内容：
  
 * `val readChannel: ByteReadChannel = response.content`
 * `val bytes: ByteArray = response.readBytes()`
 * `val text: String = response.readText()`
 * `val readChannel = response.call.receive<ByteReadChannel>()`
 * `val multiPart = response.call.receive<MultiPartData>()`
-* `val inputStream = response.call.receive<InputStream>()` *Remember that InputStream API is synchronous!*
+* `val inputStream = response.call.receive<InputStream>()` *请记住，InputStream API 是同步的！*
 * `response.discardRemaining()`
 
-You can also get the additional response information such as its status, headers, internal state, etc.:
+还可以获取其他响应信息，例如响应状态码、响应头、内部状态等：
 
-### *Basic*:
+### *基本*:
 
 * `val status: HttpStatusCode = response.status`
 * `val headers: Headers = response.headers`
 
-### *Advanced*:
+### *高级*:
 * `val call: HttpClientCall = response.call`
 * `val version: HttpProtocolVersion = response.version`
 * `val requestTime: Date = response.requestTime`
 * `val responseTime: Date = response.responseTime`
 * `val executionContext: Job = response.executionContext`
 
-### *Extensions for headers*:
+### *响应头的扩展函数*:
 * `val contentType: ContentType? = response.contentType()`
 * `val charset: Charset? = response.charset()`
 * `val lastModified: Date? = response.lastModified()`
