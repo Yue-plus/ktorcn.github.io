@@ -2,10 +2,12 @@
 title: 响应
 caption: HTTP 客户端响应
 category: clients
-permalink: /clients/http-client/calls/responses.html
+permalink: /clients/http-client/call/responses.html
+ktor_version_review: 1.2.0
 ---
 
 ## 接收响应的 body
+
 {: #receive}
 
 默认情况下，可以使用 `HttpResponse` 或者 `String` 作为类型化
@@ -24,33 +26,38 @@ val helloWorld = client.get<HelloWorld>("http://127.0.0.1:8080/")
 ```
 
 ### `HttpResponse` 类
+
 {: #HttpResponse }
 
+`HttpResponse` API reference is listed [here](https://api.ktor.io/{{site.ktor_version}}/io.ktor.client.response/-http-response/).
+
 通过 `HttpResponse` 可以轻松获取响应内容：
- 
+
 * `val readChannel: ByteReadChannel = response.content`
 * `val bytes: ByteArray = response.readBytes()`
 * `val text: String = response.readText()`
-* `val readChannel = response.call.receive<ByteReadChannel>()`
-* `val multiPart = response.call.receive<MultiPartData>()`
-* `val inputStream = response.call.receive<InputStream>()` *请记住，InputStream API 是同步的！*
+* `val readChannel = response.receive<ByteReadChannel>()`
+* `val multiPart = response.receive<MultiPartData>()`
+* `val inputStream = response.receive<InputStream>()` *请记住，InputStream API 是同步的！*
 * `response.discardRemaining()`
 
 还可以获取其他响应信息，例如响应状态码、响应头、内部状态等：
 
-### *基本*:
+### *基本*
 
 * `val status: HttpStatusCode = response.status`
 * `val headers: Headers = response.headers`
 
-### *高级*:
+### *高级*
+
 * `val call: HttpClientCall = response.call`
 * `val version: HttpProtocolVersion = response.version`
 * `val requestTime: Date = response.requestTime`
 * `val responseTime: Date = response.responseTime`
 * `val executionContext: Job = response.executionContext`
 
-### *响应头的扩展函数*:
+### *响应头的扩展函数*
+
 * `val contentType: ContentType? = response.contentType()`
 * `val charset: Charset? = response.charset()`
 * `val lastModified: Date? = response.lastModified()`

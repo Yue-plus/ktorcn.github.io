@@ -13,8 +13,7 @@ Ktor 是一个使用强大的 [Kotlin 语言](https://www.kotlincn.net/)在互�
 这里是查找你要寻找的答案并了解其工作原理的地方。
 从搜索信息或者浏览下文的几节开始。
 
-
-{% include search.html inline="true" %} 
+{% include search.html inline="true" %}
 
 ![Ktor 示例](/what-is-ktor-shadow.png){: style="width:745px;height:auto;max-width:100%;"}
 {: style="text-align:center;"}

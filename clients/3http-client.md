@@ -4,7 +4,7 @@ category: clients
 permalink: /clients/http-client.html
 children: /clients/http-client/
 caption: Http 客户端
-ktor_version_review: 1.0.0
+ktor_version_review: 1.2.0
 ---
 
 {::options toc_levels="1..2" /}
@@ -22,6 +22,7 @@ ktor_version_review: 1.0.0
 {:toc}
 
 ## Call：Request 与 Response
+
 {: #requests-responses }
 
 可以在相应的章节中查看[如何发出请求](/clients/http-client/calls/requests.html)，
@@ -34,40 +35,38 @@ ktor_version_review: 1.0.0
 -->执行多个请求，可以使用 `launch` 或 `async` 函数，之后获取各个结果。
 例如：
 
-### 顺序请求：
+### 顺序请求
 
 ```kotlin
 suspend fun sequentialRequests() {
-    val client = HttpClient(Apache)
-    
+    val client = HttpClient()
+
     // 获取一个 URL 的内容。
-    val bytes1 = client.call("https://127.0.0.1:8080/a").response.readBytes() // 挂起点。
-    
+    val firstBytes = client.get<ByteArray>("https://127.0.0.1:8080/a")
+
     // 完成上一个请求后，获取另一个 URL 的内容。
-    val bytes2 = client.call("https://127.0.0.1:8080/b").response.readBytes() // 挂起点。
+    val secondBytes = client.get<ByteArray>("https://127.0.0.1:8080/b")
 
     client.close()
 }
 ```
 
-### 并行请求：
+### 并行请求
 
 ```kotlin
 suspend fun parallelRequests() = coroutineScope<Unit> {
-    val client1 = HttpClient(Apache)
-    val client2 = HttpClient(Apache)
-    
+    val client = HttpClient()
+
     // 异步启动两个请求。
-    val req1 = async { client1.call("https://127.0.0.1:8080/a").response.readBytes() }
-    val req2 = async { client2.call("https://127.0.0.1:8080/b").response.readBytes() }
-    
+    val firstRequest = async { client.get<ByteArray>("https://127.0.0.1:8080/a") }
+    val secondRequest = async { client.get<ByteArray>("https://127.0.0.1:8080/b") }
+
     // 获取请求内容而不阻塞线程，只是挂起该函数直到两个
     // 请求都完成。
-    val bytes1 = req1.await() // 挂起点。
-    val bytes2 = req2.await() // 挂起点。
+    val bytes1 = firstRequest.await() // 挂起点。
+    val bytes2 = secondRequest.await() // 挂起点。
 
-    client2.close()
-    client1.close()
+    client.close()
 }
 ```
 
