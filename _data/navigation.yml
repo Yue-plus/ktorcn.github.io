@@ -39,11 +39,11 @@ main:
     color: primary
     icon: icon_toolbox_alt
 
-  - title: Api
+  - title: API
     category: api
     url: https://api.ktor.io
     icon_url: '/assets/images/icon_api.svg'
-    summary: API Reference
+    summary: API 参考
     color: primary
     icon: icon_toolbox_alt
 
