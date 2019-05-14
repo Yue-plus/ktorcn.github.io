@@ -11,7 +11,7 @@ ktor_version_review: 1.2.0
 
 {% include feature.html %}
 
-Ktor provides a WebSocket client for the following engines: CIO, OkHttp, Js. To get more information about the server side, follow this [section](/servers/features/websockets.html).
+Ktor 为 CIO、OkHttp、Js 这几个引擎提供了 WebSocket 客户端。如需了解服务端的相关信息，请参见[这一节](/servers/features/websockets.html)。
 
 一旦连接后，客户端与服务器的 WebSocket 就共享相同的 [WebSocketSession](/servers/features/websockets.html#WebSocketSession)
 接口进行通信。
@@ -33,16 +33,16 @@ client.ws(
     port = 8080, path = "/route/path/to/ws"
 ) { // this: DefaultClientWebSocketSession
 
-    // Send text frame.
+    // 发送文本帧。
     send("Hello, Text frame")
 
-    // Send text frame.
+    // 发送文本帧。
     send(Frame.Text("Hello World"))
 
-    // Send binary frame.
-    send(Frame.Binary(...))
+    // 发送二进制帧。
+    send(Frame.Binary(……))
 
-    // Receive frame.
+    // 接收帧。
     val frame = incomming.receive()
     when (frame) {
         is Frame.Text -> println(frame.readText())
@@ -51,4 +51,4 @@ client.ws(
 }
 ```
 
-关于 WebSocketSession 的更多信息请参见 [WebSocketSession 页](/servers/features/websockets.html#WebSocketSession) and the [API reference](https://api.ktor.io/{{ site.ktor_version }}/io.ktor.client.features.websocket/).
+关于 WebSocketSession 的更多信息请参见 [WebSocketSession 页](/servers/features/websockets.html#WebSocketSession)及其 [API 参考](https://api.ktor.io/{{ site.ktor_version }}/io.ktor.client.features.websocket/)。
