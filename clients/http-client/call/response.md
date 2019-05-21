@@ -3,6 +3,8 @@ title: 响应
 caption: HTTP 客户端响应
 category: clients
 permalink: /clients/http-client/call/responses.html
+redirect_from:
+- /clients/http-client/calls/requests.html
 ktor_version_review: 1.2.0
 ---
 
