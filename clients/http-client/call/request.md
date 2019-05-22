@@ -1,6 +1,6 @@
 ---
-title: Request
-caption: HTTP Client Request
+title: 请求
+caption: HTTP 客户端请求
 category: clients
 permalink: /clients/http-client/call/requests.html
 redirect_from:
@@ -8,55 +8,55 @@ redirect_from:
 ktor_version_review: 1.2.0
 ---
 
-## Simple requests
+## 简单的请求
 
-The basic usage is *super* simple: you just have to instantiate an `HttpClient` instance,
-specifying an engine, for example
-[`Apache`](/clients/http-client/engines.html#apache),
-[`OkHttp`](/clients/http-client/engines.html#okhttp),
-[`Android`](/clients/http-client/engines.html#android),
-[`Ios`](/clients/http-client/engines.html#ios),
-[`Js`](/clients/http-client/engines.html#js-javascript),
-[`Jetty`](/clients/http-client/engines.html#jetty),
+基本用法*超*简单：只需实例化一个 `HttpClient` 实例、
+指定一个引擎——例如：
+[`Apache`](/clients/http-client/engines.html#apache)、
+[`OkHttp`](/clients/http-client/engines.html#okhttp)、
+[`Android`](/clients/http-client/engines.html#android)、
+[`Ios`](/clients/http-client/engines.html#ios)、
+[`Js`](/clients/http-client/engines.html#js)、
+[`Jetty`](/clients/http-client/engines.html#jetty)、
 [`CIO`](/clients/http-client/engines.html#cio)
-or [`Mock`](/clients/http-client/testing.html),
-and start making requests using one of the many convenience methods available.
+或者 [`Mock`](/clients/http-client/engines.html#mock)，
+并使用众多可用的便利方法之一发出请求。
 
-You can omit the engine, and Ktor will choose an engine among the ones that are available
-from the included artifacts using a ServiceLoader on the JVM, or the default implementation
-in the other platforms.
+引擎可以省略，对于 JVM，Ktor 会使用 ServiceLoader 从所包含的构件中选择一个可用的<!--
+-->引擎；对于其他平台 Ktor
+会选用默认实现。
 
-First you need to instantiate the client:
+首先需要实例化客户端：
 
 ```kotlin
 val client = HttpClient()
 ```
 
-Then, to perform a `GET` request fully reading a `String`:
+然后，执行读取完整 `String` 的 `GET` 请求：
 
 ```kotlin
 val htmlContent = client.get<String>("https://en.wikipedia.org/wiki/Main_Page")
 ```
 
-And in the case you are interested in the raw bits, you can read a `ByteArray`:
+而如果对原始数据感兴趣，可以读取 `ByteArray`：
 
 ```kotlin
 val bytes: ByteArray = client.get<ByteArray>("http://127.0.0.1:8080/")
 ```
 
-It is possible to customize the request a lot and to stream the request and response payloads:
+可以对请求进行大量定制，并且流式传输请求与响应有效载荷：
 
 ```kotlin
 val channel: ByteReadChannel = client.get<ByteReadChannel>("http://127.0.0.1:8080/")
 ```
 
-After you finish working with the client, it should be closed in order to properly stop the underlying engine.
+使用完客户端之后，应该关闭它以彻底停止底层引擎。
 
 ```kotlin
 client.close()
 ```
 
-If you want to use a client to make only one request consider `use`-ing it. The client will be automatically closed once the passed block has been executed:
+如果只使用客户端发出一个请求，考虑使用 `use`。一旦传入的块执行完，客户端会自动关闭。
 
 ```kotlin
 val status = HttpClient().use { client ->
@@ -64,11 +64,11 @@ val status = HttpClient().use { client ->
 }
 ```
 
-## Custom requests
+## 定制请求
 
-We cannot live only on *get* requests, Ktor allows you to build complex requests with any of the HTTP verbs, with the flexibility to process responses in many ways.
+我们不能只进行 *get* 请求，Ktor 允许使用任何 HTTP 动词构件复杂请求，并且灵活地以多种方式处理响应。
 
-### The `call` method
+### `call` 方法
 
 {: #call-method }
 
@@ -84,7 +84,7 @@ val call = client.call("http://127.0.0.1:8080/") {
 println(call.response.receive<String>())
 ```
 
-### The `request` method
+### `request` 方法
 
 {: #request-method }
 
@@ -99,7 +99,7 @@ val call = client.request<String> {
 }
 ```
 
-### The `get`, `post`, `put`, `delete`, `patch`, `head` and `options` methods
+### `get`、 `post`、 `put`、 `delete`、 `patch`、 `head` 以及 `options` 方法
 
 {: #shortcut-methods }
 
@@ -138,14 +138,14 @@ You can check the standard available [HttpClient build extension methods](https:
 
 {: .note.api}
 
-### The `submitForm` and `submitFormWithBinaryData` methods
+### `submitForm` 与 `submitFormWithBinaryData` 方法
 
 {: #submit-form }
 
 There are a couple of convenience extension methods for submitting form information.
 The detailed refrence is listed [here](https://api.ktor.io/{{ site.ktor_version }}/io.ktor.client.request.forms/).
 
-The `submitForm` method:
+`submitForm` 方法：
 
 ```kotlin
 client.submitForm(
@@ -157,7 +157,7 @@ client.submitForm(
 
 It allows requesting with the `Parameters` encoded in the query string(`GET` by default) or requesting with the `Parameters` encoded as multipart(`POST` by default) depending on the `encodeInQuery` parameter.
 
-The `submitFormWithBinaryData` method:
+`submitFormWithBinaryData` 方法：
 
 ```kotlin
 client.submitFormWithBinaryData(
@@ -183,7 +183,7 @@ val data: List<PartData> = formData {
 }
 ```
 
-### Specifying custom headers
+### 指定自定义头
 
 {: #custom-headers}
 
@@ -214,7 +214,7 @@ headers { // this: HeadersBuilder
 
 Complete `HeadersBuilder` API is listed [here](https://api.ktor.io/{{ site.ktor_version }}/io.ktor.http/-headers-builder/).
 
-## Specifying a body for requests
+## 指定请求的正文
 
 For `POST` and `PUT` requests, you can set the `body` property:
 
@@ -280,7 +280,7 @@ Remember that your classes must be *top-level* to be recognized by `Gson`. \\
 If you try to send a class that is inside a function, the feature will send a *null*.
 {: .note}
 
-## Uploading multipart/form-data
+## 上传 multipart/form-data
 
 {: #multipart-form-data }
 
