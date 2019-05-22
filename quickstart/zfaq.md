@@ -171,7 +171,7 @@ route.insertPhaseAfter(PhaseDefinedInAncestor, MyNodePhase)
 
 这意味着 Ktor 无法找到 `application.conf` 文件。请重新检查它是否在 `resources` 文件夹中<!--
 -->并且该资源文件夹已正确标记。
-可以考虑使用[项目生成器](/quickstart/generator.html)或者 [IntelliJ 插件](/quickstart/quickstart/intellij-idea/plugin.html)<!--
+可以考虑使用[项目生成器](/quickstart/generator.html)或者 [IntelliJ 插件](/quickstart/quickstart/intellij-idea.html)<!--
 -->搭建项目作为工作项目的基础。
 
 ## 可以在 Android 上使用 ktor 吗？

@@ -43,7 +43,7 @@ Ktor 还提供了[处理原始套接字](/servers/raw-sockets.html)的功能，�
 Ktor 包含一些标准的特性，不过可以添加自己的或者社区中的其他特性。
 任何流水线中都可以安装特性，例如在应用自身中，或者指定的路由中。
 
-更多相关内容请参阅[特性](/servers/features/index.html)专有页。
+更多相关内容请参阅[特性](/servers/features.html)专有页。
 {: .note}
 
 ## 模块

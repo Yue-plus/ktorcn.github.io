@@ -25,8 +25,8 @@ ktor_version_review: 1.2.0
 
 {: #requests-responses }
 
-可以在相应的章节中查看[如何发出请求](/clients/http-client/calls/requests.html)，
-以及[如何接收响应](/clients/http-client/calls/responses.html)。
+可以在相应的章节中查看[如何发出请求](/clients/http-client/call/requests.html)，
+以及[如何接收响应](/clients/http-client/call/responses.html)。
 
 ## 并发
 

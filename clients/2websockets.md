@@ -43,7 +43,7 @@ client.ws(
     send(Frame.Binary(……))
 
     // 接收帧。
-    val frame = incomming.receive()
+    val frame = incoming.receive()
     when (frame) {
         is Frame.Text -> println(frame.readText())
         is Frame.Binary -> println(frame.readBytes())

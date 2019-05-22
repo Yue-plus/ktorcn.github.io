@@ -44,7 +44,7 @@ Ktor 分为以下几组模块：
   * `ktor-client-apache` 添加对 Apache 异步 HttpClient 的支持
   * `ktor-client-cio`  添加对纯 Kotlin 基于协程的 I/O 异步 HttpClient 的支持
   * `ktor-client-jetty` adds support
-  * `ktor-client-auth-basic` 添加对[认证](/clients/http-client/features/basic-auth.html)的支持
+  * `ktor-client-auth-basic` 添加对[认证](/clients/http-client/features/auth.html)的支持
   * `ktor-client-json` 添加对 [json 内容协商](/clients/http-client/features/json-feature.html)的支持
 * `ktor-network` 包含用于客户端/服务器的[原始套接字](/servers/raw-sockets.html)与 TCP/UDP
   * `ktor-network-tls` 包含对原始套接字的 TLS 支持
