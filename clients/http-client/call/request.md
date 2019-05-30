@@ -72,10 +72,10 @@ val status = HttpClient().use { client ->
 
 {: #call-method }
 
-The HttpClient `call` method, returns an `HttpClientCall` and allows you to perform simple untyped requests.
+HttpClient 的 `call` 方法返回一个 `HttpClientCall`，可以用它执行简单的未指定类型的请求。
 
-You can read the content using `response: HttpResponse`.
-For further information, check out the [receiving content using HttpResponse](/clients/http-client/call/responses.html) section.
+可以使用 `response: HttpResponse` 读取其内容。
+更详细信息请参见[使用 HttpResponse 接收内容](/clients/http-client/call/responses.html)部分。
 
 ```kotlin
 val call = client.call("http://127.0.0.1:8080/") {
@@ -88,9 +88,9 @@ println(call.response.receive<String>())
 
 {: #request-method }
 
-In addition to call, there is a `request` method for performing a typed request,
-[receiving a specific type](/clients/http-client/call/responses.html#receive) like String, HttpResponse, or an arbitrary class.
-You have to specify the URL and the method when building the request.
+除了 call 之外，还有一个 `request` 方法用于执行类型化的请求，
+它[接收指定类型](/clients/http-client/call/responses.html#receive)如字符串、 HttpResponse 或者任何其他类。
+必须在构建请求时指定 URL 与方法。
 
 ```kotlin
 val call = client.request<String> {
@@ -103,16 +103,16 @@ val call = client.request<String> {
 
 {: #shortcut-methods }
 
-Similar to `request`, there are several extension methods to perform requests
-with the most common HTTP verbs: `GET`, `POST`, `PUT`, `DELETE`, `PATCH`, `HEAD` and `OPTIONS`.
+与 `request` 类似，还有几个可以<!--
+-->使用最常见的 HTTP 动词（`GET`、 `POST`、 `PUT`、 `DELETE`、 `PATCH`、 `HEAD` 以及 `OPTIONS`）执行请求的扩展方法。
 
 ```kotlin
 val text = client.post<String>("http://127.0.0.1:8080/")
 ```
 
-When calling request methods, you can provide a lambda to build the request
-parameters like the URL, the HTTP method(verb), the body, or the headers.
-The `HttpRequestBuilder` looks like this:
+当调用 request 方法时，可以提供一个 lambda 表达式来构建请求<!--
+-->参数，如 URL、HTTP 方法（动词）、正文或者请求头。
+`HttpRequestBuilder` 类似这样：
 
 ```kotlin
 class HttpRequestBuilder : HttpMessageBuilder {
@@ -133,8 +133,8 @@ class HttpRequestBuilder : HttpMessageBuilder {
 }
 ```
 
-The `HttpClient` class only offers some basic functionality, and all the methods for building requests are exposed as extensions.\\
-You can check the standard available [HttpClient build extension methods](https://api.ktor.io/{{ site.ktor_version }}/io.ktor.client.request/).
+`HttpClient` 类只提供一些基本功能，而所有构建请求的方法都是扩展方法。
+参见标准的 [HttpClient 构建扩展方法](https://api.ktor.io/{{ site.ktor_version }}/io.ktor.client.request/)。
 
 {: .note.api}
 
