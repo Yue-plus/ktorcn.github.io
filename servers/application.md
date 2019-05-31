@@ -3,7 +3,7 @@ title: Application
 category: servers
 permalink: /servers/application.html
 caption: Application 是什么？
-ktor_version_review: 1.0.0
+ktor_version_review: 1.2.1
 ---
 
 Ktor 服务器应用（Application）是使用[已配置的服务器引擎](/servers/configuration.html)监听一个或多个端口的自定义程序，
@@ -92,3 +92,10 @@ com.example.myapp.MainKt.mymodule
 在本例中，类名是 `com.example.myapp` 包中的 `MainKt`，而其 Java 方法的签名为
 `static public void mymodule(Application app)`。
 {: .note}
+
+## What's next
+
+- [Application calls](/servers/calls.html)
+- [Application lifecycle explanation](/servers/lifecycle.html)
+- [Application configuration](/servers/configuration.html)
+- [Pipelines exlained](/advanced/pipeline)
