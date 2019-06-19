@@ -303,7 +303,7 @@ fun Application.module() {
 ## 使用 HTML DSL 取代 FreeMarker
 
 可以选择直接由代码生成 HTML 而不是使用模板引擎。
-为此，可以使用 HTML DSL。这个 DSL 并不需要安装，但需要一个额外的构件。
+为此，可以使用 HTML DSL。这个 DSL 并不需要安装，但需要一个额外的构件（详见 [HTML DSL]）。
 这个构件提供了使用 HTML 块来响应的扩展：
 
 ```kotlin
