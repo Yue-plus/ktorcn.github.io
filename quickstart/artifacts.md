@@ -43,8 +43,8 @@ Ktor 分为以下几组模块：
   * `ktor-client-core` 是大多数 http HttpClient API 所在的核心包
   * `ktor-client-apache` 添加对 Apache 异步 HttpClient 的支持
   * `ktor-client-cio`  添加对纯 Kotlin 基于协程的 I/O 异步 HttpClient 的支持
-  * `ktor-client-jetty` adds support for [Jetty HTTP client](https://www.eclipse.org/jetty/javadoc/current/org/eclipse/jetty/http2/client/HTTP2Client.html)
-  * `ktor-client-okhttp` adds support for [OkHttp](https://square.github.io/okhttp/) client backend.
+  * `ktor-client-jetty` 添加对 [Jetty HTTP 客户端](https://www.eclipse.org/jetty/javadoc/current/org/eclipse/jetty/http2/client/HTTP2Client.html)的支持
+  * `ktor-client-okhttp` 添加对 [OkHttp](https://square.github.io/okhttp/) 客户端后端的支持
   * `ktor-client-auth-basic` 添加对[认证](/clients/http-client/features/auth.html)的支持
   * `ktor-client-json` 添加对 [json 内容协商](/clients/http-client/features/json-feature.html)的支持
 * `ktor-network` 包含用于客户端/服务器的[原始套接字](/servers/raw-sockets.html)与 TCP/UDP
