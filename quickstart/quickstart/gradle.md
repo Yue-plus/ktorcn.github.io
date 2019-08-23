@@ -212,27 +212,25 @@ dependencies {
 
     ![Ktor IntelliJ: GroupId](/quickstart/intellij-idea/groupid.png)
 
-4.  选中复选框 `Use auto-import` 以及 `Create separate module per source set`。 确认选中单选框 Use default gradle wrapper 并且 Gradle JVM 已有值，然后点击 `Next`：
-
-    ![Ktor IntelliJ: Gradle Config](/quickstart/intellij-idea/gradle-config.png)
-
-5.  填写项目名： `Example`
+4.  填写项目名： `Example`
     与项目位置： `a/path/on/your/filesystem`
     并点击 `Finish`：
 
     ![Ktor IntelliJ: Project Location Name](/quickstart/intellij-idea/project-location-name.png)
 
-6.  等待 Gradle 运行几秒，应该能看到以下项目结构（以及其他几个文件与目录）：
+5.  等待 Gradle 运行几秒，应该能看到以下项目结构（以及其他几个文件与目录）：
 
     ![Ktor IntelliJ: Project Structure](/quickstart/intellij-idea/project-structure.png)
 
-7.  更新 `build.gradle` 文件，添加使相关类可用的构件与仓库：
+6.  更新 `build.gradle` 文件，添加使相关类可用的构件与仓库：
     * 将 `compile("io.ktor:ktor-server-netty:$ktor_version")` 包含到 `build.gradle` 的 `dependencies` 块中
     * 将  `maven { url = uri("http://kotlin.bintray.com/ktor") }` 与 `jcenter()` 包含到 `repositories` 块中
 
     ![Ktor IntelliJ: Build Gradle](/quickstart/intellij-idea/build-gradle.png)
 
 关于配置 `build.gradle` 文件的更详细的指南，请查阅[以 Gradle 入门](/quickstart/quickstart/gradle.html)一节。
+
+When auto-import options, shows up (likely on bottom right hand side) click allow auto-import. 
 {: .note}
 
 ## IntelliJ：Gradle 设置
