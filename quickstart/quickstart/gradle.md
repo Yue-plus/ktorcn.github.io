@@ -230,7 +230,7 @@ dependencies {
 
 关于配置 `build.gradle` 文件的更详细的指南，请查阅[以 Gradle 入门](/quickstart/quickstart/gradle.html)一节。
 
-When auto-import options, shows up (likely on bottom right hand side) click allow auto-import. 
+当显示自动导入选项（可能在右下角）时，单击允许自动导入。
 {: .note}
 
 ## IntelliJ：Gradle 设置
