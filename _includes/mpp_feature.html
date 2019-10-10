@@ -21,26 +21,32 @@
     {% else %}
         <div class="note-inner" id="artifact-{{ name }}">
             {% if include.kind %}
-            This {{ include.kind }} is defined
+            本{{ include.kind }}在<!--
             {% else %}
-            This feature is defined
+            本特性在<!--
+            {% endif %}
+
+            {% if artifact_required %}
+            -->构件 <code class="highlighter-rouge">{{ artifact }}</code> 中的
+            {% else %}
+            -->
             {% endif %}
 
             {% if method %}
-            in the method <code class="highlighter-rouge">{{ method }}</code>
+            <code class="highlighter-rouge">{{ method }}</code> 方法中<!--
             {% elsif package %}
-            in the package <code class="highlighter-rouge">{{ package }}</code>
+            <code class="highlighter-rouge">{{ package }}</code> 包中<!--
             {% else %}
-            in the class <code class="highlighter-rouge">{{ class }}</code>
-            {% endif %}
+            <code class="highlighter-rouge">{{ class }}</code> 类中<!--
+            {% endif %}-->定义<!--
             {% if artifact_required %}
-            in the artifact <code class="highlighter-rouge">{{ artifact }}</code>.
+            -->。
             {% else %}
-            and no additional artifacts are required.
+            -->，无需任何额外构件。
             {% endif %}
 
-            {% if include.transitive %}
-            It includes the <code class="highlighter-rouge">{{ include.transitive }}</code> transitive dependency.
+            {% if transitive %}
+            它包含传递依赖 <code class="highlighter-rouge">{{ transitive }}</code>。
             {% else %}
             <!-- It does not include any additional transitive dependencies. -->
             {% endif %}
