@@ -149,7 +149,7 @@ The detailed refrence is listed [here](https://api.ktor.io/{{ site.ktor_version 
 
 ```kotlin
 client.submitForm(
-    formData: Parameters = Parameters.Empty,
+    formParameters: Parameters = Parameters.Empty,
     encodeInQuery: Boolean = false,
     block: HttpRequestBuilder.() -> Unit = {}
 )

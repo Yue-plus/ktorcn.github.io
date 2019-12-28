@@ -156,12 +156,12 @@ Since the Autoreload feature only detects changes in class files, you have to co
 You can do it using IntelliJ IDEA with `Build -> Build Project` while running.
 
 However, you can also use gradle to automatically detect source changes and compile it for you. You can just open
-another terminal in your project folder and run: `gradle -t build`.
+another terminal in your project folder and run: `gradle -t installDist`.
 
 It will compile the application, and after doing so,
 it will listen for additional source changes and recompile when necessary. And thus, triggering Automatic class reloading.
 
-You can then use another terminal to run the application with `gradle run`.
+You can then use another terminal to run the application with `gradle run`. If you use IntelliJ IDEA to run the application, you should properly configure its [compilation output locations](https://www.jetbrains.com/help/idea/specifying-compilation-settings.html) because it uses a different output location from that gradle uses.
 
 ## Example
 {: #example}
