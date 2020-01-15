@@ -39,7 +39,7 @@ Ktor 分为以下几组模块：
   * `ktor-metrics` 添加了为服务器添加一些[指标](/servers/features/metrics.html)的能力
   * `ktor-server-sessions` 添加使用[服务器存储的有状态会话](/servers/features/sessions.html)的能力
   * `ktor-websockets` 提供 [Websockets](/servers/features/websockets.html) 支持
-* `ktor-client` 包含[执行 http 请求](/clients/http-client.html)的模块
+* `ktor-client` 包含[执行 http 请求](/clients/index.html)的模块
   * `ktor-client-core` 是大多数 http HttpClient API 所在的核心包
   * `ktor-client-apache` 添加对 Apache 异步 HttpClient 的支持
   * `ktor-client-cio`  添加对纯 Kotlin 基于协程的 I/O 异步 HttpClient 的支持

@@ -1,105 +1,66 @@
 ---
 title: 请求
-caption: HTTP 客户端请求
+caption: Preparing the request
 category: clients
-permalink: /clients/http-client/call/requests.html
+permalink: /clients/http-client/quick-start/requests.html
 redirect_from:
-- /clients/http-client/calls/requests.html
-ktor_version_review: 1.2.0
+- /clients/http-client/call/requests.html
+ktor_version_review: 1.3.0
 ---
 
-## 简单的请求
+## Making request
 
-基本用法*超*简单：只需实例化一个 `HttpClient` 实例、
-指定一个引擎——例如：
-[`Apache`](/clients/http-client/engines.html#apache)、
-[`OkHttp`](/clients/http-client/engines.html#okhttp)、
-[`Android`](/clients/http-client/engines.html#android)、
-[`Ios`](/clients/http-client/engines.html#ios)、
-[`Js`](/clients/http-client/engines.html#js)、
-[`Jetty`](/clients/http-client/engines.html#jetty)、
-[`CIO`](/clients/http-client/engines.html#cio)
-或者 [`Mock`](/clients/http-client/engines.html#mock)，
-并使用众多可用的便利方法之一发出请求。
+After client configuration we're ready to perform our first request.
+Most of the simple requests are made with pattern
 
-引擎可以省略，对于 JVM，Ktor 会使用 ServiceLoader 从所包含的构件中选择一个可用的<!--
--->引擎；对于其他平台 Ktor
-会选用默认实现。
-
-首先需要实例化客户端：
-
-```kotlin
-val client = HttpClient()
+```
+val response = client.'http-method'<'ResponseType'>("url-string")
 ```
 
-然后，执行读取完整 `String` 的 `GET` 请求：
+or even simpler form(due to kotlin generic type inference):
+
+```
+val response: ResponseType = client.'http-method'("url-string")
+```
+
+For example to perform a `GET` request fully reading a `String`:
 
 ```kotlin
 val htmlContent = client.get<String>("https://en.wikipedia.org/wiki/Main_Page")
+// same as
+val content: String = client.get("https://en.wikipedia.org/wiki/Main_Page")
 ```
 
 而如果对原始数据感兴趣，可以读取 `ByteArray`：
 
 ```kotlin
-val bytes: ByteArray = client.get<ByteArray>("http://127.0.0.1:8080/")
+val channel: ByteArray = client.get("https://en.wikipedia.org/wiki/Main_Page")
 ```
 
-可以对请求进行大量定制，并且流式传输请求与响应有效载荷：
+Or get full [HttpResponse](https://api.ktor.io/{{ site.ktor_version }}/io.ktor.client.statement/-http-response/index.html):
 
 ```kotlin
-val channel: ByteReadChannel = client.get<ByteReadChannel>("http://127.0.0.1:8080/")
+val response: HttpResponse = client.get("https://en.wikipedia.org/wiki/Main_Page")
 ```
 
-使用完客户端之后，应该关闭它以彻底停止底层引擎。
+The [HttpResponse](https://api.ktor.io/{{ site.ktor_version }}/io.ktor.client.statement/-http-response/index.html) is downloaded in memory by default. To learn how to download response partially or work with a stream data consult with the [Streaming](/clients/http-client/quick-start/streaming.html) section.
+
+And even your data class using [Json](/clients/http-client/features/json-feature.html) feature:
 
 ```kotlin
-client.close()
+@Serializable
+data class User(val id: Int)
+
+val response: User = client.get("https://myapi.com/user?id=1")
 ```
 
-如果只使用客户端发出一个请求，考虑使用 `use`。一旦传入的块执行完，客户端会自动关闭。
+Please note that some of response types are `Closeable` and can hold resources.
 
-```kotlin
-val status = HttpClient().use { client ->
-    client.get<HttpStatusCode>("http://127.0.0.1:8080/check")
-}
-```
-
-## 定制请求
+## Customizing requests
 
 我们不能只进行 *get* 请求，Ktor 允许使用任何 HTTP 动词构件复杂请求，并且灵活地以多种方式处理响应。
 
-### `call` 方法
-
-{: #call-method }
-
-HttpClient 的 `call` 方法返回一个 `HttpClientCall`，可以用它执行简单的未指定类型的请求。
-
-可以使用 `response: HttpResponse` 读取其内容。
-更详细信息请参见[使用 HttpResponse 接收内容](/clients/http-client/call/responses.html)部分。
-
-```kotlin
-val call = client.call("http://127.0.0.1:8080/") {
-    method = HttpMethod.Get
-}
-println(call.response.receive<String>())
-```
-
-### `request` 方法
-
-{: #request-method }
-
-除了 call 之外，还有一个 `request` 方法用于执行类型化的请求，
-它[接收指定类型](/clients/http-client/call/responses.html#receive)如字符串、 HttpResponse 或者任何其他类。
-必须在构建请求时指定 URL 与方法。
-
-```kotlin
-val call = client.request<String> {
-    url("http://127.0.0.1:8080/")
-    method = HttpMethod.Get
-}
-```
-
-### `get`、 `post`、 `put`、 `delete`、 `patch`、 `head` 以及 `options` 方法
+### Default http methods
 
 {: #shortcut-methods }
 
@@ -110,9 +71,16 @@ val call = client.request<String> {
 val text = client.post<String>("http://127.0.0.1:8080/")
 ```
 
-当调用 request 方法时，可以提供一个 lambda 表达式来构建请求<!--
--->参数，如 URL、HTTP 方法（动词）、正文或者请求头。
-`HttpRequestBuilder` 类似这样：
+When calling request methods, you can provide a lambda to build the request
+parameters like the URL, the HTTP method(verb), the body, or the headers:
+
+```kotlin
+val text = client.post<String>("http://127.0.0.1:8080/") {
+    header("Hello", "World")
+}
+```
+
+The [HttpRequestBuilder](https://api.ktor.io/{{ site.ktor_version }}/io.ktor.client.request/-http-request-builder/) looks like this:
 
 ```kotlin
 class HttpRequestBuilder : HttpMessageBuilder {
@@ -136,9 +104,20 @@ class HttpRequestBuilder : HttpMessageBuilder {
 `HttpClient` 类只提供一些基本功能，而所有构建请求的方法都是扩展方法。
 参见标准的 [HttpClient 构建扩展方法](https://api.ktor.io/{{ site.ktor_version }}/io.ktor.client.request/)。
 
-{: .note.api}
+### Customize method
 
-### `submitForm` 与 `submitFormWithBinaryData` 方法
+In addition to call, there is a `request` method for performing a typed request,
+[receiving a specific type](/clients/http-client/quick-start/responses.html#receive) like String, HttpResponse, or an arbitrary class.
+You have to specify the URL and the method when building the request.
+
+```kotlin
+val call = client.request<String> {
+    url("http://127.0.0.1:8080/")
+    method = HttpMethod.Get
+}
+```
+
+### Posting forms
 
 {: #submit-form }
 
@@ -256,7 +235,7 @@ client.post<Unit> {
 }
 ```
 
-Alternatively(using the integrated `JsonSerializer`):
+Alternatively (using the integrated `JsonSerializer`):
 
 ```kotlin
 val json = io.ktor.client.features.json.defaultSerializer()
@@ -266,7 +245,7 @@ client.post<Unit>() {
 }
 ```
 
-Or using Jackson(JVM only):
+Or using Jackson (JVM only):
 
 ```kotlin
 val json = jacksonObjectMapper()
