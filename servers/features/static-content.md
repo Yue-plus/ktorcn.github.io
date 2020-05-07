@@ -94,8 +94,7 @@ and `staticBasePackage` similar to `staticRootFolder` for specifying a base reso
 
 ## Handling Errors
 
-If the requested content is not found, a `FileNotFoundException` is thrown. It should be handled in `StatusPages` with the `exception` handler 
-to produce a corresponding `404 Not Found`, otherwise it propagates to the engine and causes a 500 Internal Server Error. 
+If the requested content is not found in any route the `404 Not Found` will be produced.
 
 ## Customising Content Types
 
