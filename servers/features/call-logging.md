@@ -39,7 +39,7 @@ install(CallLogging) {
 }
 ```
 
-The filter method keeps a whitelist list of filters. If no filters are defined,
+The filter method keeps an allow list of filters. If no filters are defined,
 everything is logged. And if there are filters, if any of them returns true,
 the call will be logged.
 
