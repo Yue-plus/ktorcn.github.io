@@ -115,5 +115,5 @@ In the case where you only need to generate a war file, there is a `war` task de
 Just run `./gradlew war` and it will generate a `/build/libs/projectname.war` file.
 {: .note #generate-war-file }
 
-For a full example: <https://github.com/ktorio/ktor-samples/tree/master/deployment/jetty-war>
+For a full example: <https://github.com/ktorio/ktor-samples/tree/1.3.0/deployment/jetty-war>
 {: .note.example}

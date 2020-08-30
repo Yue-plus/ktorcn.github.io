@@ -7,4 +7,4 @@ redirect_from:
   - /samples/kweet.html
 ---
 
-Browse the source code on GitHub: [ktor-samples-kweet](https://github.com/ktorio/ktor-samples/tree/master/app/kweet)
+Browse the source code on GitHub: [ktor-samples-kweet](https://github.com/ktorio/ktor-samples/tree/master/generic/samples/kweet)

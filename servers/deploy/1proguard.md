@@ -53,5 +53,5 @@ task minimizedJar(type: proguard.gradle.ProGuardTask, dependsOn: shadowJar) {
 
 &nbsp;
 
-You have a full example on: <https://github.com/ktorio/ktor-samples/tree/master/other/proguard> 
+You have a full example on: <https://github.com/ktorio/ktor-samples/tree/master/generic/samples/proguard> 
 {: .note.example}

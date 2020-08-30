@@ -4,7 +4,7 @@ category: samples
 caption: CSS DSL
 ---
 
-Browse the source code on GitHub: [ktor-samples-css-dsl](https://github.com/ktorio/ktor-samples/tree/master/other/css-dsl)
+Browse the source code on GitHub: [ktor-samples-css-dsl](https://github.com/ktorio/ktor-samples/tree/master/generic/samples/css-dsl)
 
 {% include sample.html paths='
     other/css-dsl/src/CssDslApplication.kt,

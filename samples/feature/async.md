@@ -7,6 +7,6 @@ redirect_from:
   - /samples/async.html
 ---
 
-Browse the source code on GitHub: [ktor-samples/feature/async](https://github.com/ktorio/ktor-samples/tree/master/feature/async)
+Browse the source code on GitHub: [ktor-samples/feature/async](https://github.com/ktorio/ktor-samples/tree/master/generic/samples/async)
 
 {% include sample.html paths = 'feature/async/src/AsyncApplication.kt' %}
