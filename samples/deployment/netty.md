@@ -7,7 +7,7 @@ redirect_from:
   - /samples/hello.html
 ---
 
-Browse the source code on GitHub: [ktor-samples-hello](https://github.com/ktorio/ktor-samples/tree/master/deployment/netty/)
+Browse the source code on GitHub: [ktor-samples-hello](https://github.com/ktorio/ktor-samples/tree/1.3.0/deployment/netty/)
 
 {% include sample.html paths = '
     deployment/netty/src/HelloApplication.kt

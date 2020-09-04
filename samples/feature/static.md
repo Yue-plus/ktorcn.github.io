@@ -7,7 +7,7 @@ redirect_from:
   - /samples/static.html
 ---
 
-Browse the source code on GitHub: [ktor-samples-static](https://github.com/ktorio/ktor-samples/tree/master/generic/samples/static-content)
+Browse the source code on GitHub: [ktor-samples-static](https://github.com/ktorio/ktor-samples/tree/1.3.0/feature/static-content)
 
 {% include sample.html paths='
     feature/static-content/src/StaticContentApplication.kt
