@@ -7,7 +7,7 @@ redirect_from:
   - /samples/youkube.html
 ---
 
-Browse the source code on GitHub: [ktor-samples/app/youkube](https://github.com/ktorio/ktor-samples/tree/master/app/youkube)
+Browse the source code on GitHub: [ktor-samples/app/youkube](https://github.com/ktorio/ktor-samples/tree/1.3.0/app/youkube)
 
 {% include sample.html paths='
     app/youkube/src/YoukubeApplication.kt,

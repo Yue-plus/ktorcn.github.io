@@ -4,7 +4,7 @@ category: samples
 caption: Fullstack MPP
 ---
 
-Browse the source code on GitHub: [ktor-samples-fullstack-mpp](https://github.com/ktorio/ktor-samples/tree/master/mpp/fullstack-mpp)
+Browse the source code on GitHub: [ktor-samples-fullstack-mpp](https://github.com/ktorio/ktor-samples/1.3.0/other/fullstack-mpp)
 
 {% include sample.html paths='
     mpp/fullstack-mpp/src/backendMain/kotlin/BackendCode.kt,

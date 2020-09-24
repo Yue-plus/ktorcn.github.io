@@ -5,7 +5,7 @@ permalink: /samples/fullstack-mpp.html
 caption: Example of a FullStack Multiplatform Application
 ---
 
-Browse the source code on GitHub: [ktor-samples-fullstack-mpp](https://github.com/ktorio/ktor-samples/tree/master/mpp/fullstack-mpp)
+Browse the source code on GitHub: [ktor-samples-fullstack-mpp](https://github.com/ktorio/ktor-samples/tree/master/fullstack-mpp)
 
 {% include sample.html paths='
     mpp/fullstack-mpp/src/backendMain/kotlin/BackendCode.kt,

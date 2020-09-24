@@ -7,7 +7,7 @@ redirect_from:
   - /samples/httpbin.html
 ---
 
-Browse the source code on GitHub: [ktor-samples-httpbin](https://github.com/ktorio/ktor-samples/tree/master/app/httpbin)
+Browse the source code on GitHub: [ktor-samples-httpbin](https://github.com/ktorio/ktor-samples/tree/1.3.0/app/httpbin)
 
 {% include sample.html paths = '
     app/httpbin/src/HttpBinApplication.kt,

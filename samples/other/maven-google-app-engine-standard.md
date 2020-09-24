@@ -4,7 +4,7 @@ category: samples
 caption: Maven with Google App Engine
 ---
 
-Browse the source code on GitHub: [ktor-samples-maven-google-appengine-standard](https://github.com/ktorio/ktor-samples/tree/master/other/maven-google-appengine-standard)
+Browse the source code on GitHub: [ktor-samples-maven-google-appengine-standard](https://github.com/ktorio/ktor-samples/tree/1.3.0/other/maven-google-appengine-standard)
 
 {% include sample.html paths='
     other/maven-google-appengine-standard/pom.xml,

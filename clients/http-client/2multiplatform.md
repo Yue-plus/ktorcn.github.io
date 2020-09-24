@@ -80,7 +80,7 @@ dependencies {
 
 ## Samples
 
-There is a full sample using the common client in the ktor-samples repository [mpp/client-mpp](https://github.com/ktorio/ktor-samples/tree/master/mpp/client-mpp).
+There is a full sample using the common client in the ktor-samples repository [mpp/client-mpp](https://github.com/ktorio/ktor-samples/tree/master/client-mpp).
 
 You can use this project as a reference. This project also expose some experimental Gradle tasks to build, install and run the
 Android and iOS applications directly from Gradle.
